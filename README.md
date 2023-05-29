@@ -4,9 +4,14 @@
 
 ## Updates
 * [2023-05-29] We opened SiT Dataset github.
-* [2023-06-02] Mini set of 'SiT Dataset' is released on public.
-* [2023-06-03] ROS bagfile of SiT miniset Dataset is released on public.
+* [2023-06-02] SiT Miniset is released on public.
+* [2023-06-03] ROS bagfile of SiT Miniset is released on public.
 * [2023-06-07] We uploaded pretrained models for 3D object detection.
+
+## Upcomings
+* [2023-07] SiT Full dataset upload.
+* [2023-07] ROS bagfile of SiT Full dataset upload.
+* [2023-08] SiT benchmark for end-to-end trajectory prediction release.
 
 ## Overview
 To ensure safe and reliable mobility in spaces shared by humans and robots, social navigation robots must accurately recognize and predict the trajectories of nearby pedestrians. In this paper, we present a novel dataset of pedestrian trajectories, referred to as Social Interactive Trajectory (SiT) dataset, which can be used to train pedestrian detection, tracking, and trajectory prediction models needed to design social navigation robots. Thus far, various human trajectory datasets have been released to support the development of pedestrian motion forecasting models. However, our SiT dataset differs from other datasets in the following two respects. Whereas the pedestrian trajectory data in other datasets was obtained from static scenes, our data was collected while the robot moves in a crowded environment, capturing human-robot interactive scenarios in motion. Furthermore, our dataset includes raw data captured by two scanning LiDARs and five cameras covering a 360-degree view, an Inertial Measurement Unit (IMU) sensor, and Real-Time Kinematic Positioning (RTK), as well as annotations including 2D \& 3D boxes, object classes, and object IDs. Rather than designing the dataset according to individual tasks, we have structured it such that it can be uniformly used across all tasks. Consequently, the SiT dataset can be used to train and test the end-to-end models performing 3D perception, multiple object tracking, and trajectory prediction tasks jointly. We present the performances of baseline models for all three tasks. Our dataset and models provide a strong foundation for future research in pedestrian trajectory prediction, which could expedite the development of safe and agile social navigation robots.
