@@ -14,6 +14,9 @@ To ensure safe and reliable mobility in spaces shared by humans and robots, soci
 * Clearpath HUSKY UGV
 
 ## Sensor Setup
+
+![Sensor Setup Illustration](./images/230506_husky.png)
+
 * Velodyne VLP-16 * 2
 * RGB CameraL Basler a2A1920-51gv PRO GigE * 5
 * MIi-680 IMU & GPS
