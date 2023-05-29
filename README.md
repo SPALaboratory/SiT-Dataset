@@ -1,5 +1,6 @@
 <h1>SiT Dataset: Socially Interactive Pedestrian Trajectory Dataset</h1>
 
+![Demo_data Illustration](./images/sample_data.png)
 
 ## Updates
 * [2023-05-29] We opened SiT Dataset github.
