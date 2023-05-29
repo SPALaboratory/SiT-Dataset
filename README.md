@@ -57,7 +57,7 @@ We tested the SiT Dataset for prediction frameworks on the following enviroment:
 ## Model Zoo
 We provide pretrained models for 3D pedestrian detection, Pedestrian Trajectory Prediction and end-to-end Prediction.
 ### 3D Object Detection
-|Modal|Name|mAP| dist 0.25 |dist 0.5 | dist 1.0 | dist 2.0 | dist 4.0 | - | Pretrained |
+|Modal|Name|mAP| dist 0.25 |dist 0.5 | dist 1.0 | dist 2.0 | -  | - | Pretrained |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |Camera|FCOS3D| - | - | - | - | - | - | - |<a href="">Link</a>|
 |Camera|BEVFormer| - | - | - | - | - | - | - |<a href="">Link</a>|
