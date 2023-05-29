@@ -12,7 +12,8 @@ To ensure safe and reliable mobility in spaces shared by humans and robots, soci
 
 ## Robot Platform & Sensor Setup
 ![Sensor Setup Illustration](./images/230506_husky.png)
-* Clearpath HUSKY UGV
+
+* <a href="https://clearpathrobotics.com/husky-unmanned-ground-vehicle-robot/"> Clearpath Husky UGV </a>
 * Velodyne VLP-16 * 2
 * RGB Camera Basler a2A1920-51gv PRO GigE * 5
 * MIi-680 IMU & GPS
