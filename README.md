@@ -104,6 +104,9 @@ Topic Name | Message Tpye | Message Descriptison
 /xsens/imu/data      | sensor_msgs/Imu | GNSS by MIi-680
  /xsens/imu_interpolated   | | sensor_msgs/Imu | GNSS by MIi-680
 
+## License
+The SiT dataset is published under the CC BY-NC-ND License, and all codes are published under the Apache License 2.0.
+
 ## Citation
 ```
 @misc{sitdataset,
