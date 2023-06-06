@@ -1,6 +1,6 @@
 <h1>SiT Dataset: Socially Interactive Pedestrian Trajectory Dataset</h1>
 
-![Demo_data Illustration](./images/sample_data.png)
+![Demo_data Illustration](./images/230605_main.png)
 
 ## Updates
 * [2023-05-29] We opened SiT Dataset github.
@@ -13,10 +13,10 @@
 * [2023-08] SiT benchmark for end-to-end trajectory prediction release.
 
 ## Overview
-To ensure safe and reliable mobility in spaces shared by humans and robots, social navigation robots must accurately recognize and predict the trajectories of nearby pedestrians. In this paper, we present a novel dataset of pedestrian trajectories, referred to as Social Interactive Trajectory (SiT) dataset, which can be used to train pedestrian detection, tracking, and trajectory prediction models needed to design social navigation robots. Thus far, various human trajectory datasets have been released to support the development of pedestrian motion forecasting models. However, our SiT dataset differs from other datasets in the following two respects. Whereas the pedestrian trajectory data in other datasets was obtained from static scenes, our data was collected while the robot moves in a crowded environment, capturing human-robot interactive scenarios in motion. Furthermore, our dataset includes raw data captured by two scanning LiDARs and five cameras covering a 360-degree view, an Inertial Measurement Unit (IMU) sensor, and Real-Time Kinematic Positioning (RTK), as well as annotations including 2D \& 3D boxes, object classes, and object IDs. Rather than designing the dataset according to individual tasks, we have structured it such that it can be uniformly used across all tasks. Consequently, the SiT dataset can be used to train and test the end-to-end models performing 3D perception, multiple object tracking, and trajectory prediction tasks jointly. We present the performances of baseline models for all three tasks. Our dataset and models provide a strong foundation for future research in pedestrian trajectory prediction, which could expedite the development of safe and agile social navigation robots.
+Our Social Interactive Trajectory (SiT) dataset is a unique collection of pedestrian trajectories for designing advanced social navigation robots. It includes a range of sensor data, annotations, and offers a unique perspective from a robot navigating crowded environments, capturing dynamic human-robot interactions. It's meticulously organized for training and evaluating models across tasks like 3D detection, 3D multi-object tracking, and trajectory prediction, providing an end-to-end modular approach. It includes a comprehensive benchmark and exhibits the performance of several baseline models. This dataset is a valuable resource for future pedestrian trajectory prediction research, supporting the development of safe and agile social navigation robots.
 
 ## Robot Platform & Sensor Setup
-![Sensor Setup Illustration](./images/230506_husky.png)
+![Sensor Setup Illustration](./images/230606_husky.png)
 
 * <a href="https://clearpathrobotics.com/husky-unmanned-ground-vehicle-robot/"> Clearpath Husky UGV </a>
 * Velodyne VLP-16 * 2
@@ -51,7 +51,7 @@ We tested the SiT Dataset for prediction frameworks on the following enviroment:
 * CUDA 11.3
 * opencv 4.2.0.32
 
-
+<!-- 
 
 ## Model Zoo
 We provide pretrained models for 3D pedestrian detection, Pedestrian Trajectory Prediction and end-to-end Prediction.
@@ -82,9 +82,9 @@ We provide pretrained models for 3D pedestrian detection, Pedestrian Trajectory 
 |FaF|x| - | - | - | - | - | - | - | - | - | - | - | - | - | - | - |<a href="">Link</a>|
 |FutureDet|x| - | - | - | - | - | - | - | - | - | - | - | - | - | - | - |<a href="">Link</a>|
 |FutureDet|o| - | - | - | - | - | - | - | - | - | - | - | - | - | - | - |<a href="">Link</a>|
-
-## Download Dataset
-You can download full dataset and raw rosbag files from below.
+ -->
+## Download Dataset (TBD)
+Download full dataset and raw rosbag files from below.
 <a href="https://eddie-jub.github.io/test/"> Download link </a>
 
 
@@ -103,11 +103,10 @@ Topic Name | Message Tpye | Message Descriptison
 /xsens/imu/data      | sensor_msgs/Imu | GNSS by MIi-680
  /xsens/imu_interpolated   | | sensor_msgs/Imu | GNSS by MIi-680
 
-
-
 ## License <a rel="license_cc" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="by-nc-nd_4.0" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a> <a rel="license_gpl"><img alt="gpl_3.0" style="border-width:0; width:6.5%;" src="https://upload.wikimedia.org/wikipedia/commons/9/93/GPLv3_Logo.svg"/></a>
 
 The SiT dataset is published under the CC BY-NC-ND License, and all codes are published under the GPL-3.0.
+<!-- 
 
 ## Citation
 ```
@@ -119,7 +118,7 @@ The SiT dataset is published under the CC BY-NC-ND License, and all codes are pu
       archivePrefix={arXiv},
       primaryClass={cs.CV}
 }
-```
+``` -->
 
 ## Acknowledgement
 The SiT dataset is contributed by [Jongwook Bae](https://github.com/Eddie-JUB), [Jungho Kim](https://github.com/SPA-junghokim), [Junyong Yun](https://github.com/JunyongYun-SPA), [Changwon Kang](https://github.com/rkdckddnjs9), [Junho Lee](https://github.com/jhlee-ai), [Jeongseon Choi](https://github.com/junction824), [Chanhyeok Kim](), advised by [Jun-Won Choi](https://www.spa.hanyang.ac.kr/faculty).
