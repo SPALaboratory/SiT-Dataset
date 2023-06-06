@@ -85,7 +85,7 @@ We provide pretrained models for 3D pedestrian detection, Pedestrian Trajectory 
  -->
 ## Download Dataset (TBD)
 Download full dataset and raw rosbag files from below.
-<a href="https://eddie-jub.github.io/test/"> Download link </a>
+<a href="https://github.com/SPALaboratory/SiT-Dataset"> Download link </a>
 
 
 ## ROS Bag Raw Data
