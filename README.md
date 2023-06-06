@@ -4,13 +4,12 @@
 
 ## Updates
 * [2023-05-29] We opened SiT Dataset github.
-* [2023-06-02] SiT Miniset is released on public.
-* [2023-06-03] ROS bagfile of SiT Miniset is released on public.
-* [2023-06-07] We uploaded pretrained models for 3D object detection.
 
 ## Upcomings
+* [2023-06] SiT Miniset release on public.
 * [2023-07] SiT Full dataset upload.
 * [2023-07] ROS bagfile of SiT Full dataset upload.
+* [2023-07] Pretrained models for 3D object detection.
 * [2023-08] SiT benchmark for end-to-end trajectory prediction release.
 
 ## Overview
