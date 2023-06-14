@@ -99,10 +99,13 @@ Topic Name | Message Tpye | Message Descriptison
 /47_camera/pylon_camera_node/image_raw/compressed  | sensor_msgs/CompressedImage  | Compressed Bayer Image by Basler a2A1920-51gv PRO GigE
 /65_camera/pylon_camera_node/image_raw/compressed  | sensor_msgs/CompressedImage  | Compressed Bayer Image by Basler a2A1920-51gv PRO GigE
 /bottom/velodyne_points | sensor_msgs/PointCloud2 | Pointcloud by Velodyne VLP-16
+odometry/filtered | -- | --
 /top/velodyne_points | sensor_msgs/PointCloud2 | Pointcloud by Velodyne VLP-16
+vn100/vectornav/IMU | -- | VN-100 IMU
+/xsens/filter/position_interpolated  | -- | --
 /xsens/filter/positionlla  | geometry_msgs/Vector3Stamped | GNSS by MIi-680
 /xsens/imu/data      | sensor_msgs/Imu | GNSS by MTi-680
- /xsens/imu_interpolated   | | sensor_msgs/Imu | GNSS by MTi-680
+/xsens/imu_interpolated   | sensor_msgs/Imu | GNSS by MTi-680
 
 ## License <a rel="license_cc" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="by-nc-nd_4.0" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a> <a rel="license_apache_2"><img alt="apache_2.0" style="border-width:0; width:8%;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/ASF_Logo.svg/220px-ASF_Logo.svg.png"/></a>
 
