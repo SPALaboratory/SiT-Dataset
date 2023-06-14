@@ -4,6 +4,7 @@
 
 ## Updates
 * [2023-05-29] We opened SiT Dataset github.
+* [2023-05-29] We opened SiT Dataset webpage.
 
 ## Upcomings
 * [2023-06] SiT Miniset release on public.
