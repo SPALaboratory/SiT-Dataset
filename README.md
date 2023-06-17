@@ -1,4 +1,4 @@
-<h1>SiT Dataset: Socially Interactive Pedestrian Trajectory Dataset</h1>
+<h1>SiT Dataset: Socially Interactive Pedestrian Trajectory Dataset for Social Navigation Robots</h1>
 
 ![Demo_data Illustration](./images/230605_main.png)
 
