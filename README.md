@@ -4,14 +4,14 @@
 
 ## Updates
 * [2023-05-29] We opened SiT Dataset github.
-* [2023-05-29] We opened SiT Dataset webpage.
-
+* [2023-05-29] <a href="https://spalaboratory.github.io/SiT/">We opened SiT Dataset website.</a>
+* 
 ## Upcomings
-* [2023-06] SiT Miniset release on public.
-* [2023-07] SiT Full dataset upload.
-* [2023-07] ROS bagfile of SiT Full dataset upload.
-* [2023-07] Pretrained models for 3D object detection.
-* [2023-08] SiT benchmark for end-to-end trajectory prediction release.
+* [2023-06] SiT Miniset with rosbag files release on public.
+<!-- * [2023-07] SiT Full dataset upload. -->
+<!-- * [2023-07] ROS bagfile of SiT Full dataset upload. -->
+<!-- * [2023-07] Pretrained models for 3D object detection. -->
+<!-- * [2023-08] SiT benchmark for end-to-end trajectory prediction release. -->
 
 ## Overview
 Our Social Interactive Trajectory (SiT) dataset is a unique collection of pedestrian trajectories for designing advanced social navigation robots. It includes a range of sensor data, annotations, and offers a unique perspective from a robot navigating crowded environments, capturing dynamic human-robot interactions. It's meticulously organized for training and evaluating models across tasks like 3D detection, 3D multi-object tracking, and trajectory prediction, providing an end-to-end modular approach. It includes a comprehensive benchmark and exhibits the performance of several baseline models. This dataset is a valuable resource for future pedestrian trajectory prediction research, supporting the development of safe and agile social navigation robots.
