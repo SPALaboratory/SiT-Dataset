@@ -1,6 +1,6 @@
 
 
-<h1> <a href="https://spalaboratory.github.io/SiT/"> SiT Dataset: Socially Interactive Pedestrian Trajectory Dataset for Social Navigation Robots </a> </h1>
+<h1> <a href="https://spalaboratory.github.io/SiT/" target="_blank"> SiT Dataset: Socially Interactive Pedestrian Trajectory Dataset for Social Navigation Robots </a> </h1>
 
 <p align="center">
 <!--   <img src="./images/230618_SPA_logo.png" align="center" height="300px" width="60%"> -->
@@ -8,7 +8,7 @@
     <img src="./images/230618_SPA_logo.png" align="center" width="55%">
   </a>
 <!--   <img src="./images/HYU_initial_eng.png" align="center" width="39%"> -->
-  <a href="https://www.hanyang.ac.kr/web/eng" target="_blank">
+  <a href="https://www.hanyang.ac.kr/web/eng/" target="_blank">
     <img src="./images/HYU_initial_eng.png" align="center" width="44%">
   </a>
 <!--   <img src="./images/HYU_initial_eng.png" align="center" height="70px" width="40%"> -->
@@ -25,9 +25,9 @@
 
 
 ## Updates
-* [2023-05-29] We opened SiT Dataset <a href="https://github.com/SPALaboratory/SiT-Dataset">Github</a>.
-* [2023-05-29] We opened SiT Dataset <a href="https://spalaboratory.github.io/SiT/">Website.</a>
-* [2023-06-18] Semantic map data of SiT Dataset released on <a href="https://github.com/SPALaboratory/SiT-Dataset/tree/main/semantic-maps">Github.</a>
+* [2023-05-29] We opened SiT Dataset <a href="https://github.com/SPALaboratory/SiT-Dataset" target="_blank"> Github</a>.
+* [2023-05-29] We opened SiT Dataset <a href="https://spalaboratory.github.io/SiT/"target="_blank"> Website.</a>
+* [2023-06-18] Semantic map data of SiT Dataset released on <a href="https://github.com/SPALaboratory/SiT-Dataset/tree/main/semantic-maps "target="_blank">Github.</a>
 
 
 ## Upcomings
