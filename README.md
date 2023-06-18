@@ -31,10 +31,10 @@
 
 
 ## Upcomings
-* [2023-06] <a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u?usp=sharing">SiT Miniset</a> release on public.
+* [2023-06] <a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u?usp=sharing">SiT Mini-Dataset</a> release on public.
 * [2023-06] Dockerfiles for each perception task release on <a href="https://hub.docker.com/u/spalaboratory">Dockerhub</a>.
 * [2023-06] SiT benchmark and devkit for each perception task release.
-* [2023-06] SiT Miniset Rosbag files release on public.
+* [2023-06] SiT Mini-Dataset Rosbag files release on public.
 * [2023-09] SiT Full dataset with rosbag files release on public.
 * [2023-09] Pretrained models for 3D object detection and Trajectory prediction release on public.
 * [2023-10] Dockerfiles for each perception task release.
