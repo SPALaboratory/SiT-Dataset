@@ -8,11 +8,12 @@ See the main github page.
 ## File tree
 Please set up the configuration to match the tree structure below.
 ```
-ln -s {$SiT-dataset} ./data/SiT
+ln -s {SiT Dataset} SiT_dataset
 ```
 ```
 ynet
-├── data/SiT
+├── SiT_dataset
+├── data
 │   ├── raster/
 │   ├── tran/
 │   ├── val/
