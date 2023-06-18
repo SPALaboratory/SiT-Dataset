@@ -17,18 +17,21 @@
 ## Updates
 * [2023-05-29] We opened SiT Dataset github.
 * [2023-05-29] <a href="https://spalaboratory.github.io/SiT/">We opened SiT Dataset website.</a>
+* [2023-06-18] <a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u?usp=sharing">SiT Miniset release on public.</a>
+* [2023-06-18] SiT benchmark for end-to-end trajectory prediction release.
+* [2023-06-18] Dockerfiles for each perception task release on Dockerhub.
 * 
 ## Upcomings
-* [2023-06] SiT Miniset with rosbag files release on public.
+* [2023-06] SiT Miniset Rosbag files release on public.
 * [2023-09] SiT Full dataset with rosbag files release on public.
 * [2023-09] Pretrained models for 3D object detection and Trajectory prediction release on public.
-* [2023-10] SiT benchmark for end-to-end trajectory prediction release.
+
 * [2023-10] Dockerfiles for each perception task release.
 * [2024-01] SiT End-to-End pedestrain trajectory prediction challenge start on Eval AI.
-* 
+* [2023-07] Pretrained models for 3D object detection.
 <!-- * [2023-09] SiT Full dataset upload. -->
 <!-- * [2023-07] ROS bagfile of SiT Full dataset upload. -->
-* [2023-07] Pretrained models for 3D object detection.
+
 <!-- * [2023-08] SiT benchmark for end-to-end trajectory prediction release. -->
 
 ## Overview
@@ -40,9 +43,10 @@ Our Social Interactive Trajectory (SiT) dataset is a unique collection of pedest
 * <a href="https://clearpathrobotics.com/husky-unmanned-ground-vehicle-robot/"> Clearpath Husky UGV </a>
 * Velodyne VLP-16 * 2
 * RGB Camera Basler a2A1920-51gv PRO GigE * 5
-* MIi-680 IMU & GPS
+* MTI-680 IMU & GPS * 1
+* VectorNAV VN-100 IMU * 1
 
-
+<!-- 
 ### 3D Object Detection
 This is the document for how to use our dataset for various perception tasks.
 We tested the SiT Dataset for detection frameworks on the following enviroment:
@@ -68,44 +72,51 @@ We tested the SiT Dataset for prediction frameworks on the following enviroment:
 * Ubuntu 18.04/20.04
 * Torch 1.11.0+cu113
 * CUDA 11.3
-* opencv 4.2.0.32
+* opencv 4.2.0.32 -->
 
-<!-- 
 
-## Model Zoo
-We provide pretrained models for 3D pedestrian detection, Pedestrian Trajectory Prediction and end-to-end Prediction.
+
+## Benchmarks
+We provide benchmarks and pretrained models for 3D pedestrian detection, 3D Multi-Object Tracking, Pedestrian Trajectory Prediction and end-to-end Prediction.
+
 ### 3D Object Detection
-|Modal|Name|mAP| dist 0.25 |dist 0.5 | dist 1.0 | dist 2.0 | -  | - | Pretrained |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|Camera|FCOS3D| - | - | - | - | - | - | - |<a href="">Link</a>|
-|Camera|BEVFormer| - | - | - | - | - | - | - |<a href="">Link</a>|
-|LiDAR|PointPillars| - | - | - | - | - | - | - |<a href="">Link</a>|
-|LiDAR|SECOND| - | - | - | - | - | - | - |<a href="">Link</a>|
-|LiDAR|CenterPoint| - | - | - | - | - | - | - |<a href="">Link</a>|
-|Fusion|Transfusion| - | - | - | - | - | - | - |<a href="">Link</a>|
-|Fusion|BEVFusion| - | - | - | - | - | - | - |<a href="">Link</a>|
+|**Methods**|**Modality**|**mAP &uarr;**| **AP(0.25) &uarr;** |**AP(0.5) &uarr;** | **AP(1.0) &uarr;** | **AP(2.0) &uarr;** | **Pretrained** |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|FCOS3D|Camera| 0.131 | 0.054 | 0.147 | 0.162 | 0.162 | <a href="">TBD</a>|
+|PointPillars|LiDAR| 0.319 | 0.202 | 0.316 | 0.346 | 0.414 |<a href="">TBD</a>|
+|CenterPoint-P|LiDAR| 0.382 | 0.233 | 0.388 | 0.424 | 0.482 |<a href="">TBD</a>|
+|CenterPoint-V|LiDAR| 0.514 | 0.352 | **0.522 **| 0.556 | 0.620 |<a href="">TBD</a>|
+|Transfusion-P|Fusion| 0.396 | 0.213 | 0.371 | 0.451 | 0.551 |<a href="">TBD</a>|
+|Transfusion-V|Fusion| **0.533** | **0.360** | 0.512 | **0.587** | **0.672** |<a href="">TBD</a>|
+
+### 3D Multi-Object Trajectory Tracking
+|**Method**| **sAMOTA &uarr;** | **AMOTA &uarr;** | **AMOTP (m) &darr;** | **MOTA &uarr;**| **MOTP (m) &darr;** | **IDS&darr;** |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|**PointPillars + AB3DMOT** | 0.3679 | 0.0826 | 0.5125 | 0.2073 | 0.9702 | 1048 |
+|**Centerpoint Detector + AB3DMOT** | 0.4626 | 0.1159 | 0.3757 | 0.3438 | 0.8360 | **554** |
+|**Centerpoint Tracker** | **0.7244** | **0.2793** | **0.2611** | **0.5150** | **0.4274** | 1136 |
 
 ### Pedestrian Trajectory Prediction
-|Name|Map|ADE|FDE| - | - | - | - | - |Pretrained|
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|Vanilla LSTM|x| - | - | - | - | - | - | - |<a href="">Link</a>|
-|Social-LSTM|x| - | - | - | - | - | - | - |<a href="">Link</a>|
-|Y-NET|x| - | - | - | - | - | - | - |<a href="">Link</a>|
-|Y-NET|o| - | - | - | - | - | - | - |<a href="">Link</a>|
-|NSP|x| - | - | - | - | - | - | - |<a href="">Link</a>|
-|NSP|o| - | - | - | - | - | - | - |<a href="">Link</a>|
+|**Name**|**Map**|**ADE<sub>5<sub> &darr;**|**FDE<sub>5<sub> &darr;**| **ADE<sub>20<sub> &darr;** | **FDE<sub>20<sub> &darr;** | **Pretrained** |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|**Vanilla LSTM**| X|1.156 | 2.205 | 1.601 | 3.157 | <a href="">TBD</a>|
+|**Social-LSTM**| X | 1.336 | 2.554 | 1.319 | 2.519 | <a href="">TBD</a>|
+|**Y-NET**| X | 1.188 | 2.427 | 0.640 | 1.547 | <a href="">TBD</a>|
+|**Y-NET**| O | 1.036 | 2.306 | 0.596 | 1.370 | <a href="">TBD</a>|
+|**NSP-SFM**| X | 1.036 | 1.947 | 0.529 | 0.936 | <a href="">TBD</a>|
+|**NSP-SFM**| O | 0.808 | 1.549 | 0.443 | 0.807 | <a href="">TBD</a>|
 
 ### End-to-End Pedestrian Trajectory Prediction
-|Name|Map| AP | FAP_MR | AR | FAP | FAR | AAP | AAR | ATE | ASE | AOE | AVE | AAE | ADE | FDE | MR |Pretrained|
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|FaF|x| - | - | - | - | - | - | - | - | - | - | - | - | - | - | - |<a href="">Link</a>|
-|FutureDet|x| - | - | - | - | - | - | - | - | - | - | - | - | - | - | - |<a href="">Link</a>|
-|FutureDet|o| - | - | - | - | - | - | - | - | - | - | - | - | - | - | - |<a href="">Link</a>|
- -->
-## Download Dataset (TBD)
-Download full dataset and raw rosbag files from below.
-<a href="https://github.com/SPALaboratory/SiT-Dataset"> Download link </a>
+|**Method**| **mAP &uarr;** |  **mAP<sub>f<sub>** **&uarr;** |**ADE<sub>5<sub> ** **&darr;** | **FDE<sub>5<sub>** **&darr;** | **Pretrained** |
+|:---:|:---:|:---:|:---:|:---:|
+|**Fast and Furious**| **0.490** | **0.079** | **1.915** | **3.273** |<a href="">TBD</a>|
+|**FutureDet-P**|0.209 | 0.037 | 2.532 | 4.537|<a href="">TBD</a>|
+|**FutureDet-V**|0.408 | 0.053 | 2.416 | 4.409|<a href="">TBD</a>|
 
+## Download Dataset (TBD)
+Download SiT Mini dataset from below.
+**<a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u?usp=sharing"> Click Download link </a>**
+Full dataset and Rosbag files will be uploaded(TBD)
 
 ## ROS Bag Raw Data
 ROS bagfiles include below sensor data:
