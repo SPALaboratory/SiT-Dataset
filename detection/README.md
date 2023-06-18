@@ -38,13 +38,13 @@ The performance of baselines are as follows.
 
 ## Data generation
 
-#### concat 
+#### Concat 
 python tools/create_data.py spa_nus --root-path ./data/spa --version v1.0-spa-trainval --max-sweeps 1 --out-dir ./data/spa --extra-tag spa_nusc
 
-#### top
+#### Top
 python tools/create_data.py spa_nus_top --root-path ./data/spa --version v1.0-spa-trainval --max-sweeps 1 --out-dir ./data/spa --extra-tag spa_nusc_top
 
-#### bottom
+#### Bottom
 python tools/create_data.py spa_nus_bottom --root-path ./data/spa --version v1.0-spa-trainval --max-sweeps 1 --out-dir ./data/spa --extra-tag spa_nusc_bottom
 
 ## Training
