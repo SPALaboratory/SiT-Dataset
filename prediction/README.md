@@ -9,7 +9,7 @@ The Social LSTM model takes into account the social dynamics among pedestrians. 
 
 
 ### Y-Net
-The semantic map serves as a guideline indicating areas where pedestrians can move, providing helpful information for path prediction. Y-Net is a model that takes semantic maps as an input to predict the future trajectories of pedestrians.
+Human trajectory forecasting is a complex problem with inherent uncertainty. This uncertainty arises from both known and unknown sources, such as long-term goals and the intent of other agents. Y-net proposes separating this uncertainty into epistemic uncertainty, related to long-term goals, and aleatoric uncertainty, related to waypoints and paths. This approach introduces multimodality in goal predictions and path variations to capture these uncertainties. Y-net also introduces a new long-term trajectory forecasting scenario with prediction horizons up to a minute, surpassing previous works.
 
 
 ### NSP
