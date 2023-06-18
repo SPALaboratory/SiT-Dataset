@@ -49,7 +49,8 @@ Our Social Interactive Trajectory (SiT) dataset is a unique collection of pedest
 
 ## Robot Platform & Sensor Setup
 ![Sensor Setup Illustration](./images/230607_husky.png)
-
+* Ubuntu 18.04 LTS
+* ROS Melodic
 * <a href="https://clearpathrobotics.com/husky-unmanned-ground-vehicle-robot/"> Clearpath Husky UGV </a>
 * Velodyne VLP-16 * 2
 * RGB Camera Basler a2A1920-51gv PRO GigE * 5
@@ -93,38 +94,38 @@ We provide benchmarks and pretrained models for 3D pedestrian detection, 3D Mult
 
 |**Methods**|**Modality**|**mAP &uarr;**| **AP(0.25) &uarr;** |**AP(0.5) &uarr;** | **AP(1.0) &uarr;** | **AP(2.0) &uarr;** | **Pretrained** |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|**FCOS3D**|Camera| 0.131 | 0.054 | 0.147 | 0.162 | 0.162 | <a href="">TBD</a>|
-|**PointPillars**|LiDAR| 0.319 | 0.202 | 0.316 | 0.346 | 0.414 |<a href="">TBD</a>|
-|**CenterPoint-P**|LiDAR| 0.382 | 0.233 | 0.388 | 0.424 | 0.482 |<a href="">TBD</a>|
-|**CenterPoint-V**|LiDAR| 0.514 | 0.352 | **0.522**| 0.556 | 0.620 |<a href="">TBD</a>|
-|**Transfusion-P**|Fusion| 0.396 | 0.213 | 0.371 | 0.451 | 0.551 |<a href="">TBD</a>|
-|**Transfusion-V**|Fusion| **0.533** | **0.360** | 0.512 | **0.587** | **0.672** |<a href="">TBD</a>|
+|**<a href="https://www.arxiv-vanity.com/papers/2104.10956/">FCOS3D</a>**|Camera| 0.131 | 0.054 | 0.147 | 0.162 | 0.162 | <a href="">TBD</a>|
+|**<a href="https://openaccess.thecvf.com/content_CVPR_2019/html/Lang_PointPillars_Fast_Encoders_for_Object_Detection_From_Point_Clouds_CVPR_2019_paper.html">PointPillars</a>**|LiDAR| 0.319 | 0.202 | 0.316 | 0.346 | 0.414 |<a href="">TBD</a>|
+|**<a href="https://openaccess.thecvf.com/content/CVPR2021/html/Yin_Center-Based_3D_Object_Detection_and_Tracking_CVPR_2021_paper.html">CenterPoint-P</a>**|LiDAR| 0.382 | 0.233 | 0.388 | 0.424 | 0.482 |<a href="">TBD</a>|
+|**<a href="https://openaccess.thecvf.com/content/CVPR2021/html/Yin_Center-Based_3D_Object_Detection_and_Tracking_CVPR_2021_paper.html">CenterPoint-V</a>**|LiDAR| 0.514 | 0.352 | **0.522**| 0.556 | 0.620 |<a href="">TBD</a>|
+|**<a href="https://openaccess.thecvf.com/content/CVPR2022/html/Bai_TransFusion_Robust_LiDAR-Camera_Fusion_for_3D_Object_Detection_With_Transformers_CVPR_2022_paper.html">Transfusion-P</a>**|Fusion| 0.396 | 0.213 | 0.371 | 0.451 | 0.551 |<a href="">TBD</a>|
+|**<a href="https://openaccess.thecvf.com/content/CVPR2022/html/Bai_TransFusion_Robust_LiDAR-Camera_Fusion_for_3D_Object_Detection_With_Transformers_CVPR_2022_paper.html">Transfusion-V</a>**|Fusion| **0.533** | **0.360** | 0.512 | **0.587** | **0.672** |<a href="">TBD</a>|
 
 ### 3D Multi-Object Trajectory Tracking
 
 |**Method**| **sAMOTA&uarr;** | **AMOTA&uarr;** | **AMOTP(m)&darr;** | **MOTA&uarr;**| **MOTP(m)&darr;** | **IDS&darr;** |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|**PointPillars + AB3DMOT** | 0.3679 | 0.0826 | 0.5125 | 0.2073 | 0.9702 | 1048 |
-|**Centerpoint Detector + AB3DMOT** | 0.4626 | 0.1159 | 0.3757 | 0.3438 | 0.8360 | **554** |
-|**Centerpoint Tracker** | **0.7244** | **0.2793** | **0.2611** | **0.5150** | **0.4274** | 1136 |
+|**<a href="https://openaccess.thecvf.com/content_CVPR_2019/html/Lang_PointPillars_Fast_Encoders_for_Object_Detection_From_Point_Clouds_CVPR_2019_paper.html">PointPillars</a> + <a href="https://arxiv.org/abs/2008.08063">AB3DMOT</a>** | 0.3679 | 0.0826 | 0.5125 | 0.2073 | 0.9702 | 1048 |
+|**<a href="https://openaccess.thecvf.com/content/CVPR2021/html/Yin_Center-Based_3D_Object_Detection_and_Tracking_CVPR_2021_paper.html">Centerpoint Detector</a> + <a href="https://arxiv.org/abs/2008.08063">AB3DMOT</a>** | 0.4626 | 0.1159 | 0.3757 | 0.3438 | 0.8360 | **554** |
+|**<a href="https://openaccess.thecvf.com/content/CVPR2021/html/Yin_Center-Based_3D_Object_Detection_and_Tracking_CVPR_2021_paper.html">Centerpoint Tracker</a>** | **0.7244** | **0.2793** | **0.2611** | **0.5150** | **0.4274** | 1136 |
 
 ### <a href="https://github.com/SPALaboratory/SiT-Dataset/tree/main/prediction">Pedestrian Trajectory Prediction</a>
 
+<!-- |**Vanilla LSTM**| X|1.156 | 2.205 | 1.601 | 3.157 | <a href="">TBD</a>| -->
 |**Name**|**Map**|**ADE<sub>5<sub>** **&darr;**|**FDE<sub>5<sub>** **&darr;**| **ADE<sub>20<sub>** **&darr;** | **FDE<sub>20<sub>** **&darr;** | **Pretrained** |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|**Vanilla LSTM**| X|1.156 | 2.205 | 1.601 | 3.157 | <a href="">TBD</a>|
-|**Social-LSTM**| X | 1.336 | 2.554 | 1.319 | 2.519 | <a href="">TBD</a>|
-|**Y-NET**| X | 1.188 | 2.427 | 0.640 | 1.547 | <a href="">TBD</a>|
-|**Y-NET**| O | 1.036 | 2.306 | 0.596 | 1.370 | <a href="">TBD</a>|
-|**NSP-SFM**| X | 1.036 | 1.947 | 0.529 | 0.936 | <a href="">TBD</a>|
-|**NSP-SFM**| O | **0.808** | **1.549** | **0.443** | **0.807** | <a href="">TBD</a>|
+|**<a href="https://openaccess.thecvf.com/content_cvpr_2016/html/Alahi_Social_LSTM_Human_CVPR_2016_paper.html">Social-LSTM</a>**| X | 1.336 | 2.554 | 1.319 | 2.519 | <a href="">TBD</a>|
+|**<a href="https://openaccess.thecvf.com/content/ICCV2021/html/Mangalam_From_Goals_Waypoints__Paths_to_Long_Term_Human_Trajectory_ICCV_2021_paper.html">Y-NET</a>**| X | 1.188 | 2.427 | 0.640 | 1.547 | <a href="">TBD</a>|
+|**<a href="https://openaccess.thecvf.com/content/ICCV2021/html/Mangalam_From_Goals_Waypoints__Paths_to_Long_Term_Human_Trajectory_ICCV_2021_paper.html">Y-NET</a>**| O | 1.036 | 2.306 | 0.596 | 1.370 | <a href="">TBD</a>|
+  |**<a href="https://link.springer.com/chapter/10.1007/978-3-031-19830-4_22">NSP-SFM</a>**| X | 1.036 | 1.947 | 0.529 | 0.936 | <a href="">TBD</a>|
+|**<a href="https://link.springer.com/chapter/10.1007/978-3-031-19830-4_22">NSP-SFM</a>**| O | **0.808** | **1.549** | **0.443** | **0.807** | <a href="">TBD</a>|
 
 ### End-to-End Pedestrian Motion Forecasting
 |**Method**| **mAP** **&uarr;** |  **mAP<sub>f<sub>** **&uarr;** | **ADE<sub>5<sub>** **&darr;** | **FDE<sub>5<sub>** **&darr;** | **Pretrained** |
 |:---:|:---:|:---:|:---:|:---:|:---:|
-|**Fast and Furious**| **0.490** | **0.079** | **1.915** | **3.273** |<a href="">TBD</a>|
-|**FutureDet-P**|0.209 | 0.037 | 2.532 | 4.537|<a href="">TBD</a>|
-|**FutureDet-V**|0.408 | 0.053 | 2.416 | 4.409|<a href="">TBD</a>|
+|**<a href="https://openaccess.thecvf.com/content_cvpr_2018/html/Luo_Fast_and_Furious_CVPR_2018_paper.html">Fast and Furious</a>**| **0.490** | **0.079** | **1.915** | **3.273** |<a href="">TBD</a>|
+|**<a href="https://openaccess.thecvf.com/content/CVPR2022/html/Peri_Forecasting_From_LiDAR_via_Future_Object_Detection_CVPR_2022_paper.html">FutureDet-P</a>**|0.209 | 0.037 | 2.532 | 4.537|<a href="">TBD</a>|
+|**<a href="https://openaccess.thecvf.com/content/CVPR2022/html/Peri_Forecasting_From_LiDAR_via_Future_Object_Detection_CVPR_2022_paper.html">FutureDet-V</a>**|0.408 | 0.053 | 2.416 | 4.409|<a href="">TBD</a>|
 
 ## Download Dataset
 * Download SiT Mini dataset from below Google Drive link. <br>
