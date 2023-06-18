@@ -97,7 +97,7 @@ We provide benchmarks and pretrained models for 3D pedestrian detection, 3D Mult
 |**Centerpoint Tracker** | **0.7244** | **0.2793** | **0.2611** | **0.5150** | **0.4274** | 1136 |
 
 ### Pedestrian Trajectory Prediction
-|**Name**|**Map**|**ADE<sub>5<sub> &darr;**|**FDE<sub>5<sub> &darr;**| **ADE<sub>20<sub> &darr;** | **FDE<sub>20<sub> &darr;** | **Pretrained** |
+|**Name**|**Map**|**ADE<sub>5<sub>** **&darr;**|**FDE<sub>5<sub>** **&darr;**| **ADE<sub>20<sub>** **&darr;** | **FDE<sub>20<sub>** **&darr;** | **Pretrained** |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |**Vanilla LSTM**| X|1.156 | 2.205 | 1.601 | 3.157 | <a href="">TBD</a>|
 |**Social-LSTM**| X | 1.336 | 2.554 | 1.319 | 2.519 | <a href="">TBD</a>|
@@ -107,7 +107,7 @@ We provide benchmarks and pretrained models for 3D pedestrian detection, 3D Mult
 |**NSP-SFM**| O | 0.808 | 1.549 | 0.443 | 0.807 | <a href="">TBD</a>|
 
 ### End-to-End Pedestrian Trajectory Prediction
-|**Method**| **mAP &uarr;** |  **mAP<sub>f<sub>** **&uarr;** |**ADE<sub>5<sub> ** **&darr;** | **FDE<sub>5<sub>** **&darr;** | **Pretrained** |
+|**Method**| **mAP** **&uarr;** |  **mAP<sub>f<sub>** **&uarr;** | **ADE<sub>5<sub>** **&darr;** | **FDE<sub>5<sub>** **&darr;** | **Pretrained** |
 |:---:|:---:|:---:|:---:|:---:|:---:|
 |**Fast and Furious**| **0.490** | **0.079** | **1.915** | **3.273** |<a href="">TBD</a>|
 |**FutureDet-P**|0.209 | 0.037 | 2.532 | 4.537|<a href="">TBD</a>|
