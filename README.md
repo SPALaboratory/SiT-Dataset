@@ -12,7 +12,13 @@
 
 
 
-![Demo_data Illustration](./images/230605_main.png)
+<!-- ![Demo_data Illustration](./images/230605_main.png) -->
+
+<p align="center">
+  <img src="./images/230605_main.png" alt>
+   <em align="center">Example of SiT dataset (Cafe_Street_3)</em>
+</p>
+
 
 ## Updates
 * [2023-05-29] We opened SiT Dataset github.
