@@ -53,7 +53,7 @@ Our Social Interactive Trajectory (SiT) dataset is a unique collection of pedest
 * ROS Melodic
 * <a href="https://clearpathrobotics.com/husky-unmanned-ground-vehicle-robot/"> Clearpath Husky UGV </a>
 * Velodyne VLP-16 * 2
-* RGB Camera Basler a2A1920-51gv PRO GigE * 5
+* RGB Camera Basler a2A1920-51gc PRO GigE * 5
 * MTI-680 IMU & GPS * 1
 * VectorNAV VN-100 IMU * 1
 
