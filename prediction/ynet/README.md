@@ -12,7 +12,7 @@ ln -s {$SiT-dataset} ./data/SiT
 ```
 ```
 ynet
-├── data/SPA
+├── data/SiT
 │   ├── raster/
 │   ├── tran/
 │   ├── val/
