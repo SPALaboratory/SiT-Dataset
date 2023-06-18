@@ -22,11 +22,12 @@
 
 ## Updates
 * [2023-05-29] We opened SiT Dataset github.
-* [2023-05-29] <a href="https://spalaboratory.github.io/SiT/">We opened SiT Dataset website.</a>
-* [2023-06-18] <a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u?usp=sharing">SiT Miniset release on public.</a>
+* [2023-05-29] We opened SiT Dataset<a href="https://spalaboratory.github.io/SiT/"> website.</a>
+* [2023-06-18] <a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u?usp=sharing">SiT Miniset</a> release on public.
 * [2023-06-18] SiT benchmark and devkit for each perception task release.
-* [2023-06-18] Dockerfiles for each perception task release on Dockerhub.
-* 
+* [2023-06-18] SiT semantic maps release on <a href="https://github.com/SPALaboratory/SiT-Dataset/tree/main/semantic-maps"> Github. </a>
+* [2023-06-18] Dockerfiles for each perception task release on <a href="https://hub.docker.com/u/spalaboratory">Dockerhub</a>.
+
 ## Upcomings
 * [2023-06] SiT Miniset Rosbag files release on public.
 * [2023-09] SiT Full dataset with rosbag files release on public.
