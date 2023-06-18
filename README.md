@@ -24,7 +24,7 @@
 * [2023-05-29] We opened SiT Dataset github.
 * [2023-05-29] <a href="https://spalaboratory.github.io/SiT/">We opened SiT Dataset website.</a>
 * [2023-06-18] <a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u?usp=sharing">SiT Miniset release on public.</a>
-* [2023-06-18] SiT benchmark for end-to-end trajectory prediction release.
+* [2023-06-18] SiT benchmark and devkit for each perception task release.
 * [2023-06-18] Dockerfiles for each perception task release on Dockerhub.
 * 
 ## Upcomings
