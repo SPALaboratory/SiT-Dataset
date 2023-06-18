@@ -1,6 +1,4 @@
-
 <h1> <a href="https://spalaboratory.github.io/SiT/> SiT Dataset: Socially Interactive Pedestrian Trajectory Dataset for Social Navigation Robots </a> </h1>
-
 <p align="center">
 <!--   <img src="./images/230618_SPA_logo.png" align="center" height="300px" width="60%"> -->
   <a href="https://www.spa.hanyang.ac.kr/  target="_blank">
