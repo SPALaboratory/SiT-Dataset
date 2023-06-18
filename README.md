@@ -4,7 +4,7 @@
 
 <p align="center">
 <!--   <img src="./images/230618_SPA_logo.png" align="center" height="300px" width="60%"> -->
-  <a href="https://www.spa.hanyang.ac.kr/">
+  <a href="https://www.spa.hanyang.ac.kr/ ">
     <img src="./images/230618_SPA_logo.png" align="center" width="55%">
   </a>
 <!--   <img src="./images/HYU_initial_eng.png" align="center" width="39%"> -->
