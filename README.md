@@ -108,7 +108,7 @@ We provide benchmarks and pretrained models for 3D pedestrian detection, 3D Mult
 
 ### End-to-End Pedestrian Trajectory Prediction
 |**Method**| **mAP &uarr;** |  **mAP<sub>f<sub>** **&uarr;** |**ADE<sub>5<sub> ** **&darr;** | **FDE<sub>5<sub>** **&darr;** | **Pretrained** |
-|:---:|:---:|:---:|:---:|:---:|
+|:---:|:---:|:---:|:---:|:---:|:---:|
 |**Fast and Furious**| **0.490** | **0.079** | **1.915** | **3.273** |<a href="">TBD</a>|
 |**FutureDet-P**|0.209 | 0.037 | 2.532 | 4.537|<a href="">TBD</a>|
 |**FutureDet-V**|0.408 | 0.053 | 2.416 | 4.409|<a href="">TBD</a>|
