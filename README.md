@@ -98,7 +98,7 @@ We provide benchmarks and pretrained models for 3D pedestrian detection, 3D Mult
 
 ### 3D Multi-Object Trajectory Tracking
 
-|**Method**| **sAMOTA &uarr;** | **AMOTA &uarr;** | **AMOTP (m) &darr;** | **MOTA &uarr;**| **MOTP (m) &darr;** | **IDS&darr;** |
+|**Method**| **sAMOTA&uarr;** | **AMOTA&uarr;** | **AMOTP (m)&darr;** | **MOTA&uarr;**| **MOTP (m)&darr;** | **IDS&darr;** |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |**PointPillars + AB3DMOT** | 0.3679 | 0.0826 | 0.5125 | 0.2073 | 0.9702 | 1048 |
 |**Centerpoint Detector + AB3DMOT** | 0.4626 | 0.1159 | 0.3757 | 0.3438 | 0.8360 | **554** |
