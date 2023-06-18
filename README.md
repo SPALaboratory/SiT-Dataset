@@ -122,10 +122,11 @@ We provide benchmarks and pretrained models for 3D pedestrian detection, 3D Mult
 |**FutureDet-P**|0.209 | 0.037 | 2.532 | 4.537|<a href="">TBD</a>|
 |**FutureDet-V**|0.408 | 0.053 | 2.416 | 4.409|<a href="">TBD</a>|
 
-## Download Dataset (TBD)
-Download SiT Mini dataset from below.
-**<a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u?usp=sharing"> Click Download link </a>**
-Full dataset and Rosbag files will be uploaded(TBD)
+## Download Dataset
+* Download SiT Mini dataset from below Google Drive link. <br>
+**<a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u?usp=sharing"> Click Download link. </a> <br>**
+
+* Full dataset and Rosbag files will be uploaded(TBD).
 
 ## ROS Bag Raw Data
 ROS bagfiles include below sensor data:
