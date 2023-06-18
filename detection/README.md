@@ -36,6 +36,32 @@ The performance of baselines are as follows.
 | CenterPoint - P | 0.382 |
 | CenterPoint - V | 0.382 |
 
+## Data generation
+
+#### concat 
+python tools/create_data.py spa_nus --root-path ./data/spa --version v1.0-spa-trainval --max-sweeps 1 --out-dir ./data/spa --extra-tag spa_nusc
+
+#### top
+python tools/create_data.py spa_nus_top --root-path ./data/spa --version v1.0-spa-trainval --max-sweeps 1 --out-dir ./data/spa --extra-tag spa_nusc_top
+
+#### bottom
+python tools/create_data.py spa_nus_bottom --root-path ./data/spa --version v1.0-spa-trainval --max-sweeps 1 --out-dir ./data/spa --extra-tag spa_nusc_bottom
+
+## Training
+#### PointPillars training
+python tools/train.py configs/_base_/spa_nusc_pointpillar.py
+python tools/train.py configs/_base_/spa_nusc_top_pointpillar.py
+python tools/train.py configs/_base_/spa_nusc_bottom_pointpillar.py
+
+#### Ceonterpoint training
+python tools/train.py configs/_base_/spa_nusc_centerpoint_ped.py
+python tools/train.py configs/_base_/spa_nusc_top_centerpoint_ped.py
+python tools/train.py configs/_base_/spa_nusc_bottom_centerpoint_ped.py
+
+#### Ceonterpoint training
+python tools/train.py configs/_base_/spa_nusc_centerpoint_voxel.py
+python tools/train.py configs/_base_/spa_nusc_top_centerpoint_voxel.py
+python tools/train.py configs/_base_/spa_nusc_bottom_centerpoint_voxel.py
 
 ## License
 
