@@ -1,4 +1,13 @@
+
+
 <h1>SiT Dataset: Socially Interactive Pedestrian Trajectory Dataset for Social Navigation Robots</h1>
+
+<p align="center">
+  <img src="./images/230618_SPA_logo_white.png" align="center" width="54%">
+  <img src="./images/HYU_initial_eng.png" align="center" width="45%">
+</p>
+
+
 
 ![Demo_data Illustration](./images/230605_main.png)
 
