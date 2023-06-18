@@ -84,24 +84,27 @@ We tested the SiT Dataset for prediction frameworks on the following enviroment:
 ## Benchmarks
 We provide benchmarks and pretrained models for 3D pedestrian detection, 3D Multi-Object Tracking, Pedestrian Trajectory Prediction and End-to-End Motion Forecasting.
 
-### 3D Object Detection
+### <a href="https://github.com/SPALaboratory/SiT-Dataset/tree/main/detection">3D Object Detection</a>
+
 |**Methods**|**Modality**|**mAP &uarr;**| **AP(0.25) &uarr;** |**AP(0.5) &uarr;** | **AP(1.0) &uarr;** | **AP(2.0) &uarr;** | **Pretrained** |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|FCOS3D|Camera| 0.131 | 0.054 | 0.147 | 0.162 | 0.162 | <a href="">TBD</a>|
-|PointPillars|LiDAR| 0.319 | 0.202 | 0.316 | 0.346 | 0.414 |<a href="">TBD</a>|
-|CenterPoint-P|LiDAR| 0.382 | 0.233 | 0.388 | 0.424 | 0.482 |<a href="">TBD</a>|
-|CenterPoint-V|LiDAR| 0.514 | 0.352 | **0.522**| 0.556 | 0.620 |<a href="">TBD</a>|
-|Transfusion-P|Fusion| 0.396 | 0.213 | 0.371 | 0.451 | 0.551 |<a href="">TBD</a>|
-|Transfusion-V|Fusion| **0.533** | **0.360** | 0.512 | **0.587** | **0.672** |<a href="">TBD</a>|
+|**FCOS3D**|Camera| 0.131 | 0.054 | 0.147 | 0.162 | 0.162 | <a href="">TBD</a>|
+|**PointPillars**|LiDAR| 0.319 | 0.202 | 0.316 | 0.346 | 0.414 |<a href="">TBD</a>|
+|**CenterPoint-P**|LiDAR| 0.382 | 0.233 | 0.388 | 0.424 | 0.482 |<a href="">TBD</a>|
+|**CenterPoint-V**|LiDAR| 0.514 | 0.352 | **0.522**| 0.556 | 0.620 |<a href="">TBD</a>|
+|**Transfusion-P**|Fusion| 0.396 | 0.213 | 0.371 | 0.451 | 0.551 |<a href="">TBD</a>|
+|**Transfusion-V**|Fusion| **0.533** | **0.360** | 0.512 | **0.587** | **0.672** |<a href="">TBD</a>|
 
 ### 3D Multi-Object Trajectory Tracking
+
 |**Method**| **sAMOTA &uarr;** | **AMOTA &uarr;** | **AMOTP (m) &darr;** | **MOTA &uarr;**| **MOTP (m) &darr;** | **IDS&darr;** |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |**PointPillars + AB3DMOT** | 0.3679 | 0.0826 | 0.5125 | 0.2073 | 0.9702 | 1048 |
 |**Centerpoint Detector + AB3DMOT** | 0.4626 | 0.1159 | 0.3757 | 0.3438 | 0.8360 | **554** |
 |**Centerpoint Tracker** | **0.7244** | **0.2793** | **0.2611** | **0.5150** | **0.4274** | 1136 |
 
-### Pedestrian Trajectory Prediction
+### <a href="https://github.com/SPALaboratory/SiT-Dataset/tree/main/prediction">Pedestrian Trajectory Prediction</a>
+
 |**Name**|**Map**|**ADE<sub>5<sub>** **&darr;**|**FDE<sub>5<sub>** **&darr;**| **ADE<sub>20<sub>** **&darr;** | **FDE<sub>20<sub>** **&darr;** | **Pretrained** |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |**Vanilla LSTM**| X|1.156 | 2.205 | 1.601 | 3.157 | <a href="">TBD</a>|
