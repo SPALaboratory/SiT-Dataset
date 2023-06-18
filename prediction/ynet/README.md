@@ -46,7 +46,7 @@ python script_train.py
 
 
 ## Inference for training & validation set
-This code stores the prediction results for NSP. First, it performs inference on the train set, followed by the validation set. It also provides separate errors for indoor and outdoor. Please move the results saved in the "./result_for_nsp" folder to be used for training/inference in NSP.
+This code stores the prediction results for NSP. First, it performs inference on the train set, followed by the validation set. It also provides separate errors for indoor and outdoor. Change the variable "MODEL_WEIGHT" in the script_test.py file with the name of the saved pretrained weights in "pretrained". Please move the results saved in the "./result_for_nsp" folder to be used for training/inference in NSP.
 ```
 python script_test.py
 ```
