@@ -1,5 +1,4 @@
 
-
 <h1> <a href="https://spalaboratory.github.io/SiT/ target="_blank"> SiT Dataset: Socially Interactive Pedestrian Trajectory Dataset for Social Navigation Robots </a> </h1>
 
 <p align="center">
