@@ -75,7 +75,7 @@ We tested the SiT Dataset for prediction frameworks on the following enviroment:
 
 
 ## Benchmarks
-We provide benchmarks and pretrained models for 3D pedestrian detection, 3D Multi-Object Tracking, Pedestrian Trajectory Prediction and end-to-end Prediction.
+We provide benchmarks and pretrained models for 3D pedestrian detection, 3D Multi-Object Tracking, Pedestrian Trajectory Prediction and End-to-End Motion Forecasting.
 
 ### 3D Object Detection
 |**Methods**|**Modality**|**mAP &uarr;**| **AP(0.25) &uarr;** |**AP(0.5) &uarr;** | **AP(1.0) &uarr;** | **AP(2.0) &uarr;** | **Pretrained** |
@@ -104,7 +104,7 @@ We provide benchmarks and pretrained models for 3D pedestrian detection, 3D Mult
 |**NSP-SFM**| X | 1.036 | 1.947 | 0.529 | 0.936 | <a href="">TBD</a>|
 |**NSP-SFM**| O | **0.808** | **1.549** | **0.443** | **0.807** | <a href="">TBD</a>|
 
-### End-to-End Pedestrian Trajectory Prediction
+### End-to-End Pedestrian Motion Forecasting
 |**Method**| **mAP** **&uarr;** |  **mAP<sub>f<sub>** **&uarr;** | **ADE<sub>5<sub>** **&darr;** | **FDE<sub>5<sub>** **&darr;** | **Pretrained** |
 |:---:|:---:|:---:|:---:|:---:|:---:|
 |**Fast and Furious**| **0.490** | **0.079** | **1.915** | **3.273** |<a href="">TBD</a>|
