@@ -138,7 +138,8 @@ Topic Name | Message Tpye | Message Descriptison
 /xsens/filter/positionlla  | geometry_msgs/Vector3Stamped | GNSS by MTi-680
 /xsens/imu/data      | sensor_msgs/Imu | IMU by MTi-680
 /xsens/imu_interpolated   | sensor_msgs/Imu | Interpolated IMU to the timestep of top 
-
+  
+  
 ## License <a rel="license_cc" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="by-nc-nd_4.0" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a> <a rel="license_apache_2"><img alt="apache_2.0" style="border-width:0; width:8%;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/ASF_Logo.svg/220px-ASF_Logo.svg.png"/></a>
 
 The SiT dataset is published under the CC BY-NC-ND License 4.0, and all codes are published under the Apache License 2.0.
