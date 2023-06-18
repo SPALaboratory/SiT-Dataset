@@ -4,7 +4,12 @@
 An essential role in the operational effectiveness of autonomous robots lies in their ability to detect and understand their surrounding environments and objects. This capability is not only crucial for safe navigation but also for meaningful interactions within those environments. In this context, we've developed a comprehensive pedestrian path dataset that can serve as a vital tool for future research advancements in this domain. It's designed to benchmark and enhance the performance of various detection models, providing a reliable baseline against which improvements can be measured and progress can be tracked.
 
 
+### PointPillars
+PointPillars focuses on the challenge of encoding a point cloud into a format that can be effectively used in a downstream detection pipeline. PointPillars is a novel encoder that uses PointNets to learn a representation of point clouds organized in vertical columns, or pillars. While the encoded features can be integrated with any standard 2D convolutional detection architecture, PointPillars propose a streamlined downstream network.
 
+
+### CenterPoint
+Three-dimensional object detection often employs 3D boxes in point clouds, but this method struggles with varying orientations. CenterPoint is a novel framework that detects and tracks 3D objects as points rather than boxes. CenterPoint detects object centers first, then regresses to other attributes like size, orientation, and velocity, refining these estimates with additional point features.
 
 
 The performance of baselines are as follows.
