@@ -53,12 +53,12 @@ python tools/train.py configs/_base_/spa_nusc_pointpillar.py
 python tools/train.py configs/_base_/spa_nusc_top_pointpillar.py
 python tools/train.py configs/_base_/spa_nusc_bottom_pointpillar.py
 
-#### Ceonterpoint training
+#### Ceonterpoint(P) training
 python tools/train.py configs/_base_/spa_nusc_centerpoint_ped.py
 python tools/train.py configs/_base_/spa_nusc_top_centerpoint_ped.py
 python tools/train.py configs/_base_/spa_nusc_bottom_centerpoint_ped.py
 
-#### Ceonterpoint training
+#### Centerpoint(V) training
 python tools/train.py configs/_base_/spa_nusc_centerpoint_voxel.py
 python tools/train.py configs/_base_/spa_nusc_top_centerpoint_voxel.py
 python tools/train.py configs/_base_/spa_nusc_bottom_centerpoint_voxel.py
