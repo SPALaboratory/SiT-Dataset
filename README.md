@@ -4,11 +4,11 @@
 
 <p align="center">
 <!--   <img src="./images/230618_SPA_logo.png" align="center" height="300px" width="60%"> -->
-  <a href="https://www.spa.hanyang.ac.kr/ ">
+  <a href="https://www.spa.hanyang.ac.kr/ " target="_blank">
     <img src="./images/230618_SPA_logo.png" align="center" width="55%">
   </a>
 <!--   <img src="./images/HYU_initial_eng.png" align="center" width="39%"> -->
-  <a href="https://www.hanyang.ac.kr/web/eng">
+  <a href="https://www.hanyang.ac.kr/web/eng" target="_blank">
     <img src="./images/HYU_initial_eng.png" align="center" width="44%">
   </a>
 <!--   <img src="./images/HYU_initial_eng.png" align="center" height="70px" width="40%"> -->
