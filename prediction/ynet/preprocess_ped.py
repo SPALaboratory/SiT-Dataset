@@ -202,7 +202,7 @@ dataset = './SiT_dataset'
 trajectory_path = './data/trajectory_txt'
 os.makedirs(trajectory_path, exist_ok=True)
 
-first_loc_path = "/media/jw/c0cd0b98-c54e-40fb-a862-ed1951f68b3f/for_github/4.reindex_raw_files/first_loc"
+first_loc_path = "./SiT_dataset/first_loc"
 
 for place in os.listdir(dataset):
     if place not in ['Courtyard', 'Subway_Entrance', 'Cafeteria', 'Three_way_Intersection', 'cafe_street', 'Corridor', 'Lobby', 'Outdoor_Alley', 'Crossroad', 'Hallway']:
