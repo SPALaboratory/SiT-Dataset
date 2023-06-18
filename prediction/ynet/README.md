@@ -20,10 +20,13 @@ ynet
 ```
 
 
-## Docker images
+## Docker pull
 ```shell
-docker pull spalabatory/ynet:torch1.9.1_cu111
-docker run spalabatory/ynet:torch1.9.1_cu111
+# pull and run docker image, immediately. 
+sudo docker run -it -e DISPLAY=unix$DISPLAY --gpus all --ipc=host -v {local_ynet}:/mnt/ynet -e XAUTHORITY=/tmp/.docker.xauth --name sit_ynet spalaboratory/ynet:torch1.9.1_cu111 /bin/bash
+
+# docker start & docker exec
+docker start sit_ynet && docker exec -it sit_ynet /bin/bash
 ```
 
 
@@ -38,7 +41,7 @@ python train.py
 ```
 
 
-## Inference for Validation set
+## Inference for validation set
 ```
 python test.py
 ```
