@@ -14,12 +14,10 @@ ln -s {SiT Dataset} SiT_dataset
 social-lstm
 ├── SiT_dataset
 ├── data
-│   ├── semantic_maps_json
-│   ├── semantic_map
 │   ├── trajectory_txt
-│   ├── tran.pkl
-│   ├── val.pkl
-│   ├── test.pkl
+│   ├── trajectories_train.cpkl
+│   ├── trajectories_val.cpkl
+│   ├── trajectories_test.cpkl
 ```
 
 
