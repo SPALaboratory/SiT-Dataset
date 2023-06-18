@@ -26,28 +26,26 @@ ynet
 ## Docker pull
 ```shell
 # pull and run docker image, immediately. 
-sudo docker run -it -e DISPLAY=unix$DISPLAY --gpus all --ipc=host -v {local_ynet}:/mnt/ynet -e XAUTHORITY=/tmp/.docker.xauth --name sit_ynet spalaboratory/ynet:torch1.9.1_cu111 /bin/bash
+sudo docker run -it -e DISPLAY=unix$DISPLAY --gpus all --ipc=host -v {local_social-lstm}:/mnt/social-lstm -e XAUTHORITY=/tmp/.docker.xauth --name sit_social_lstm spalaboratory/social-lstm:torch1.9.1_cu111 /bin/bash
 
 # docker start & docker exec
-docker start sit_ynet && docker exec -it sit_ynet /bin/bash
+docker start sit_social_lstm && docker exec -it sit_social_lstm /bin/bash
 ```
 
 
 ## Preprocess
 ```
-python preprocess_ped.py # for pedestrian history
-python preprocess_map.py # for semantic map
+python /preprocess/preprocess_socialLSTM_JY_0603_deepen.py
 ```
 
 ## Training
 ```
-python script_train.py
+python train.py
 ```
 
 
-## Inference for training & validation set
-This code stores the prediction results for NSP. First, it performs inference on the train set, followed by the validation set. It also provides separate errors for indoor and outdoor. Change the variable "MODEL_WEIGHT" in the script_test.py file with the name of the saved pretrained weights in "pretrained". Please move the results saved in the "./result_for_nsp" folder to be used for training/inference in NSP.
+## Inference for validation set
 ```
-python script_test.py
+python validation_sample20.py
 ```
 
