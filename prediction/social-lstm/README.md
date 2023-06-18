@@ -11,7 +11,7 @@ Please set up the configuration to match the tree structure below.
 ln -s {SiT Dataset} SiT_dataset
 ```
 ```
-ynet
+social-lstm
 ├── SiT_dataset
 ├── data
 │   ├── semantic_maps_json
