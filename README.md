@@ -25,8 +25,8 @@
 
 
 ## Updates
-* [2023-05-29] We opened SiT Dataset <a href="https://github.com/SPALaboratory/SiT-Dataset target="_blank"> Github</a>.
-* [2023-05-29] We opened SiT Dataset [Website.](https://spalaboratory.github.io/SiT/){:target="_blank"}
+* [2023-05-29] We opened SiT Dataset <a href="https://spalaboratory.github.io/SiT/" target="_blank">Website</a>.
+* [2023-05-29] We opened SiT Dataset <a href="https://github.com/SPALaboratory/SiT-Dataset" target="_blank">Github</a>.
 
 * [2023-06-18] Semantic map data of SiT Dataset released on <a href="https://github.com/SPALaboratory/SiT-Dataset/tree/main/semantic-maps "target="_blank">Github.</a>
 
