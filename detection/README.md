@@ -1,7 +1,11 @@
 
 
 ## Introduction
-For 3d object detection on SiT Dataset, we use the MMDetection3D toolbox.
+An essential role in the operational effectiveness of autonomous robots lies in their ability to detect and understand their surrounding environments and objects. This capability is not only crucial for safe navigation but also for meaningful interactions within those environments. In this context, we've developed a comprehensive pedestrian path dataset that can serve as a vital tool for future research advancements in this domain. It's designed to benchmark and enhance the performance of various detection models, providing a reliable baseline against which improvements can be measured and progress can be tracked.
+
+
+
+
 
 The performance of baselines are as follows.
 
