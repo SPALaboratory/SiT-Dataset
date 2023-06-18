@@ -126,9 +126,8 @@ Topic Name | Message Tpye | Message Descriptison
 /47_camera/pylon_camera_node/<br>image_raw/compressed  | sensor_msgs/CompressedImage  | Compressed Bayer Image by Basler a2A1920-51gv PRO GigE
 /65_camera/pylon_camera_node/<br>image_raw/compressed  | sensor_msgs/CompressedImage  | Compressed Bayer Image by Basler a2A1920-51gv PRO GigE
 /bottom/velodyne_points | sensor_msgs/PointCloud2 | Pointcloud by Velodyne VLP-16
-odometry/filtered | nav_msgs/Odometry | Wheel Odometry with EKF Applied
 /top/velodyne_points | sensor_msgs/PointCloud2 | Pointcloud by Velodyne VLP-16
-vn100/vectornav/IMU | sensor_msgs/Imu | VN-100 IMU
+/vn100/vectornav/IMU | sensor_msgs/Imu | VN-100 IMU
 /xsens/filter/position_interpolated  | geometry_msgs/Vector3Stamped | GNSS by MTi-680
 /xsens/filter/positionlla  | geometry_msgs/Vector3Stamped | GNSS by MTi-680
 /xsens/imu/data      | sensor_msgs/Imu | GNSS by MTi-680
