@@ -15,7 +15,7 @@
 <!-- ![Demo_data Illustration](./images/230605_main.png) -->
 
 <p align="center">
-  <img src="./images/230605_main.png" alt>
+  <img src="./images/fig_1.png" alt>
    <em align="center">Example of SiT dataset (Cafe_Street_3)</em>
 </p>
 
