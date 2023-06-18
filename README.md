@@ -85,7 +85,7 @@ We provide benchmarks and pretrained models for 3D pedestrian detection, 3D Mult
 |FCOS3D|Camera| 0.131 | 0.054 | 0.147 | 0.162 | 0.162 | <a href="">TBD</a>|
 |PointPillars|LiDAR| 0.319 | 0.202 | 0.316 | 0.346 | 0.414 |<a href="">TBD</a>|
 |CenterPoint-P|LiDAR| 0.382 | 0.233 | 0.388 | 0.424 | 0.482 |<a href="">TBD</a>|
-|CenterPoint-V|LiDAR| 0.514 | 0.352 | **0.522 **| 0.556 | 0.620 |<a href="">TBD</a>|
+|CenterPoint-V|LiDAR| 0.514 | 0.352 | **0.522**| 0.556 | 0.620 |<a href="">TBD</a>|
 |Transfusion-P|Fusion| 0.396 | 0.213 | 0.371 | 0.451 | 0.551 |<a href="">TBD</a>|
 |Transfusion-V|Fusion| **0.533** | **0.360** | 0.512 | **0.587** | **0.672** |<a href="">TBD</a>|
 
@@ -104,7 +104,7 @@ We provide benchmarks and pretrained models for 3D pedestrian detection, 3D Mult
 |**Y-NET**| X | 1.188 | 2.427 | 0.640 | 1.547 | <a href="">TBD</a>|
 |**Y-NET**| O | 1.036 | 2.306 | 0.596 | 1.370 | <a href="">TBD</a>|
 |**NSP-SFM**| X | 1.036 | 1.947 | 0.529 | 0.936 | <a href="">TBD</a>|
-|**NSP-SFM**| O | 0.808 | 1.549 | 0.443 | 0.807 | <a href="">TBD</a>|
+|**NSP-SFM**| O | **0.808** | **1.549** | **0.443** | **0.807** | <a href="">TBD</a>|
 
 ### End-to-End Pedestrian Trajectory Prediction
 |**Method**| **mAP** **&uarr;** |  **mAP<sub>f<sub>** **&uarr;** | **ADE<sub>5<sub>** **&darr;** | **FDE<sub>5<sub>** **&darr;** | **Pretrained** |
