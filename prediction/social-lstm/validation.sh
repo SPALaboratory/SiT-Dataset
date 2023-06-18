@@ -1,0 +1,2 @@
+python validation_sample20.py
+python validation_sample20_vanilla.py
