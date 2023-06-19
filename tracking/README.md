@@ -6,7 +6,7 @@
 ## AB3DMOT
 
 # Convert detection format to tracking format
-'''
+'''shell
 # Convert detection results to tracking format
 cd AB3DMOT/data/spa/convert_det_format
 python convert_det_result_oxt.py
