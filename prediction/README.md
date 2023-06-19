@@ -23,7 +23,7 @@ We provide benchmarks and pretrained models for Pedestrian Trajectory Prediction
 
 
 ### Pedestrian Trajectory Prediction
-|**Name**|**Map**|**ADE<sub>5<sub> &darr;**|**FDE<sub>5<sub> &darr;**| **ADE<sub>20<sub> &darr;** | **FDE<sub>20<sub> &darr;** | **Pretrained** |
+|**Name**|**Map**|**ADE<sub>5<sub>** **&darr;**|**FDE<sub>5<sub>** **&darr;**| **ADE<sub>20<sub>** **&darr;** | **FDE<sub>20<sub>** **&darr;** | **Pretrained** |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |**Vanilla LSTM**| X|1.156 | 2.205 | 1.601 | 3.157 | <a href="">TBD</a>|
 |**Social-LSTM**| X | 1.336 | 2.554 | 1.319 | 2.519 | <a href="">TBD</a>|
