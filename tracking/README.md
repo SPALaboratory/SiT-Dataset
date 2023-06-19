@@ -28,6 +28,23 @@ cd AB3DMOT
 python scripts/spa/evaluate.py centerpoint_pedestrian_val_H1 1 val
 ```
 
+## CenterPoint
 
+### Tracker
+```
+cd CenterPoint/tools/spa_tracking
+python pub_test.py
+```
+
+### Evaluation
+```shell
+# Convert CenterPoint tracker results to AB3DMOT evaluation format
+cp tracking_result.json AB3DMOT/results/spa/CenterPoint_results
+cd AB3DMOT/results/spa/CenterPoint_results
+python convert_result.py
+
+# run evaluation
+cd AB3DMOT/scripts/spa/evaluate_quick.py CenterPoint_results 1 val
+```
 
 
