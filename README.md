@@ -2,33 +2,35 @@
 
 <h1> <a href="https://spalaboratory.github.io/SiT/"> SiT Dataset: Socially Interactive Pedestrian Trajectory Dataset for Social Navigation Robots </a> </h1>
 
-<p align="center">
-<!--   <img src="./images/230618_SPA_logo.png" align="center" height="300px" width="60%"> -->
+<!-- <p align="center">
   <a href="https://www.spa.hanyang.ac.kr/ " target="_blank">
     <img src="./images/230618_SPA_logo.png" align="center" width="55%">
   </a>
-<!--   <img src="./images/HYU_initial_eng.png" align="center" width="39%"> -->
   <a href="https://www.hanyang.ac.kr/web/eng" target="_blank">
     <img src="./images/HYU_initial_eng.png" align="center" width="44%">
   </a>
-<!--   <img src="./images/HYU_initial_eng.png" align="center" height="70px" width="40%"> -->
+</p>
+ -->
+ 
+<p align="center">
+  <img src="./images/230618_SPA_logo.png" align="center" width="40%>
+<!--   <img src="./images/230618_SPA_logo.png" align="center" alt width="40%> -->
 </p>
 
-<div align="center" dir="auto">
-  <b>mmdetection</b>
-  <sup>
-    <a href="https://github.com/open-mmlab/mmdetection" rel="nofollow">
-      <i>GitHub</i>
-    </a>
-  </sup>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <b>OpenMMLab platform</b>
-  <sup>
-    <a href="https://platform.openmmlab.com" rel="nofollow">
-      <i>TRY IT OUT</i>
-    </a>
-  </sup>
-</div>
+<br>
+<br>
+
+<p align="center">
+  <div align="center" dir="auto">
+    <b>SiT Dataset</b>
+    <sup>
+      <a href="https://spalaboratory.github.io/SiT" rel="nofollow">
+        <i>Homepage</i>
+      </a>
+    </sup>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+  </div>
+</p>
 
 
 
