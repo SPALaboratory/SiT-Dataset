@@ -1,7 +1,5 @@
-## 3D Pedestrian MOT
+# 3D Pedestrian MOT
 
-
-# Evaluation
 
 ## AB3DMOT
 
