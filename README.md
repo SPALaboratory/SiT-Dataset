@@ -14,6 +14,22 @@
 <!--   <img src="./images/HYU_initial_eng.png" align="center" height="70px" width="40%"> -->
 </p>
 
+<div align="center" dir="auto">
+  <b>mmdetection</b>
+  <sup>
+    <a href="https://github.com/open-mmlab/mmdetection" rel="nofollow">
+      <i>GitHub</i>
+    </a>
+  </sup>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <b>OpenMMLab platform</b>
+  <sup>
+    <a href="https://platform.openmmlab.com" rel="nofollow">
+      <i>TRY IT OUT</i>
+    </a>
+  </sup>
+</div>
+
 
 
 <!-- ![Demo_data Illustration](./images/230605_main.png) -->
