@@ -17,7 +17,7 @@
     <img src="./images/230618_SPA_logo.png" align="center" width="40%" alt="SPA Logo">
   </a>
 </p>
-<p align="center">
+<!-- <p align="center">
   <div align="center" dir="auto">
     <b>SiT Dataset</b>
     <sup>
@@ -27,7 +27,7 @@
     </sup>
     &nbsp;&nbsp;&nbsp;&nbsp;
   </div>
-</p>
+</p> -->
 
 
 
