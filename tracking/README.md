@@ -1,11 +1,11 @@
 ## 3D Pedestrian MOT
 
 
-### Evaluation
+# Evaluation
 
 ## AB3DMOT
 
-# Convert detection format to tracking format
+### Convert detection format to tracking format
 ```shell
 # Convert detection results to tracking format
 cd AB3DMOT/data/spa/convert_det_format
@@ -16,13 +16,13 @@ cd AB3DMOT/scripts/spa
 python convert_det_to_track.py
 ```
 
-# Tracker
+### Tracker
 ```
 cd AB3DMOT
 python main.py --dataset spa --det_name centerpoint
 ```
 
-# Evaluation
+### Evaluation
 ```
 cd AB3DMOT
 python scripts/spa/evaluate.py centerpoint_pedestrian_val_H1 1 val
