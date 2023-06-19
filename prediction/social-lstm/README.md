@@ -33,7 +33,7 @@ docker start sit_social_lstm && docker exec -it sit_social_lstm /bin/bash
 
 ## Preprocess
 ```
-python /preprocess/preprocess_socialLSTM_JY_0603_deepen.py
+python /preprocess/preprocess_socialLSTM.py
 ```
 
 ## Training
