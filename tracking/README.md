@@ -6,7 +6,7 @@
 ## AB3DMOT
 
 # Convert detection format to tracking format
-'''shell
+```shell
 # Convert detection results to tracking format
 cd AB3DMOT/data/spa/convert_det_format
 python convert_det_result_oxt.py
@@ -14,19 +14,19 @@ python convert_det_result_oxt.py
 # Convert labels to tracking label format
 cd AB3DMOT/scripts/spa
 python convert_det_to_track.py
-'''
+```
 
 # Tracker
-'''
+```
 cd AB3DMOT
 python main.py --dataset spa --det_name centerpoint
-'''
+```
 
 # Evaluation
-'''
+```
 cd AB3DMOT
 python scripts/spa/evaluate.py centerpoint_pedestrian_val_H1 1 val
-'''
+```
 
 
 
