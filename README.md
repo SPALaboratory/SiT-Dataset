@@ -38,7 +38,7 @@
 
 <p align="center">
   <img src="./images/fig_1_w_logo.png" alt>
-   <em align="center">Example of SiT dataset (Cafe_Street_3)</em>
+   <em align="center">Example of SiT dataset</em>
 </p>
 
 
