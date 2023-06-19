@@ -15,6 +15,7 @@
 <p align="center">
   <img src="./images/230618_SPA_logo.png" align="center" width="40%>
 <!--   <img src="./images/230618_SPA_logo.png" align="center" alt width="40%> -->
+        <a href="https://spalaboratory.github.io/SiT" rel="nofollow">
 </p>
 
 <br>
