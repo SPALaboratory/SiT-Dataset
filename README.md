@@ -13,14 +13,10 @@
  -->
  
 <p align="center">
-  <img src="./images/230618_SPA_logo.png" align="center" width="40%>
-<!--   <img src="./images/230618_SPA_logo.png" align="center" alt width="40%> -->
-        <a href="https://spalaboratory.github.io/SiT" rel="nofollow">
+  <a href="https://spalaboratory.github.io/SiT">
+    <img src="./images/230618_SPA_logo.png" align="center" width="40%" alt="SPA Logo">
+  </a>
 </p>
-
-<br>
-<br>
-
 <p align="center">
   <div align="center" dir="auto">
     <b>SiT Dataset</b>
@@ -32,6 +28,7 @@
     &nbsp;&nbsp;&nbsp;&nbsp;
   </div>
 </p>
+
 
 
 
