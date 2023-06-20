@@ -68,6 +68,7 @@ Be sure to change the paths in configs and syspath in the following files:
 
 ```
 In the end, the data and info files should be organized as follows
+```
 # For SiT Dataset 
 └── SiT_DATASET_ROOT
       ├── samples       <-- key frames
@@ -81,8 +82,6 @@ In the end, the data and info files should be organized as follows
           |── gt_database_1sweeps_withvelo <-- GT database 
 ```
 
-
-Use the following command to start a distributed training and evaluation. The models and logs will be saved to ```models/CONFIG_NAME```. Results will be save to ```results/CONFIG_NAME``` 
 
 #### FaF*
 ```bash
