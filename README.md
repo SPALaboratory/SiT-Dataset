@@ -21,7 +21,7 @@
 <p align="center">
 <a href="https://youtu.be/9zc-5Gxjvzk"><img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube Video"/></a>
 <a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u"><img src="https://img.shields.io/badge/Google_Drive-4285F4?style=for-the-badge&logo=google-drive&logoColor=white" alt="Google Drive"/></a>
-<a href="https://spalaboratory.github.io/SiT/"><img src="https://img.shields.io/badge/Website-181717?style=for-the-badge&logo=github&logoColor=white" alt="Github.io"/></a>
+<a href="https://spalaboratory.github.io/SiT/"><img src="https://img.shields.io/badge/hompage-181717?style=for-the-badge&logo=googlehome&logoColor=white" alt="Github.io"/></a>
 </p>
 
 <!--홈페이지 아이콘  -->
