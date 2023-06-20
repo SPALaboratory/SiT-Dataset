@@ -13,9 +13,11 @@
  -->
  
 <p align="center">
+  </br>
   <a href="https://spalaboratory.github.io/SiT">
-    <img src="./images/230618_SPA_logo.png" align="center" width="40%" alt="SPA Logo">
+    <img src="./images/230620_SPA_logo.png" align="center" width="35%" alt="SPA Logo">
   </a>
+</br></br>
 </p>
 
 <p align="center">
