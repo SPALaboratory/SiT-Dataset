@@ -62,15 +62,14 @@ Be sure to change the paths in configs and syspath in the following files:
 
 ### Benchmark Evaluation and Training
 
+
+```
 #python tools/create_data.py spa_nusc_data_prep --root_path SPA_DATASET_ROOT --version v1.0-spa-trainval --timesteps 7
 
 ```
-
 In the end, the data and info files should be organized as follows
-
-```
-# For nuScenes Dataset 
-└── SPA-NUSC_DATASET_ROOT
+# For SiT Dataset 
+└── SiT_DATASET_ROOT
       ├── samples       <-- key frames
       ├── sweeps        <-- frames without annotation
       ├── maps          <-- unused
