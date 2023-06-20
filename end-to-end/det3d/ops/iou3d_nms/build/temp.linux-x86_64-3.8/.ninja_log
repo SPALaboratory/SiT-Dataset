@@ -1,0 +1,5 @@
+# ninja log v5
+0	2991	1677397660845667369	/home/changwon/detection_task/Det3D/det3d/ops/iou3d_nms/build/temp.linux-x86_64-3.8/src/iou3d_nms_kernel.o	caba7465ac27e424
+0	8522	1677397666390129208	/home/changwon/detection_task/Det3D/det3d/ops/iou3d_nms/build/temp.linux-x86_64-3.8/src/iou3d_cpu.o	363f37cf18ba5da
+0	9072	1677397666938174683	/home/changwon/detection_task/Det3D/det3d/ops/iou3d_nms/build/temp.linux-x86_64-3.8/src/iou3d_nms.o	e896891514528e77
+0	12774	1677397670638480760	/home/changwon/detection_task/Det3D/det3d/ops/iou3d_nms/build/temp.linux-x86_64-3.8/src/iou3d_nms_api.o	7e597366930025d5
