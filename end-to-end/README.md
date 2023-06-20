@@ -71,8 +71,8 @@ In the end, the data and info files should be organized as follows
 ```
 # For SiT Dataset 
 └── SiT_DATASET_ROOT
-      ├── samples       <-- key frames
-      ├── sweeps        <-- frames without annotation
+      ├── samples       <-- key frame
+      ├── sweeps        <-- unused
       ├── maps          <-- unused
       |── v1.0-spa-trainval <-- metadata and annotations
       |__ trainval_forecast
