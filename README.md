@@ -41,10 +41,10 @@
 
 
 ## Upcomings
-* [2023-06] <a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u?usp=sharing">SiT Mini-Dataset</a> release on public.
-* [2023-06] Dockerfiles for each perception task release on <a href="https://hub.docker.com/u/spalaboratory">Dockerhub</a>.
-* [2023-06] SiT benchmark and devkit for each perception task release.
-* [2023-06] SiT Mini-Dataset Rosbag files release on public.
+* [2023-07] <a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u?usp=sharing">SiT Mini-Dataset</a> release on public.
+* [2023-07] Dockerfiles for each perception task release on <a href="https://hub.docker.com/u/spalaboratory">Dockerhub</a>.
+* [2023-07] SiT benchmark and devkit for each perception task release.
+* [2023-07] SiT Mini-Dataset Rosbag files release on public.
 * [2023-09] SiT Full dataset with rosbag files release on public.
 * [2023-09] Pretrained models for 3D object detection and Trajectory prediction release on public.
 * [2023-10] Dockerfiles for each perception task release.
@@ -66,6 +66,13 @@ Our Social Interactive Trajectory (SiT) dataset is a unique collection of pedest
 * RGB Camera Basler a2A1920-51gc PRO GigE * 5
 * MTi-680G IMU & GPS * 1
 * VectorNAV VN-100 IMU * 1
+
+
+## Ground Truth
+We provide GT boxes for 2D and 3D data as below.
+* 2D: Class name, Class name:Track ID, Camera number, Top left X coordinate, Top left Y coordinate, Width (w), and Height (h)
+* 3D: Class name, Class name:Track ID, Height (h), Length (l), Width (w), X, Y, and Z coordinates, and rotation (rot).
+
 
 <!-- 
 ### 3D Object Detection
