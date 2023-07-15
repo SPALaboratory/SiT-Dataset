@@ -37,6 +37,7 @@
 ## Updates
 * [2023-05-29] We opened SiT Dataset <a href="https://github.com/SPALaboratory/SiT-Dataset">Github</a>.
 * [2023-05-29] We opened SiT Dataset <a href="https://spalaboratory.github.io/SiT/">Website.</a>
+* [2023-06-18] SiT mini Dataset released on <a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u"> Google Drive.</a>
 * [2023-06-18] Semantic map data of SiT Dataset released on <a href="https://github.com/SPALaboratory/SiT-Dataset/tree/main/semantic-maps">Github.</a>
 
 
