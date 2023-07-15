@@ -47,7 +47,6 @@
 * [2023-07] SiT Mini-Dataset Rosbag files release on public.
 * [2023-09] SiT Full dataset with rosbag files release on public.
 * [2023-09] Pretrained models for 3D object detection and Trajectory prediction release on public.
-* [2023-10] Dockerfiles for each perception task release.
 * [2024-01] SiT End-to-End pedestrain trajectory prediction challenge starts on Eval AI.
 * [2023-07] Pretrained models for 3D object detection.
 <!-- * [2023-09] SiT Full dataset upload. -->
