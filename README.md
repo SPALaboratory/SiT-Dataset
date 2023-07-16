@@ -70,8 +70,8 @@ Our Social Interactive Trajectory (SiT) dataset is a unique collection of pedest
 
 ## Ground Truth
 We provide GT boxes for 2D and 3D data as below.
-* 2D: Class name, Class name:Track ID, Camera number, Top left X coordinate, Top left Y coordinate, Width (w), and Height (h)
-* 3D: Class name, Class name:Track ID, Height (h), Length (l), Width (w), X, Y, and Z coordinates, and rotation (rot).
+* 2D: Class name, Track ID, Camera number, Top left X coordinate, Top left Y coordinate, Width (w), and Height (h)
+* 3D: Class name, Track ID, Height (h), Length (l), Width (w), X, Y, and Z coordinates, and rotation (rot).
 
 
 <!-- 
