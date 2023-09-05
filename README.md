@@ -39,12 +39,13 @@
 * [2023-05-29] We opened SiT Dataset <a href="https://spalaboratory.github.io/SiT/">Website.</a>
 * [2023-06-18] SiT mini Dataset released on <a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u"> Google Drive.</a>
 * [2023-06-18] Semantic map data of SiT Dataset released on <a href="https://github.com/SPALaboratory/SiT-Dataset/tree/main/semantic-maps">Github.</a>
-
-
-## Upcomings
 * [2023-07] <a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u?usp=sharing">SiT Mini-Dataset</a> release on public.
 * [2023-07] Dockerfiles for each perception task release on <a href="https://hub.docker.com/u/spalaboratory">Dockerhub</a>.
 * [2023-07] SiT benchmark and devkit for each perception task release.
+
+
+## Upcomings
+
 * [2023-12] SiT Full dataset with rosbag files release on public.
 * [2023-09] Pretrained models for 3D object detection and Trajectory prediction release on public.
 * [2024-01] SiT End-to-End pedestrain trajectory prediction challenge starts on <a href='https://eval.ai/web/challenges/list'>Eval AI</a>.
