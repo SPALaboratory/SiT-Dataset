@@ -99,19 +99,80 @@ def create_spa_nus_top_infos(root_path,
         mmcv.dump(data, info_val_path)
 
 
+# def get_label_anno(label_path):
+#     annotations = {}
+#     annotations.update({
+#         'name': [],
+#         'track_id': [],
+#         'cam_id': [],
+#         'bbox': [],
+#         'dimensions': [],
+#         'location': [],
+#         'rotation_y': []
+#     })
+#     name_map={'Car':'car', 'Truck':'truck', 'Bus':'bus', 'Pedestrian':'pedestrian','Bicyclist':'bicycle', 'Motorcycle':'motorcycle', 
+#               'Kickboard':'kickboard', 'Vehicle':'car', 'Pedestrian_sitting':'pedestrian_sitting',
+#               'Cyclist' : 'bicycle', 'Motorcyclist':'motorcycle'
+#               }
+#     with open(label_path, 'r') as f:
+#         lines = f.readlines()
+
+#     content = [line.strip().split(' ') for line in lines]
+
+#     annotations['name'] = np.array([ name_map[x[0]] for x in content])
+#     sitting_mask = np.array([True if i != 'pedestrian_sitting' else False  for i in annotations['name']])
+#     annotations['name'] = annotations['name'][sitting_mask]
+#     annotations['track_id'] = np.array([x[1] for x in content])[sitting_mask]
+#     annotations['cam_id'] = np.array([float(x[2]) for x in content])[sitting_mask]
+#     annotations['bbox'] = np.array([[float(info) for info in x[3:7]]
+#                                     for x in content]).reshape(-1, 4)[sitting_mask] #1102.00 110.00 1596.00 1203.00
+#     # no 2d box processing
+
+
+#     # dimensions will convert hwl format to standard lhw(camera) format. #l,w,h ->w,l,h
+#     annotations['dimensions'] = np.abs(np.array([[float(info) for info in x[7:10]]
+#                                           for x in content
+#                                           ]).reshape(-1, 3)[:, [1, 2, 0]])[sitting_mask] #h, l, w -> l ,w, h
+
+#     annotations['location'] = np.array([[float(info) for info in x[10:13]]
+#                                         for x in content]).reshape(-1, 3)[sitting_mask]
+
+#     annotations['rotation_y'] = np.array([float(x[13])
+#                                           for x in content]).reshape(-1)[sitting_mask]
+                                          
+#     if len(content) != 0 and len(content[0]) == 15:  # have score
+#         annotations['score'] = np.array([float(x[14]) for x in content])[sitting_mask]
+#     else:
+#         annotations['score'] = np.ones((annotations['bbox'].shape[0], ))
+    
+
+#     # for unique mask
+#     _, mask_index = np.unique(annotations['track_id'], return_index=True)
+#     annotations['name'] = annotations['name'][mask_index]
+#     annotations['track_id'] = annotations['track_id'][mask_index]
+#     annotations['cam_id'] = annotations['cam_id'][mask_index]
+#     annotations['bbox'] = annotations['bbox'][mask_index]
+#     annotations['dimensions'] = annotations['dimensions'][mask_index]
+#     annotations['location'] = annotations['location'][mask_index]
+#     annotations['rotation_y'] = annotations['rotation_y'][mask_index]
+#     annotations['score'] = annotations['score'][mask_index]
+#     return annotations 
+
 def get_label_anno(label_path):
     annotations = {}
+
     annotations.update({
         'name': [],
         'track_id': [],
-        'cam_id': [],
-        'bbox': [],
+        # 'cam_id': [],
+        # 'bbox': [],
         'dimensions': [],
         'location': [],
         'rotation_y': []
     })
+    # name_map={'car':'car', 'motocycle':'motorcycle', 'pedestrian':'pedestrian','cyclist':'bicycle', 'motorcycle':'motorcycle'}
     name_map={'Car':'car', 'Truck':'truck', 'Bus':'bus', 'Pedestrian':'pedestrian','Bicyclist':'bicycle', 'Motorcycle':'motorcycle', 
-              'Kickboard':'kickboard', 'Vehicle':'car', 'Pedestrian_sitting':'pedestrian_sitting',
+              'Kickboard':'kickboard', 'Vehicle':'car', 'Pedestrian_sitting':'pedestrian_sitting', 'Pedestrain_sitting':'pedestrian_sitting',
               'Cyclist' : 'bicycle', 'Motorcyclist':'motorcycle'
               }
     with open(label_path, 'r') as f:
@@ -120,30 +181,26 @@ def get_label_anno(label_path):
     content = [line.strip().split(' ') for line in lines]
 
     annotations['name'] = np.array([ name_map[x[0]] for x in content])
-    sitting_mask = np.array([True if i != 'pedestrian_sitting' else False  for i in annotations['name']])
+    sitting_mask = np.array([True if i != 'pedestrian_sitting' and i != 'car' and i != 'bicycle' and i != 'motorcycle' and i != 'truck' and i != 'bus' else False  for i in annotations['name']])
     annotations['name'] = annotations['name'][sitting_mask]
-    annotations['track_id'] = np.array([x[1] for x in content])[sitting_mask]
-    annotations['cam_id'] = np.array([float(x[2]) for x in content])[sitting_mask]
-    annotations['bbox'] = np.array([[float(info) for info in x[3:7]]
-                                    for x in content]).reshape(-1, 4)[sitting_mask] #1102.00 110.00 1596.00 1203.00
-    # no 2d box processing
+    annotations['track_id'] = np.array([int(x[1].split(":")[-1]) for x in content])[sitting_mask]
 
-
-    # dimensions will convert hwl format to standard lhw(camera) format. #l,w,h ->w,l,h
-    annotations['dimensions'] = np.abs(np.array([[float(info) for info in x[7:10]]
+    annotations['dimensions'] = np.abs(np.array([[float(info) for info in x[2:5]]
                                           for x in content
-                                          ]).reshape(-1, 3)[:, [1, 2, 0]])[sitting_mask] #h, l, w -> l ,w, h
+                                          ]).reshape(-1, 3)[:, [2, 1, 0]])[sitting_mask] #h, l, w -> w, l, h
 
-    annotations['location'] = np.array([[float(info) for info in x[10:13]]
+    annotations['location'] = np.array([[float(info) for info in x[5:8]]
                                         for x in content]).reshape(-1, 3)[sitting_mask]
 
-    annotations['rotation_y'] = np.array([float(x[13])
+    annotations['rotation_y'] = np.array([float(x[-1])
                                           for x in content]).reshape(-1)[sitting_mask]
+    
+    annotations['rotation_y'] = -(-annotations['rotation_y'] + np.pi/2)
                                           
     if len(content) != 0 and len(content[0]) == 15:  # have score
         annotations['score'] = np.array([float(x[14]) for x in content])[sitting_mask]
     else:
-        annotations['score'] = np.ones((annotations['bbox'].shape[0], ))
+        annotations['score'] = np.ones((annotations['track_id'].shape[0], ))
     
 
     # for unique mask
@@ -156,7 +213,7 @@ def get_label_anno(label_path):
     annotations['location'] = annotations['location'][mask_index]
     annotations['rotation_y'] = annotations['rotation_y'][mask_index]
     annotations['score'] = annotations['score'][mask_index]
-    return annotations 
+    return annotations   
 
 def get_ego_matrix(label_path):
     with open(label_path, 'r') as f:
