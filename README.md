@@ -42,7 +42,7 @@
 * [2023-07] <a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u?usp=sharing">SiT Mini-Dataset</a> release on public.
 * [2023-07] Dockerfiles for each perception task release on <a href="https://hub.docker.com/u/spalaboratory">Dockerhub</a>.
 * [2023-07] SiT benchmark and devkit for each perception task release.
-
+* [2023-09] Our paper is accepted to NeurIPS 2023 Dataset and Benchmark Track!
 
 ## Upcomings
 * [2023-09] Pretrained models for 3D object detection and Trajectory prediction release on public.
@@ -52,6 +52,7 @@
 <!-- * [2023-09] SiT Full dataset upload. -->
 <!-- * [2023-07] ROS bagfile of SiT Full dataset upload. -->
 <!-- * [2023-08] SiT benchmark for end-to-end trajectory prediction release. -->
+
 
 ## Overview
 Our Social Interactive Trajectory (SiT) dataset is a unique collection of pedestrian trajectories for designing advanced social navigation robots. It includes a range of sensor data, annotations, and offers a unique perspective from a robot navigating crowded environments, capturing dynamic human-robot interactions. It's meticulously organized for training and evaluating models across tasks like 3D detection, 3D multi-object tracking, and trajectory prediction, providing an end-to-end modular approach. It includes a comprehensive benchmark and exhibits the performance of several baseline models. This dataset is a valuable resource for future pedestrian trajectory prediction research, supporting the development of safe and agile social navigation robots.
