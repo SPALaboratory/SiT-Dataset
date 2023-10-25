@@ -45,7 +45,7 @@
 * [2023-09] Our paper is accepted to NeurIPS 2023 Dataset and Benchmark Track!
 
 ## Upcomings
-* [2023] Pretrained models for 3D object detection and Trajectory prediction release on public.
+* [2023] Weights of trained models for 3D object detection and Trajectory prediction release on public.
 * [2023] SiT Full dataset with rosbag files release on public.
 * [2024] SiT End-to-End pedestrain trajectory prediction challenge starts on <a href='https://eval.ai/web/challenges/list'>Eval AI</a>.
 <!-- * [2023-07] Pretrained models for 3D object detection. -->
@@ -105,11 +105,11 @@ We tested the SiT Dataset for prediction frameworks on the following enviroment:
 
 
 ## Benchmarks
-We provide benchmarks and pretrained models for 3D pedestrian detection, 3D Multi-Object Tracking, Pedestrian Trajectory Prediction and End-to-End Motion Forecasting.
+We provide benchmarks and weights of trained models for 3D pedestrian detection, 3D Multi-Object Tracking, Pedestrian Trajectory Prediction and End-to-End Motion Forecasting.
 
 ### <a href="https://github.com/SPALaboratory/SiT-Dataset/tree/main/detection">3D Object Detection</a>
 
-|**Methods**|**Modality**|**mAP &uarr;**| **AP(0.25) &uarr;** |**AP(0.5) &uarr;** | **AP(1.0) &uarr;** | **AP(2.0) &uarr;** | **Pretrained** |
+|**Methods**|**Modality**|**mAP &uarr;**| **AP(0.25) &uarr;** |**AP(0.5) &uarr;** | **AP(1.0) &uarr;** | **AP(2.0) &uarr;** | **Trained** |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |**<a href="https://www.arxiv-vanity.com/papers/2104.10956/">FCOS3D</a>**|Camera| 0.131 | 0.054 | 0.147 | 0.162 | 0.162 | <a href="">TBD</a>|
 |**<a href="https://openaccess.thecvf.com/content_CVPR_2019/html/Lang_PointPillars_Fast_Encoders_for_Object_Detection_From_Point_Clouds_CVPR_2019_paper.html">PointPillars</a>**|LiDAR| 0.319 | 0.202 | 0.316 | 0.346 | 0.414 |<a href="">TBD</a>|
@@ -131,7 +131,7 @@ We provide benchmarks and pretrained models for 3D pedestrian detection, 3D Mult
 ### <a href="https://github.com/SPALaboratory/SiT-Dataset/tree/main/prediction">Pedestrian Trajectory Prediction</a>
 
 <!-- |**Vanilla LSTM**| X|1.156 | 2.205 | 1.601 | 3.157 | <a href="">TBD</a>| -->
-|**Name**|**Map**|**ADE<sub>5<sub>** **&darr;**|**FDE<sub>5<sub>** **&darr;**| **ADE<sub>20<sub>** **&darr;** | **FDE<sub>20<sub>** **&darr;** | **Pretrained** |
+|**Name**|**Map**|**ADE<sub>5<sub>** **&darr;**|**FDE<sub>5<sub>** **&darr;**| **ADE<sub>20<sub>** **&darr;** | **FDE<sub>20<sub>** **&darr;** | **Trained** |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |**<a href="https://openaccess.thecvf.com/content_cvpr_2016/html/Alahi_Social_LSTM_Human_CVPR_2016_paper.html">Social-LSTM</a>**| X | 1.336 | 2.554 | 1.319 | 2.519 | <a href="">TBD</a>|
 |**<a href="https://openaccess.thecvf.com/content/ICCV2021/html/Mangalam_From_Goals_Waypoints__Paths_to_Long_Term_Human_Trajectory_ICCV_2021_paper.html">Y-NET</a>**| X | 1.188 | 2.427 | 0.640 | 1.547 | <a href="">TBD</a>|
@@ -140,7 +140,7 @@ We provide benchmarks and pretrained models for 3D pedestrian detection, 3D Mult
 |**<a href="https://link.springer.com/chapter/10.1007/978-3-031-19830-4_22">NSP-SFM</a>**| O | **0.808** | **1.549** | **0.443** | **0.807** | <a href="">TBD</a>|
 
 ### End-to-End Pedestrian Motion Forecasting
-|**Method**| **mAP** **&uarr;** |  **mAP<sub>f<sub>** **&uarr;** | **ADE<sub>5<sub>** **&darr;** | **FDE<sub>5<sub>** **&darr;** | **Pretrained** |
+|**Method**| **mAP** **&uarr;** |  **mAP<sub>f<sub>** **&uarr;** | **ADE<sub>5<sub>** **&darr;** | **FDE<sub>5<sub>** **&darr;** | **Trained** |
 |:---:|:---:|:---:|:---:|:---:|:---:|
 |**<a href="https://openaccess.thecvf.com/content_cvpr_2018/html/Luo_Fast_and_Furious_CVPR_2018_paper.html">Fast and Furious</a>**| **0.490** | **0.079** | **1.915** | **3.273** |<a href="">TBD</a>|
 |**<a href="https://openaccess.thecvf.com/content/CVPR2022/html/Peri_Forecasting_From_LiDAR_via_Future_Object_Detection_CVPR_2022_paper.html">FutureDet-P</a>**|0.209 | 0.037 | 2.532 | 4.537|<a href="">TBD</a>|
