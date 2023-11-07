@@ -1,5 +1,6 @@
 ## End-to-end model training on SiT-Dataset
-
+detection distance threshold : [0.25, 0.5, 1.0, 2.0]
+future detection distance threshold : [0.25, 0.5, 1.0, 2.0] (original paper : [0.5, 1.0, 2.0, 4.0])
 |**Method**| **mAP** **&uarr;** |  **mAP<sub>f<sub>** **&uarr;** | **ADE<sub>5<sub>** **&darr;** | **FDE<sub>5<sub>** **&darr;** | **Pretrained** |
 |:---:|:---:|:---:|:---:|:---:|:---:|
 |**<a href="https://openaccess.thecvf.com/content_cvpr_2018/html/Luo_Fast_and_Furious_CVPR_2018_paper.html">Fast and Furious</a>**| **0.490** | **0.079** | **1.915** | **3.273** |<a href="">TBD</a>|
