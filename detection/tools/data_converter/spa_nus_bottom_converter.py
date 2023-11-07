@@ -99,71 +99,12 @@ def create_spa_nus_bottom_infos(root_path,
         mmcv.dump(data, info_val_path)
 
 
-# def get_label_anno(label_path):
-#     annotations = {}
-#     annotations.update({
-#         'name': [],
-#         'track_id': [],
-#         'cam_id': [],
-#         'bbox': [],
-#         'dimensions': [],
-#         'location': [],
-#         'rotation_y': []
-#     })
-#     name_map={'Car':'car', 'Truck':'truck', 'Bus':'bus', 'Pedestrian':'pedestrian','Bicyclist':'bicycle', 'Motorcycle':'motorcycle', 
-#               'Kickboard':'kickboard', 'Vehicle':'car', 'Pedestrian_sitting':'pedestrian_sitting',
-#               'Cyclist' : 'bicycle', 'Motorcyclist':'motorcycle'
-#               }
-#     with open(label_path, 'r') as f:
-#         lines = f.readlines()
-
-#     content = [line.strip().split(' ') for line in lines]
-
-#     annotations['name'] = np.array([ name_map[x[0]] for x in content])
-#     sitting_mask = np.array([True if i != 'pedestrian_sitting' else False  for i in annotations['name']])
-#     annotations['name'] = annotations['name'][sitting_mask]
-#     annotations['track_id'] = np.array([x[1] for x in content])[sitting_mask]
-#     annotations['cam_id'] = np.array([float(x[2]) for x in content])[sitting_mask]
-#     annotations['bbox'] = np.array([[float(info) for info in x[3:7]]
-#                                     for x in content]).reshape(-1, 4)[sitting_mask] #1102.00 110.00 1596.00 1203.00
-#     # no 2d box processing
-
-#     annotations['dimensions'] = np.abs(np.array([[float(info) for info in x[7:10]]
-#                                           for x in content
-#                                           ]).reshape(-1, 3)[:, [1, 2, 0]])[sitting_mask] #h, l, w -> l ,w, h
-
-#     annotations['location'] = np.array([[float(info) for info in x[10:13]]
-#                                         for x in content]).reshape(-1, 3)[sitting_mask]
-
-#     annotations['rotation_y'] = np.array([float(x[13])
-#                                           for x in content]).reshape(-1)[sitting_mask]
-                                          
-#     if len(content) != 0 and len(content[0]) == 15:  # have score
-#         annotations['score'] = np.array([float(x[14]) for x in content])[sitting_mask]
-#     else:
-#         annotations['score'] = np.ones((annotations['bbox'].shape[0], ))
-    
-
-#     # for unique mask
-#     _, mask_index = np.unique(annotations['track_id'], return_index=True)
-#     annotations['name'] = annotations['name'][mask_index]
-#     annotations['track_id'] = annotations['track_id'][mask_index]
-#     annotations['cam_id'] = annotations['cam_id'][mask_index]
-#     annotations['bbox'] = annotations['bbox'][mask_index]
-#     annotations['dimensions'] = annotations['dimensions'][mask_index]
-#     annotations['location'] = annotations['location'][mask_index]
-#     annotations['rotation_y'] = annotations['rotation_y'][mask_index]
-#     annotations['score'] = annotations['score'][mask_index]
-#     return annotations
-
 def get_label_anno(label_path):
     annotations = {}
 
     annotations.update({
         'name': [],
         'track_id': [],
-        # 'cam_id': [],
-        # 'bbox': [],
         'dimensions': [],
         'location': [],
         'rotation_y': []
@@ -193,7 +134,7 @@ def get_label_anno(label_path):
     annotations['rotation_y'] = np.array([float(x[-1])
                                           for x in content]).reshape(-1)[sitting_mask]
     
-    annotations['rotation_y'] = -(-annotations['rotation_y'] + np.pi/2)
+    # annotations['rotation_y'] = -(-annotations['rotation_y'] + np.pi/2)
                                           
     if len(content) != 0 and len(content[0]) == 15:  # have score
         annotations['score'] = np.array([float(x[14]) for x in content])[sitting_mask]
@@ -205,13 +146,11 @@ def get_label_anno(label_path):
     _, mask_index = np.unique(annotations['track_id'], return_index=True)
     annotations['name'] = annotations['name'][mask_index]
     annotations['track_id'] = annotations['track_id'][mask_index]
-    annotations['cam_id'] = annotations['cam_id'][mask_index]
-    annotations['bbox'] = annotations['bbox'][mask_index]
     annotations['dimensions'] = annotations['dimensions'][mask_index]
     annotations['location'] = annotations['location'][mask_index]
     annotations['rotation_y'] = annotations['rotation_y'][mask_index]
     annotations['score'] = annotations['score'][mask_index]
-    return annotations   
+    return annotations
 
 def get_ego_matrix(label_path):
     with open(label_path, 'r') as f:
@@ -227,16 +166,27 @@ def box_center_to_corner_3d(centers, dims, angles):
 
     # Create a bounding box outline
     x_corners = np.array([[l_ / 2, l_ / 2, -l_ / 2, -l_ / 2, l_ / 2, l_ / 2, -l_ / 2, -l_ / 2] for l_ in l])
+    #[[l_ / 2, l_ / 2, -l_ / 2, -l_ / 2, l_ / 2, l_ / 2, -l_ / 2, -l_ / 2] for l_ in l]
     y_corners = np.array([[w_ / 2, -w_ / 2, -w_ / 2, w_ / 2, w_ / 2, -w_ / 2, -w_ / 2, w_ / 2] for w_ in w])
+    #[w / 2, -w / 2, -w / 2, w / 2, w / 2, -w / 2, -w / 2, w / 2]
     z_corners = np.array([[-h_ / 2, -h_ / 2, -h_ / 2, -h_ / 2, h_ / 2, h_ / 2, h_ / 2, h_ / 2] for h_ in h])
+    #[-h/2, -h/2, -h/2, -h/2, h/2, h/2, h/2, h/2] #[0, 0, 0, 0, -h, -h, -h, -h]
     bounding_box = np.array([np.vstack([x_corners[i], y_corners[i], z_corners[i]]) for i in range(x_corners.shape[0])])
 
+
+    # rotation_matrix = np.array([[np.cos(rotation),  0,  np.sin(rotation)],
+    #                      [0,  1,  0],
+    #                      [-np.sin(rotation), 0,  np.cos(rotation)]])
     rotation_matrix = np.array([np.array([[np.cos(rotation_),  -np.sin(rotation_), 0],
                                             [np.sin(rotation_), np.cos(rotation_), 0],
                                             [0,  0,  1]]) for rotation_ in rotation])
 
 
     corner_box = np.array([np.dot(rotation_matrix[i], bounding_box[i]).T + translation[i] for i in range(x_corners.shape[0])])
+    # corner_box = corner_box[:, [2, 0, 1]] * np.array([[1, -1, -1]])
+    #corner_box = corner_box[:, [2, 0, 1]] * np.array([[1, -1, -1]])
+
+    # return corner_box.transpose()
     return corner_box
 
 def get_pts_in_3dbox(pc, corners):
@@ -356,6 +306,7 @@ def _fill_trainval_infos(nusc,
                             ]).reshape([3, 4])
                 P4_extrinsic = np.array([float(info) for info in lines[9].split(' ')[1:13]
                             ]).reshape([3, 4])
+        # projection_matrix = [P0, P1, P2, P3, P4]
         projection_matrix = [ [P0_intrinsic, P0_extrinsic], \
                               [P1_intrinsic, P1_extrinsic], \
                               [P2_intrinsic, P2_extrinsic], \
@@ -365,6 +316,13 @@ def _fill_trainval_infos(nusc,
 
         velo_path = root_path / place / scene / "velo/bottom/bin_data" / "{}.bin".format(frame)
 
+        # lidar_token = sample['data']['LIDAR_TOP']
+        # sd_rec = nusc.get('sample_data', sample['data']['LIDAR_TOP'])
+        # cs_record = nusc.get('calibrated_sensor',
+        #                      sd_rec['calibrated_sensor_token'])
+        # pose_record = nusc.get('ego_pose', sd_rec['ego_pose_token'])
+        # lidar_path, boxes, _ = nusc.get_sample_data(lidar_token)
+
         mmcv.check_file_exist(velo_path)
 
         info = {
@@ -372,9 +330,23 @@ def _fill_trainval_infos(nusc,
             'token': token,
             'sweeps': [],
             'cams': dict(),
+            # 'lidar2ego_translation': cs_record['translation'],
+            # 'lidar2ego_rotation': cs_record['rotation'],
+            # 'ego2global_translation': pose_record['translation'],
+            # 'ego2global_rotation': pose_record['rotation'],
+            # 'timestamp': sample['timestamp'],
         }
 
-        # obtain 5 image's information per frame
+        # obtain 6 image's information per frame
+        camera_types = [
+            'CAM_FRONT',
+            'CAM_FRONT_RIGHT',
+            'CAM_FRONT_LEFT',
+            # 'CAM_BACK',
+            'CAM_BACK_LEFT',
+            'CAM_BACK_RIGHT',
+        ] # 5: front, 4: front_left, 3: front_right, 2: back_right, 1:back_right
+
         camera_mapping = {4:'CAM_FRONT', 1:'CAM_FRONT_LEFT', 5:'CAM_FRONT_RIGHT', 3:'CAM_BACK_RIGHT',  2:'CAM_BACK_LEFT'}
 
         cam_num_list = [1, 2, 3, 4, 5]
@@ -383,15 +355,29 @@ def _fill_trainval_infos(nusc,
         cam_path_ = []
         for num in cam_num_list:
             cam_path_.append(root_path / place / scene / "cam_img/{}".format(num) / "data_rgb" / "{}.png".format(frame))
-        anno_path_.append(root_path / place / scene / "label/{}.txt".format(frame))
+        anno_path_.append(root_path / place / scene / "label_3d/{}.txt".format(frame))
         odom_path_.append(root_path / place / scene / "ego_trajectory/{}.txt".format(frame))
 
         for num, cam in enumerate(cam_num_list):
+            # cam_num = num+1
+            # cam_path, _, cam_intrinsic = nusc.get_sample_data(cam_token)
+            # cam_info = obtain_sensor2top(nusc, cam_token, l2e_t, l2e_r_mat,
+            #                              e2g_t, e2g_r_mat, cam)
             cam_info = {'data_path':cam_path_[cam-1], 'type': camera_mapping[cam]}
             cam_info.update(cam_intrinsic=projection_matrix[cam-1])
             info['cams'].update({camera_mapping[cam]: cam_info})
 
+        # obtain sweeps for a single key-frame
+        # sd_rec = nusc.get('sample_data', sample['data']['LIDAR_TOP'])
         sweeps = []
+        # while len(sweeps) < max_sweeps:
+        #     if not sd_rec['prev'] == '':
+        #         sweep = obtain_sensor2top(nusc, sd_rec['prev'], l2e_t,
+        #                                   l2e_r_mat, e2g_t, e2g_r_mat, 'lidar')
+        #         sweeps.append(sweep)
+        #         sd_rec = nusc.get('sample_data', sd_rec['prev'])
+        #     else:
+        #         break
         info['sweeps'] = sweeps
         # obtain annotation
         if not test:
@@ -410,6 +396,8 @@ def _fill_trainval_infos(nusc,
 
             locs = np.array(data_anno['location']).reshape(-1, 3)
             dims = np.array(data_anno['dimensions']).reshape(-1, 3) # order : l,w,h 
+            # rots = np.array([b.orientation.yaw_pitch_roll[0] for b in ref_boxes]).reshape(-1, 1)
+            #velocity = np.array([b.velocity for b in ref_boxes]).reshape(-1, 3)
             rots = np.array(data_anno['rotation_y']).reshape(
                 -1, 1
             )
@@ -419,6 +407,7 @@ def _fill_trainval_infos(nusc,
             gt_boxes = np.concatenate(
                 [locs, dims, rots], axis=1
             )
+            # gt_boxes = np.concatenate([locs, dims, rots], axis=1
 
             ego_motion = get_ego_matrix(odom_path_[0])
             ego_yaw = rotmat_to_euler(ego_motion[:3, :3])[2]
@@ -434,6 +423,11 @@ def _fill_trainval_infos(nusc,
 
             # num_gt_points == 0 !!!!
             valid_flag = (data_anno['num_lidar_pts'] >0)
+
+
+            # we need to convert box size to
+            # the format of our lidar coordinate system
+            # which is x_size, y_size, z_size (corresponding to l, w, h)
 
             info['gt_boxes'] = gt_boxes
             info['gt_names'] = names
@@ -473,6 +467,7 @@ def _fill_trainval_infos(nusc,
                             ]).reshape([3, 4])
                 P4_extrinsic = np.array([float(info) for info in lines[9].split(' ')[1:13]
                             ]).reshape([3, 4])
+        # projection_matrix = [P0, P1, P2, P3, P4]
         projection_matrix = [ [P0_intrinsic, P0_extrinsic], \
                               [P1_intrinsic, P1_extrinsic], \
                               [P2_intrinsic, P2_extrinsic], \
@@ -482,6 +477,13 @@ def _fill_trainval_infos(nusc,
 
         velo_path = root_path / place / scene / "velo/bottom/bin_data" / "{}.bin".format(frame)
 
+        # lidar_token = sample['data']['LIDAR_TOP']
+        # sd_rec = nusc.get('sample_data', sample['data']['LIDAR_TOP'])
+        # cs_record = nusc.get('calibrated_sensor',
+        #                      sd_rec['calibrated_sensor_token'])
+        # pose_record = nusc.get('ego_pose', sd_rec['ego_pose_token'])
+        # lidar_path, boxes, _ = nusc.get_sample_data(lidar_token)
+
         mmcv.check_file_exist(velo_path)
 
         info = {
@@ -489,9 +491,22 @@ def _fill_trainval_infos(nusc,
             'token': token,
             'sweeps': [],
             'cams': dict(),
+            # 'lidar2ego_translation': cs_record['translation'],
+            # 'lidar2ego_rotation': cs_record['rotation'],
+            # 'ego2global_translation': pose_record['translation'],
+            # 'ego2global_rotation': pose_record['rotation'],
+            # 'timestamp': sample['timestamp'],
         }
 
-        # obtain 5 image's information per frame
+        # obtain 6 image's information per frame
+        camera_types = [
+            'CAM_FRONT',
+            'CAM_FRONT_RIGHT',
+            'CAM_FRONT_LEFT',
+            # 'CAM_BACK',
+            'CAM_BACK_LEFT',
+            'CAM_BACK_RIGHT',
+        ]
         camera_mapping = {4:'CAM_FRONT', 1:'CAM_FRONT_LEFT', 5:'CAM_FRONT_RIGHT', 3:'CAM_BACK_RIGHT',  2:'CAM_BACK_LEFT'}
 
         cam_num_list = [1, 2, 3, 4, 5]
@@ -500,15 +515,29 @@ def _fill_trainval_infos(nusc,
         cam_path_ = []
         for num in cam_num_list:
             cam_path_.append(root_path / place / scene / "cam_img/{}".format(num) / "data_rgb" / "{}.png".format(frame))
-        anno_path_.append(root_path / place / scene / "label/{}.txt".format(frame))
+        anno_path_.append(root_path / place / scene / "label_3d/{}.txt".format(frame))
         odom_path_.append(root_path / place / scene / "ego_trajectory/{}.txt".format(frame))
             
         for num, cam in enumerate(cam_num_list):
+            # cam_num = num+1
+            # cam_path, _, cam_intrinsic = nusc.get_sample_data(cam_token)
+            # cam_info = obtain_sensor2top(nusc, cam_token, l2e_t, l2e_r_mat,
+            #                              e2g_t, e2g_r_mat, cam)
             cam_info = {'data_path':cam_path_[cam-1], 'type': camera_mapping[cam]}
             cam_info.update(cam_intrinsic=projection_matrix[cam-1])
             info['cams'].update({camera_mapping[cam]: cam_info})
 
+        # obtain sweeps for a single key-frame
+        # sd_rec = nusc.get('sample_data', sample['data']['LIDAR_TOP'])
         sweeps = []
+        # while len(sweeps) < max_sweeps:
+        #     if not sd_rec['prev'] == '':
+        #         sweep = obtain_sensor2top(nusc, sd_rec['prev'], l2e_t,
+        #                                   l2e_r_mat, e2g_t, e2g_r_mat, 'lidar')
+        #         sweeps.append(sweep)
+        #         sd_rec = nusc.get('sample_data', sd_rec['prev'])
+        #     else:
+        #         break
         info['sweeps'] = sweeps
         # obtain annotation
         if not test:
@@ -553,6 +582,11 @@ def _fill_trainval_infos(nusc,
             # num_gt_points == 0 !!!!
             valid_flag = (data_anno['num_lidar_pts'] >0)
 
+
+            # we need to convert box size to
+            # the format of our lidar coordinate system
+            # which is x_size, y_size, z_size (corresponding to l, w, h)
+
             info['gt_boxes'] = gt_boxes
             info['gt_names'] = names
             # info['gt_velocity'] = velocity.reshape(-1, 2)
@@ -574,7 +608,8 @@ def box_center_to_corner_3d_(box_center):
 
     x_corners = [l / 2, l / 2, -l / 2, -l / 2, l / 2, l / 2, -l / 2, -l / 2]
     y_corners = [w / 2, -w / 2, -w / 2, w / 2, w / 2, -w / 2, -w / 2, w / 2]
-    z_corners = [h/2, h/2, h/2, h/2, -h/2, -h/2, -h/2, -h/2]
+    z_corners = [h/2, h/2, h/2, h/2, -h/2, -h/2, -h/2, -h/2] #[0, 0, 0, 0, -h, -h, -h, -h]
+    # z_corners = [-h/2, -h/2, -h/2, -h/2, h/2, h/2, h/2, h/2]
     bounding_box = np.vstack([x_corners, y_corners, z_corners])
 
     rotation_matrix = np.array([[np.cos(rotation),  -np.sin(rotation), 0],
@@ -692,11 +727,13 @@ def export_2d_annotation(root_path, info_path, version, mono3d=True):
             frame = info['token'].split("*")[2]
 
             # for gt data====================
-            label_path = root_path + "/" + place + "/" + scene + "/label/{}.txt".format(frame)
+            label_path = root_path + "/" + place + "/" + scene + "/label_3d/{}.txt".format(frame)
             odom_path = root_path +'/'+ place +'/'+ scene +'/'+ "ego_trajectory/{}.txt".format(frame)
             label_ = get_label_anno(label_path)
             locs = np.array(label_['location']).reshape(-1, 3)
             dims = np.array(label_['dimensions']).reshape(-1, 3) # order : l,w,h 
+            # rots = np.array([b.orientation.yaw_pitch_roll[0] for b in ref_boxes]).reshape(-1, 1)
+            #velocity = np.array([b.velocity for b in ref_boxes]).reshape(-1, 3)
             rots = np.array(label_['rotation_y']).reshape(
                 -1, 1
             )
@@ -709,11 +746,18 @@ def export_2d_annotation(root_path, info_path, version, mono3d=True):
             comp_obj_center = np.matmul(np.linalg.inv(ego_motion), np.concatenate([gt_boxes[:,:3], np.ones(gt_boxes[:,:3].shape[0]).reshape(1, -1).T], axis=1).T).T
             gt_boxes[:, :3] = comp_obj_center[:, :3]
 
+            # gt_boxes = np.array([ i['bbox_cam3d'] for i in coco_infos])
+            #===============================================================
+
             coco_2d_dict['images'].append(
                 dict(
                     file_name=str(cam_info['data_path']),
                     id=info['token'],
                     token=info['token'],
+                    # cam2ego_rotation=cam_info['sensor2ego_rotation'],
+                    # cam2ego_translation=cam_info['sensor2ego_translation'],
+                    # ego2global_rotation=info['ego2global_rotation'],
+                    # ego2global_translation=info['ego2global_translation'],
                     cam_intrinsic=cam_info['cam_intrinsic'],
                     width=width,
                     height=height,
@@ -756,7 +800,7 @@ def get_2d_boxes(nusc,
     place = str(cam_lnfo['data_path']).split("/")[2]
     scene = str(cam_lnfo['data_path']).split("/")[3]
     frame = str(cam_lnfo['data_path']).split("/")[-1].split(".")[0]
-    label_path = root_path + place + "/" + scene + "/label/{}.txt".format(frame)
+    label_path = root_path + place + "/" + scene + "/label_3d/{}.txt".format(frame)
     label_ = get_label_anno(label_path)
     velo_path = root_path +'/'+ place +'/'+ scene +'/'+ "velo/bottom/bin_data/{}.bin".format(frame)
     points = np.fromfile(velo_path, dtype=np.float32, count=-1).reshape([-1, 4]) 
@@ -834,6 +878,27 @@ def get_2d_boxes(nusc,
                 print(1)
                 continue
 
+            vis_flag = True
+            if vis_flag:
+                import cv2
+                def draw_projected_box_2d(image, points_2d, color=(255, 255, 255), thickness=2):
+                    for i in range(4):
+                        point_1 = tuple(points_2d[i].astype(int))
+                        point_2 = tuple(points_2d[(i + 1) % 4].astype(int))
+                        point_3 = tuple(points_2d[i + 4].astype(int))
+                        point_4 = tuple(points_2d[((i + 1) % 4) + 4].astype(int))
+                        
+                        cv2.line(image, point_1, point_2, color, thickness)
+                        cv2.line(image, point_1, point_3, color, thickness)
+                        cv2.line(image, point_2, point_4, color, thickness)
+                        cv2.line(image, point_3, point_4, color, thickness)
+                img = cv2.imread(str(cam_lnfo['data_path']), )
+                draw_projected_box_2d(img, corners_2d[:, :2])
+                cv2.imwrite("/home/changwon/detection_task/mmdetection3d/viz_in_model/3dbox_on_2d/1.png", img)
+                print(1)
+            # center2d[:, 0] = np.clip(center2d[:, 0], 0, 1920)
+            # center2d[:, 1] = np.clip(center2d[:, 1], 0, 1200)
+
             repro_rec['bbox_cam3d'] = gt_boxes
             repro_rec['velo_cam3d'] = np.array([0, 0]).tolist()
 
@@ -883,7 +948,7 @@ def get_2d_boxes_(nusc,
     place = str(cam_lnfo['data_path']).split("/")[2]
     scene = str(cam_lnfo['data_path']).split("/")[3]
     frame = str(cam_lnfo['data_path']).split("/")[-1].split(".")[0]
-    label_path = root_path + place + "/" + scene + "/label/{}.txt".format(frame)
+    label_path = root_path + place + "/" + scene + "/label_3d/{}.txt".format(frame)
     label_ = get_label_anno(label_path)
     velo_path = root_path +'/'+ place +'/'+ scene +'/'+ "velo/bottom/bin_data/{}.bin".format(frame)
     points = np.fromfile(velo_path, dtype=np.float32, count=-1).reshape([-1, 4]) 
