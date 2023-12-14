@@ -23,6 +23,7 @@
 <p align="center">
 <a href="https://youtu.be/9zc-5Gxjvzk"><img src="https://img.shields.io/badge/Demo_Video-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube Video"/></a>
 <a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u"><img src="https://img.shields.io/badge/Data_set-4285F4?style=for-the-badge&logo=google-drive&logoColor=white" alt="Data set"/></a>
+<a href="https://openreview.net/forum?id=gMYsxTin4x"><img src="https://img.shields.io/badge/Paper-81717?style=for-the-badge&logo=pagekit&logoColor=white" alt="OpenReview"/></a>
 <a href="https://spalaboratory.github.io/SiT/"><img src="https://img.shields.io/badge/home_page-181717?style=for-the-badge&logo=googlehome&logoColor=white" alt="Github.io"/></a>
 </p>
 
