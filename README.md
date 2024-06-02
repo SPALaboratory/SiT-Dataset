@@ -36,7 +36,7 @@
 
 
 ## Updates
-* [2023-09] SiT Full Dataset released !! <a href="https://drive.google.com/drive/folders/10Hin9sCP4dtwTPMKv4wKPlgMczDv7BBX?usp=drive_link">Google Drive</a>
+* [2024-06] SiT Full Dataset released !! <a href="https://drive.google.com/drive/folders/10Hin9sCP4dtwTPMKv4wKPlgMczDv7BBX?usp=drive_link">Google Drive</a>
 * [2023-09] Our paper is accepted to NeurIPS 2023 Dataset and Benchmark Track! <a href="https://openreview.net/forum?id=gMYsxTin4x">Paper Link</a>
 * [2023-07] SiT benchmark and devkit for each perception task release on <a href="https://github.com/SPALaboratory/SiT-Dataset">Github</a>.
 * [2023-07] Dockerfiles for each perception task release on <a href="https://hub.docker.com/u/spalaboratory">Dockerhub</a>.
