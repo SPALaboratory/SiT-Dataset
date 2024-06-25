@@ -47,7 +47,7 @@
 * [2023-05] We opened SiT Dataset <a href="https://spalaboratory.github.io/SiT/">Website.</a>
 
 ## Upcomings
-* [2024-07] Trained weights and training code for 3D object detection and Trajectory prediction release on public.
+* [2024-07] Trained weights and updated code for 3D object detection and Trajectory prediction release on public.
 * [2024-09] SiT End-to-End pedestrain trajectory prediction challenge starts on <a href='https://eval.ai/web/challenges/list'>Eval AI</a>.
 <!-- * [2023-07] Pretrained models for 3D object detection. -->
 <!-- * [2023-09] SiT Full dataset upload. -->
