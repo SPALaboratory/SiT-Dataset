@@ -38,13 +38,13 @@
 ## Updates
 * [2024-06] The final dataset is released! Download it via the link at the end of the Google Form. <a href="https://forms.gle/6iBSnRakR9wwpbkL8">Google Form</a>
 * [2023-09] Our paper is accepted to NeurIPS 2023 Dataset and Benchmark Track! <a href="https://openreview.net/forum?id=gMYsxTin4x">Paper Link</a>
-* [2023-07] SiT benchmark and devkit for each perception task release on <a href="https://github.com/SPALaboratory/SiT-Dataset">Github</a>.
-* [2023-07] Dockerfiles for each perception task release on <a href="https://hub.docker.com/u/spalaboratory">Dockerhub</a>. -->
-<!-- * [2023-07] <a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u?usp=sharing">SiT Mini-Dataset</a> release on public. -->
-<!-- * [2023-06] SiT mini Dataset released on <a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u"> Google Drive.</a>
 * [2023-06] Semantic map data of SiT Dataset released on <a href="https://github.com/SPALaboratory/SiT-Dataset/tree/main/semantic-maps">Github.</a>
 * [2023-05] We opened SiT Dataset <a href="https://github.com/SPALaboratory/SiT-Dataset">Github</a>.
 * [2023-05] We opened SiT Dataset <a href="https://spalaboratory.github.io/SiT/">Website.</a>
+<!-- * [2023-07] SiT benchmark and devkit for each perception task release on <a href="https://github.com/SPALaboratory/SiT-Dataset">Github</a>. -->
+<!-- * [2023-07] Dockerfiles for each perception task release on <a href="https://hub.docker.com/u/spalaboratory">Dockerhub</a>. -->
+<!-- * [2023-07] <a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u?usp=sharing">SiT Mini-Dataset</a> release on public. -->
+<!-- * [2023-06] SiT mini Dataset released on <a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u"> Google Drive.</a> -->
 
 ## Upcomings
 * [2024-07] Trained weights and updated code for 3D object detection and Trajectory prediction release on public.
