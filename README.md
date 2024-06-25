@@ -22,7 +22,7 @@
 
 <p align="center">
 <a href="https://youtu.be/9zc-5Gxjvzk"><img src="https://img.shields.io/badge/Demo_Video-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube Video"/></a>
-<a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u"><img src="https://img.shields.io/badge/Data_set-4285F4?style=for-the-badge&logo=google-drive&logoColor=white" alt="Data set"/></a>
+<!-- <a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u"><img src="https://img.shields.io/badge/Data_set-4285F4?style=for-the-badge&logo=google-drive&logoColor=white" alt="Data set"/></a> -->
 <a href="https://openreview.net/forum?id=gMYsxTin4x"><img src="https://img.shields.io/badge/Paper-81717?style=for-the-badge&logo=pagekit&logoColor=white" alt="OpenReview"/></a>
 <a href="https://spalaboratory.github.io/SiT/"><img src="https://img.shields.io/badge/home_page-181717?style=for-the-badge&logo=googlehome&logoColor=white" alt="Github.io"/></a>
 </p>
@@ -36,7 +36,7 @@
 
 
 ## Updates
-* [2024-06] SiT Full Dataset released !! <a href="https://drive.google.com/drive/folders/10Hin9sCP4dtwTPMKv4wKPlgMczDv7BBX?usp=drive_link">Google Drive</a>
+* [2024-06] The final dataset is released! Download it via the link at the end of the Google Form. <a href="https://forms.gle/6iBSnRakR9wwpbkL8">Google Form</a>
 * [2023-09] Our paper is accepted to NeurIPS 2023 Dataset and Benchmark Track! <a href="https://openreview.net/forum?id=gMYsxTin4x">Paper Link</a>
 * [2023-07] SiT benchmark and devkit for each perception task release on <a href="https://github.com/SPALaboratory/SiT-Dataset">Github</a>.
 * [2023-07] Dockerfiles for each perception task release on <a href="https://hub.docker.com/u/spalaboratory">Dockerhub</a>.
