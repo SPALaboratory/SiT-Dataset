@@ -14,9 +14,12 @@ The performance of the baseline models on the validation set is as follows.
 |**FCOS3D**|Camera| 0.1696 |0.0 | 0.0366 | 0.2186 | 0.4234 |<a href="https://drive.google.com/file/d/1RttgPBNatAI2Nm6po2IzvLQPS2rU3Y3-/view?usp=sharing">Gdrive</a>|
 
 
-## Data generation
+## Environment
+```
+sudo docker run -it --gpus all --ipc=host -v /mnt:/mnt --name sit_fcos3d geunjubaek/sit_fcos3d /bin/bash
+```
 
-#### Concat 
+## Data generation
 ```
 # After git clone, just use setup.py 
 python setup.py develop
