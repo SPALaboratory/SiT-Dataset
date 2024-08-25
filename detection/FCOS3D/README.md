@@ -19,6 +19,14 @@ The performance of the baseline models on the validation set is as follows.
 sudo docker run -it --gpus all --ipc=host -v /mnt:/mnt --name sit_fcos3d geunjubaek/sit_fcos3d /bin/bash
 ```
 
+## Preprocess
+```
+python2 pcd2bin_all_frame_concat    # We upload only pcd file for convenience. Therefore, you should convert pcd to bin file with python2 not 3.
+python sit_undistortion_image       # You should also undistort the images.
+python visualize_3dbox_on_image     # We provide a code of 3d boxes visualization on images.
+```
+
+
 ## Data generation
 ```
 # After git clone, just use setup.py 
