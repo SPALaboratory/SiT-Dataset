@@ -152,6 +152,8 @@ We provide benchmarks and weights of trained models for 3D pedestrian detection,
 ## Download Dataset
 * Download Full dataset via the link at the end of the Google Form. <a href="https://forms.gle/6iBSnRakR9wwpbkL8">Google Form</a>
 
+
+<!--
 ## ROS Bag Raw Data
 ROS bagfiles include below sensor data:
 | Topic Name | Message Type | Message Descriptison |
@@ -167,8 +169,8 @@ ROS bagfiles include below sensor data:
 /xsens/filter/position_interpolated  | geometry_msgs/Vector3Stamped | Interpolated GNSS data to the timestep of top velodyne
 /xsens/filter/positionlla  | geometry_msgs/Vector3Stamped | GNSS by MTi-680
 /xsens/imu/data      | sensor_msgs/Imu | IMU by MTi-680
-/xsens/imu_interpolated   | sensor_msgs/Imu | Interpolated IMU data to the timestep of top velodyne
-  
+/xsens/imu_interpolated   | sensor_msgs/Imu | Interpolated IMU data to the timestep of top velodyne   
+-->
   
 ## License <a rel="license_cc" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="by-nc-nd_4.0" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a> <a rel="license_apache_2"><img alt="apache_2.0" style="border-width:0; width:8%;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/ASF_Logo.svg/220px-ASF_Logo.svg.png"/></a>
 
