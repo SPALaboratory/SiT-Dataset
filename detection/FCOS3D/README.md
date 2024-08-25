@@ -1,71 +1,46 @@
 
 
 ## Introduction
-An essential role in the operational effectiveness of autonomous robots lies in their ability to detect and understand their surrounding environments and objects. This capability is not only crucial for safe navigation but also for meaningful interactions within those environments. In this context, we've developed a comprehensive pedestrian path dataset that can serve as a vital tool for future research advancements in this domain. It's designed to benchmark and enhance the performance of various detection models, providing a reliable baseline against which improvements can be measured and progress can be tracked.
+Research on 3D object recognition models using cameras in autonomous driving is actively underway. In this context, we provide the baseline for the FCOS3D model.
 
+### FCOS3D
+FCOS3D is a model for 3D object detection that leverages a fully convolutional one-stage detector framework. It operates on monocular images to predict 3D bounding boxes, including depth, size, and orientation of objects. The model is designed to improve accuracy and efficiency in 3D object detection for applications like autonomous driving.
 
-### PointPillars
-PointPillars focuses on the challenge of encoding a point cloud into a format that can be effectively used in a downstream detection pipeline. PointPillars is a novel encoder that uses PointNets to learn a representation of point clouds organized in vertical columns, or pillars. While the encoded features can be integrated with any standard 2D convolutional detection architecture, PointPillars propose a streamlined downstream network.
-
-
-### CenterPoint
-Three-dimensional object detection often employs 3D boxes in point clouds, but this method struggles with varying orientations. CenterPoint is a novel framework that detects and tracks 3D objects as points rather than boxes. CenterPoint detects object centers first, then regresses to other attributes like size, orientation, and velocity, refining these estimates with additional point features.
-
-
-The performance of baselines are as follows.
+The performance of the baseline models on the validation set is as follows.
 
 
 |**Methods**|**Modality**|**mAP &uarr;**| **AP(0.25) &uarr;** |**AP(0.5) &uarr;** | **AP(1.0) &uarr;** | **AP(2.0) &uarr;** | **Pretrained** |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|**PointPillars**|LiDAR| 0.319 | 0.202 | 0.316 | 0.346 | 0.414 |<a href="">TBD</a>|
-|**CenterPoint-P**|LiDAR| 0.382 | 0.233 | 0.388 | 0.424 | 0.482 |<a href="">TBD</a>|
-|**CenterPoint-V**|LiDAR| 0.514 | 0.352 | **0.522**| 0.556 | 0.620 |<a href="">TBD</a>|
-
+|**FCOS3D**|Camera| 0.1696 |0.0 | 0.0366 | 0.2186 | 0.4234 |<a href="https://drive.google.com/file/d/1RttgPBNatAI2Nm6po2IzvLQPS2rU3Y3-/view?usp=sharing">Gdrive</a>|
 
 
 ## Data generation
 
 #### Concat 
 ```
-python tools/create_data.py spa_nus --root-path ./data/spa --version v1.0-spa-trainval --max-sweeps 1 --out-dir ./data/spa --extra-tag spa_nusc
+# After git clone, just use setup.py 
+python setup.py develop
+
+# Make pkl, json file 
+# Create train, val pkl 
+python tools/create_data_mono.py sit --root-path ./data/sit_full --version sit-trainval --out-dir ./data/sit_full --extra-tag sit --max-sweeps 1
+# Create test pkl
+python tools/create_data_mono.py sit --root-path ./data/sit_full --version sit-test --out-dir ./data/sit_full --extra-tag sit --max-sweeps 1
 ```
 
-#### Top
-```
-python tools/create_data.py spa_nus_top --root-path ./data/spa --version v1.0-spa-trainval --max-sweeps 1 --out-dir ./data/spa --extra-tag spa_nusc_top
-```
-
-#### Bottom
-```
-python tools/create_data.py spa_nus_bottom --root-path ./data/spa --version v1.0-spa-trainval --max-sweeps 1 --out-dir ./data/spa --extra-tag spa_nusc_bottom
-```
 
 ## Training
-#### PointPillars training
 ```
-python tools/train.py configs/_base_/spa_nusc_pointpillar.py
-python tools/train.py configs/_base_/spa_nusc_top_pointpillar.py
-python tools/train.py configs/_base_/spa_nusc_bottom_pointpillar.py
+python tools/train.py $config
+python tools/train.py configs/sit_fcos3d/sit_fcos3d_r50_960x600.py
 ```
 
-
-#### Ceonterpoint(P) training
+## Evaluation
 ```
-python tools/train.py configs/_base_/spa_nusc_centerpoint_ped.py
-python tools/train.py configs/_base_/spa_nusc_top_centerpoint_ped.py
-python tools/train.py configs/_base_/spa_nusc_bottom_centerpoint_ped.py
+# We only provide you evaluation code in multi-view setting
+# Please use this code when you finish training your model.
+python tools/test_mv.py ./configs/sit_fcos3d/sit_fcos3d_r50_960x600.py ./work_dirs/sit_fcos3d_r50_960x600/epoch_30.pth --eval EVAL --gpu-id 0 
 ```
-
-
-#### Centerpoint(V) training
-```
-python tools/train.py configs/_base_/spa_nusc_centerpoint_voxel.py
-python tools/train.py configs/_base_/spa_nusc_top_centerpoint_voxel.py
-python tools/train.py configs/_base_/spa_nusc_bottom_centerpoint_voxel.py
-```
-
-
-
 
 
 ## License
