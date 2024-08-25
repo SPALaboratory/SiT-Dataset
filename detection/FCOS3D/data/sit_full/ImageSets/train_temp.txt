@@ -1,0 +1,10 @@
+Cafe_street*Cafe_street_1*0
+Cafe_street*Cafe_street_1*1
+Cafe_street*Cafe_street_1*2
+Cafe_street*Cafe_street_1*3
+Cafe_street*Cafe_street_1*4
+Cafe_street*Cafe_street_1*5
+Cafe_street*Cafe_street_1*6
+Cafe_street*Cafe_street_1*7
+Cafe_street*Cafe_street_1*8
+Cafe_street*Cafe_street_1*9
