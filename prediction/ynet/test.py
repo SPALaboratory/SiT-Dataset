@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from utils.image_utils import get_patch, sampling, image2world
+from utils.image_utils import get_patch, sampling, image2world, raster_one_hot
 from utils.kmeans import kmeans
 
 
@@ -30,7 +30,7 @@ def torch_multivariate_gaussian_heatmap(coordinates, H, W, dist, sigma_factor, r
 	return kernel / kernel.sum()
 
 
-def evaluate(model, val_loader, val_images, num_goals, num_traj, obs_len, batch_size, device, input_template, waypoints, resize, temperature, use_TTST=False, use_CWS=False, rel_thresh=0.002, CWS_params=None, dataset_name=None, homo_mat=None, mode='val'):
+def evaluate(model, val_loader, val_images, num_goals, num_traj, obs_len, batch_size, device, input_template, waypoints, resize, temperature, use_TTST=False, use_CWS=False, rel_thresh=0.002, CWS_params=None, dataset_name=None, homo_mat=None, mode='val', no_hd_map=False):
 	"""
 
 	:param model: torch model
@@ -59,20 +59,13 @@ def evaluate(model, val_loader, val_images, num_goals, num_traj, obs_len, batch_
 	model.eval()
 	val_ADE = []
 	val_FDE = []
-	counter = 0
 	with torch.no_grad():
 		# outer loop, for loop over each scene as scenes have different image size and to calculate segmentation only once
 		for trajectory, meta, scene in val_loader:
 			# Get scene image and apply semantic segmentation
 			scene_image = val_images[scene].to(device).unsqueeze(0)
 			scene_image = model.segmentation(scene_image)
-
-			if dataset_name == 'eth':
-				print(counter)
-				counter += batch_size
-				# Break after certain number of batches to approximate evaluation, else one epoch takes really long
-				if counter > 30 and mode == 'val':
-					break
+			scene_image = torch.Tensor(raster_one_hot(scene_image)).permute(0,3,1,2).cuda()
 
 			for i in range(0, len(trajectory), batch_size):
 				# Create Heatmaps for past and ground-truth future trajectories
@@ -86,7 +79,10 @@ def evaluate(model, val_loader, val_images, num_goals, num_traj, obs_len, batch_
 
 				# Forward pass
 				# Calculate features
-				feature_input = torch.cat([semantic_image, observed_map], dim=1)
+				if no_hd_map == False:
+					feature_input = torch.cat([semantic_image, observed_map], dim=1)
+				else:
+					feature_input = torch.cat([observed_map], dim=1)
 				features = model.pred_features(feature_input)
 
 				# Predict goal and waypoint probability distributions

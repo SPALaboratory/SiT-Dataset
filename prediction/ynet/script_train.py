@@ -5,7 +5,7 @@ import pickle5 as pickle
 
 CONFIG_FILE_PATH = 'config/sit.yaml'  # yaml config file containing all the hyperparameters
 EXPERIMENT_NAME = 'sit_ynet'  # arbitrary name for this experiment
-DATASET_NAME = 'spa'
+DATASET_NAME = 'sit'
 
 TRAIN_DATA_PATH = 'data/train.pkl'
 TRAIN_IMAGE_PATH = 'data/semantic_map/'

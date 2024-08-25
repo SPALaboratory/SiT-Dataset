@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 from utils.image_utils import get_patch, raster_one_hot
 
-def train(model, train_loader, train_images, e, obs_len, pred_len, batch_size, params, gt_template, device, input_template, optimizer, criterion, dataset_name, homo_mat):
+def train(model, train_loader, train_images, e, obs_len, pred_len, batch_size, params, gt_template, device, input_template, optimizer, criterion, dataset_name, homo_mat, no_hd_map):
 	"""
 	Run training for one epoch
 
@@ -18,22 +18,8 @@ def train(model, train_loader, train_images, e, obs_len, pred_len, batch_size, p
 	train_ADE = []
 	train_FDE = []
 	model.train()
-	counter = 0
 	# outer loop, for loop over each scene as scenes have different image size and to calculate segmentation only once
 	for batch, (trajectory, meta, scene) in enumerate(train_loader):
-		# Stop training after 25 batches to increase evaluation frequency
-		if dataset_name == 'sdd' and obs_len == 8 and batch > 25:
-			break
-
-		# TODO Delete
-		if dataset_name == 'eth':
-			print(counter)
-			counter += batch_size
-			# Break after certain number of batches to approximate evaluation, else one epoch takes really long
-			if counter > 30: #TODO Delete
-				break
-
-
 		# Get scene image and apply semantic segmentation
 		if e < params['unfreeze']:  # before unfreeze only need to do semantic segmentation once
 			model.eval()
@@ -49,7 +35,6 @@ def train(model, train_loader, train_images, e, obs_len, pred_len, batch_size, p
 				scene_image = torch.Tensor(raster_one_hot(scene_image)).permute(0,3,1,2).cuda()
 
 			# Create Heatmaps for past and ground-truth future trajectories
-			
 			_, _, H, W = scene_image.shape  # image shape
 			print('\repoch:', e, 'batch:', i, end=" ")
 
@@ -67,8 +52,10 @@ def train(model, train_loader, train_images, e, obs_len, pred_len, batch_size, p
 
 			# Concatenate heatmap and semantic map
 			semantic_map = scene_image.expand(observed_map.shape[0], -1, -1, -1)  # expand to match heatmap size
-
-			feature_input = torch.cat([semantic_map, observed_map], dim=1)
+			if no_hd_map == False:
+				feature_input = torch.cat([semantic_map, observed_map], dim=1)
+			else:
+				feature_input = torch.cat([observed_map], dim=1)
 
 			# Forward pass
 			# Calculate features

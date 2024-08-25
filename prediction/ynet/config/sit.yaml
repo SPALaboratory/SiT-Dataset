@@ -1,0 +1,48 @@
+resize: 0.15  # resize factor
+batch_size: 8
+
+viz_epoch: 10
+learning_rate: 0.00001
+num_epochs: 200
+
+encoder_channels:  # list of kernels in encoder
+  - 32
+  - 32
+  - 64
+  - 64
+  - 64
+
+decoder_channels:  # list of kernels in decoder
+  - 64
+  - 64
+  - 64
+  - 32
+  - 32
+
+# list of selected goal and waypoints as timestep idx, e.g. 14 means the 14th future timestep is used as a waypoint,
+# last element is goal timestep
+waypoints:
+  - 23
+
+temperature: 1.0
+# segmentation_model_fp: None #segmentation_models/SDD_segmentation.pth
+semantic_classes: 7
+
+loss_scale: 1000  # factor to scale the loss
+
+kernlen: 31  # (image) size of Gaussian kernel used for ground-truth Gaussian heatmap
+nsig: 4  # sigma of Gaussian kernel used for ground-truth Gaussian heatmap
+
+use_features_only: False  # If True the segmentation model only uses the
+unfreeze: 150  # Unfreeze semantic segmentation model weights after this # of epochs
+
+# TTST
+use_TTST: True
+rel_threshold: 0.01
+
+# CWS
+use_CWS: False
+CWS_params: None
+
+crop_W: 384
+crop_H: 384

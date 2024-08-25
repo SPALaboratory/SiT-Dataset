@@ -11,7 +11,7 @@ from typing import List, Tuple
 from functools import reduce
 import pickle as pkl
 import copy
-
+import numpy as np
 
 Color = Tuple[float, float, float]
 
@@ -337,7 +337,7 @@ def scene_patch_canvas_size(scene):
             'Three_way_Intersection'    :(30,   45,     270,    270/400*5000,     0),
             'Crossroad'                 :(40,   0,      300,    300/400*5000,     0),
             'Outdoor_Alley'             :(40,   0,      300,    300/400*5000,     0),
-            'Cafe_Street'               :(-10,  -70,    320,    320/400*5000,     0),
+            'Cafe_street'               :(-10,  -70,    320,    320/400*5000,     0),
         }
     
     canvas_size = int(patch_canvas[scene][3])
@@ -370,7 +370,7 @@ layer_names = ['Building', 'Car_road1', 'Walkway', 'Sharedway', 'Static_object',
 
 
    
-scene_list = ['Cafeteria', 'Corridor', 'Lobby', 'Hallway', 'Courtyard', 'Subway_Entrance', 'Three_way_Intersection', 'Crossroad', 'Cafe_Street', 'Outdoor_Alley', ]
+scene_list = ['Cafeteria', 'Corridor', 'Lobby', 'Hallway', 'Courtyard', 'Subway_Entrance', 'Three_way_Intersection', 'Crossroad', 'Cafe_street', 'Outdoor_Alley', ]
 json_dir = './data/semantic_maps_json/'
 save_dir = './data/semantic_map'
 

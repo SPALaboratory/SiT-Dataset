@@ -34,7 +34,7 @@ def torch_multivariate_gaussian_heatmap(coordinates, H, W, dist, sigma_factor, r
 	return kernel / kernel.sum()
 
 
-def evaluate(model, val_loader, val_images, num_goals, num_traj, obs_len, batch_size, device, input_template, waypoints, resize, temperature, params, use_TTST=False, use_CWS=False, rel_thresh=0.002, CWS_params=None, dataset_name=None, homo_mat=None, mode='val', gt_template=torch.ones(1500,1500)):
+def evaluate(model, val_loader, val_images, num_goals, num_traj, obs_len, batch_size, device, input_template, waypoints, resize, temperature, params, use_TTST=False, use_CWS=False, rel_thresh=0.002, CWS_params=None, dataset_name=None, homo_mat=None, mode='val', gt_template=torch.ones(1500,1500), no_hd_map=False):
 	"""
 
 	:param model: torch model
@@ -109,14 +109,16 @@ def evaluate(model, val_loader, val_images, num_goals, num_traj, obs_len, batch_
 	in_val_FDE7 = [[],[],[],]
 	in_val_trajFDE7 = [[],[],[],]
 	
-	indoor_list = ['hanyang', 'inter', 'hangwon', 'ftc']
+	indoor_list = ['Corridor', 'Cafeteria', 'Lobby', 'Hallway']
  
 	W = params['crop_W']
 	H = params['crop_H']
 	counter = 0
+	count_loc = 0
 	with torch.no_grad():
 		# outer loop, for loop over each scene as scenes have different image size and to calculate segmentation only once
 		for trajectory, meta, scene, trackID, frame_list, class_id_list, x_list, y_list in tqdm(val_loader):
+
 			processed_pd_list = [[],[],[]]
    			# processed_pd_list = []
 			# processed_pd_list = []	
@@ -134,7 +136,6 @@ def evaluate(model, val_loader, val_images, num_goals, num_traj, obs_len, batch_
 			
 			for i in range(0, len(trajectory), batch_size):
 				# Create Heatmaps for past and ground-truth future trajectories
-				
 				hist = trajectory[i:i+batch_size, :obs_len, :]
 				track = trackID[i:i+batch_size]
 				frame = frame_list[i:i+batch_size]
@@ -151,7 +152,10 @@ def evaluate(model, val_loader, val_images, num_goals, num_traj, obs_len, batch_
 
 				gt_future = trajectory[i:i + batch_size, obs_len:].to(device)
 				semantic_image = scene_image.expand(observed_map.shape[0], -1, -1, -1)
-				feature_input = torch.cat([semantic_image, observed_map], dim=1)
+				if no_hd_map == False:
+					feature_input = torch.cat([semantic_image, observed_map], dim=1)
+				else:
+					feature_input = torch.cat([observed_map], dim=1)
 				features = model.pred_features(feature_input)
 
 				# Predict goal and waypoint probability distributions
@@ -348,6 +352,8 @@ def evaluate(model, val_loader, val_images, num_goals, num_traj, obs_len, batch_
 				processed_pd = pd.DataFrame(processed_pd_list[idx])
 				save_dir = f'result/result_goal{goal_point_}'
 			
+				if not os.path.exists('result'):
+					os.mkdir('result')
 				if not os.path.exists(save_dir):
 					os.mkdir(save_dir)
 				processed_pd.to_pickle(f'./{save_dir}/{scene}.pkl')
@@ -369,7 +375,7 @@ def evaluate(model, val_loader, val_images, num_goals, num_traj, obs_len, batch_
 			val_ADE7[i] = torch.cat(val_ADE7[i]).mean()
 			val_FDE7[i] = torch.cat(val_FDE7[i]).mean()
 			val_trajFDE7[i] = torch.cat(val_trajFDE7[i]).mean()
-   
+
 			in_val_ADE1[i] = torch.cat(in_val_ADE1[i]).mean()
 			in_val_FDE1[i] = torch.cat(in_val_FDE1[i]).mean()
 			in_val_ADE2[i] = torch.cat(in_val_ADE2[i]).mean()

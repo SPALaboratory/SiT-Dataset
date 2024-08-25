@@ -120,7 +120,7 @@ class YNetDecoder(nn.Module):
 
 class YNetTorch(nn.Module):
 	def __init__(self, obs_len, pred_len, segmentation_model_fp=None, use_features_only=False, semantic_classes=6,
-				 encoder_channels=[], decoder_channels=[], waypoints=1):
+				 encoder_channels=[], decoder_channels=[], waypoints=1, no_hd_map=False):
 		"""
 		Complete Y-net Architecture including semantic segmentation backbone, heatmap embedding and ConvPredictor
 		:param obs_len: int, observed timesteps
@@ -143,8 +143,10 @@ class YNetTorch(nn.Module):
 			self.semantic_segmentation = nn.Identity()
 		semantic_classes = 7  # instead of classes use number of feature_dim
 		print("semantic_classes", semantic_classes, obs_len)
-
-		self.encoder = YNetEncoder(in_channels=semantic_classes + obs_len, channels=encoder_channels)
+		if no_hd_map == False:
+			self.encoder = YNetEncoder(in_channels=semantic_classes + obs_len, channels=encoder_channels)
+		else:
+			self.encoder = YNetEncoder(in_channels=obs_len, channels=encoder_channels)
 
 		self.goal_decoder = YNetDecoder(encoder_channels, decoder_channels, output_len=pred_len)
 		self.traj_decoder = YNetDecoder(encoder_channels, decoder_channels, output_len=pred_len, traj=waypoints)
@@ -196,7 +198,7 @@ class YNetTorch(nn.Module):
 
 
 class YNet:
-	def __init__(self, obs_len, pred_len, params, model_weight=None):
+	def __init__(self, obs_len, pred_len, params, model_weight=None, no_hd_map=False):
 		"""
 		Ynet class, following a sklearn similar class structure
 		:param obs_len: observed timesteps
@@ -214,11 +216,12 @@ class YNet:
 							   semantic_classes=params['semantic_classes'],
 							   encoder_channels=params['encoder_channels'],
 							   decoder_channels=params['decoder_channels'],
-							   waypoints=len(params['waypoints']))
+							   waypoints=len(params['waypoints']),
+          					   no_hd_map=no_hd_map,)
 		self.model_weight=model_weight
 		self.load(self.model_weight)
 
-	def evaluate(self, train_data, val_data, params, train_image_path, val_image_path, experiment_name, batch_size=8, num_goals=20, num_traj=1, device=None, dataset_name=None):
+	def evaluate(self, train_data, val_data, params, train_image_path, val_image_path, model_weight, batch_size=8, num_goals=20, num_traj=1, device=None, dataset_name=None, no_hd_map=False):
 		"""
 		Train function
 		:param train_data: pd.df, train data
@@ -226,7 +229,6 @@ class YNet:
 		:param params: dictionary with training hyperparameters
 		:param train_image_path: str, filepath to train images
 		:param val_image_path: str, filepath to val images
-		:param experiment_name: str, arbitrary name to name weights file
 		:param batch_size: int, batch size
 		:param num_goals: int, number of goals per trajectory, K_e in paper
 		:param num_traj: int, number of trajectory per goal, K_a in paper
@@ -248,7 +250,7 @@ class YNet:
 			image_file_name = 'reference.png'
 		elif dataset_name == 'eth':
 			image_file_name = 'oracle.png'
-		elif dataset_name == 'spa':
+		elif dataset_name == 'sit':
 			image_file_name = 'polygon.json'
 		else:
 			raise ValueError(f'{dataset_name} dataset is not supported')
@@ -285,7 +287,7 @@ class YNet:
 		resize(val_images, factor=params['resize'], seg_mask=seg_mask)
 		pad(val_images, division_factor=self.division_factor)  # make sure that image shape is divisible by 32, for UNet segmentation
 		preprocess_for_torch(val_images, seg_mask=seg_mask)
-		self.load(f'pretrained_models/{experiment_name}.pt')
+		self.load(f'{model_weight}')
 
 		model = self.model.to(device)
 
@@ -319,7 +321,7 @@ class YNet:
 									waypoints=params['waypoints'], resize=params['resize'],
 									temperature=params['temperature'], use_TTST=False,
 									use_CWS=False, dataset_name=dataset_name,
-									homo_mat=self.homo_mat, mode='val')
+									homo_mat=self.homo_mat, mode='val', no_hd_map=no_hd_map)
 		verbose=[1,5,20]
 		for i in range(3):
 			print(f'{verbose[i]}, 1: \nVal ADE: {val_ADE1[i]} \nVal FDE: {val_FDE1[i]}')
@@ -369,7 +371,7 @@ class YNet:
 									waypoints=params['waypoints'], resize=params['resize'],
 									temperature=params['temperature'], use_TTST=False,
 									use_CWS=False, dataset_name=dataset_name,
-									homo_mat=self.homo_mat, mode='val')
+									homo_mat=self.homo_mat, mode='val', no_hd_map=no_hd_map)
 		verbose=[1,5,20]
 		for i in range(3):
 			print(f'{verbose[i]}, 1: \nVal ADE: {val_ADE1[i]} \nVal FDE: {val_FDE1[i]}')

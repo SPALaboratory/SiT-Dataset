@@ -13,6 +13,7 @@ from utils.dataloader import SceneDataset, scene_collate
 from test import evaluate
 from train import train
 from torch.optim.lr_scheduler import MultiStepLR
+import os
 
 class YNetEncoder(nn.Module):
 	def __init__(self, in_channels, channels=(64, 128, 256, 512, 512)):
@@ -121,7 +122,7 @@ class YNetDecoder(nn.Module):
 
 class YNetTorch(nn.Module):
 	def __init__(self, obs_len, pred_len, segmentation_model_fp=None, use_features_only=False, semantic_classes=6,
-				 encoder_channels=[], decoder_channels=[], waypoints=1):
+				 encoder_channels=[], decoder_channels=[], waypoints=1, no_hd_map = False):
 		"""
 		Complete Y-net Architecture including semantic segmentation backbone, heatmap embedding and ConvPredictor
 		:param obs_len: int, observed timesteps
@@ -143,8 +144,10 @@ class YNetTorch(nn.Module):
 		else:
 			self.semantic_segmentation = nn.Identity()
 		semantic_classes = 7
-
-		self.encoder = YNetEncoder(in_channels=semantic_classes + obs_len, channels=encoder_channels)
+		if no_hd_map == False:
+			self.encoder = YNetEncoder(in_channels=semantic_classes + obs_len, channels=encoder_channels)
+		else:
+			self.encoder = YNetEncoder(in_channels=obs_len, channels=encoder_channels)
 
 		self.goal_decoder = YNetDecoder(encoder_channels, decoder_channels, output_len=pred_len)
 		self.traj_decoder = YNetDecoder(encoder_channels, decoder_channels, output_len=pred_len, traj=waypoints)
@@ -197,7 +200,7 @@ class YNetTorch(nn.Module):
 
 
 class YNet:
-	def __init__(self, obs_len, pred_len, params):
+	def __init__(self, obs_len, pred_len, params, no_hd_map=False):
 		"""
 		Ynet class, following a sklearn similar class structure
 		:param obs_len: observed timesteps
@@ -215,9 +218,11 @@ class YNet:
 							   semantic_classes=params['semantic_classes'],
 							   encoder_channels=params['encoder_channels'],
 							   decoder_channels=params['decoder_channels'],
-							   waypoints=len(params['waypoints']))
+							   waypoints=len(params['waypoints']),
+          					   no_hd_map = no_hd_map,
+                  )
 
-	def train(self, train_data, val_data, params, train_image_path, val_image_path, experiment_name, batch_size=8, num_goals=20, num_traj=1, device=None, dataset_name=None):
+	def train(self, train_data, val_data, params, train_image_path, val_image_path, experiment_name, batch_size=8, num_goals=20, num_traj=1, device=None, dataset_name=None, no_hd_map=False):
 		"""
 		Train function
 		:param train_data: pd.df, train data
@@ -247,7 +252,7 @@ class YNet:
 			image_file_name = 'reference.png'
 		elif dataset_name == 'eth':
 			image_file_name = 'oracle.png'
-		elif dataset_name == 'spa':
+		elif dataset_name == 'sit':
 			image_file_name = 'polygon.json'
 		else:
 			raise ValueError(f'{dataset_name} dataset is not supported')
@@ -263,8 +268,11 @@ class YNet:
 			seg_mask = False
 
 		# Load train images and augment train data and images
-		df_train, train_images = augment_rasterize(train_data, image_path=train_image_path, image_file=image_file_name,
-											  seg_mask=seg_mask)
+		df_train, train_images = augment_rasterize(train_data, 
+                                             	image_path=train_image_path, 
+                                              	image_file=image_file_name,
+                                               	seg_mask=seg_mask, 
+                                                )
 
 		# Load val scene images		
 		# import pdb;pdb.set_trace()
@@ -315,18 +323,27 @@ class YNet:
 		for e in tqdm(range(params['num_epochs']), desc='Epoch'):
 			train_ADE, train_FDE, train_loss = train(model, train_loader, train_images, e, obs_len, pred_len,
 													 batch_size, params, gt_template, device,
-													 input_template, optimizer, criterion, dataset_name, self.homo_mat)
+													 input_template, optimizer, criterion, dataset_name, self.homo_mat, no_hd_map)
 			self.train_ADE.append(train_ADE)
 			self.train_FDE.append(train_FDE)
 
 			# For faster inference, we don't use TTST and CWS here, only for the test set evaluation
 			val_ADE, val_FDE = evaluate(model, val_loader, val_images, num_goals, num_traj,
-										obs_len=obs_len, batch_size=batch_size,
-										device=device, input_template=input_template, params=params,
-										waypoints=params['waypoints'], resize=params['resize'],
-										temperature=params['temperature'], use_TTST=False,
-										use_CWS=False, dataset_name=dataset_name,
-										homo_mat=self.homo_mat, mode='val')
+										obs_len=obs_len, 
+          								batch_size=batch_size,
+										device=device, 
+          								input_template=input_template, 
+										# params=params,
+										waypoints=params['waypoints'], 
+          								resize=params['resize'],
+										temperature=params['temperature'], 
+          								use_TTST=False,
+										use_CWS=False, 
+          								dataset_name=dataset_name,
+										homo_mat=self.homo_mat, 
+          								mode='val',
+                  						no_hd_map=no_hd_map)
+   
 			print(f'Epoch {e}: \nVal ADE: {val_ADE} \nVal FDE: {val_FDE}')
 			self.val_ADE.append(val_ADE)
 			self.val_FDE.append(val_FDE)
@@ -334,9 +351,11 @@ class YNet:
 			if val_ADE < best_test_ADE:
 				print(f'Best Epoch {e}: \nVal ADE: {val_ADE} \nVal FDE: {val_FDE}')
 				best_test_ADE = val_ADE
+				os.makedirs('pretrained_models', exist_ok=True)
 				torch.save(model.state_dict(), f'pretrained_models/{experiment_name}_weights_bestADE{best_test_ADE}.pt')
 			scheduler.step()
-	def evaluate(self, data, params, image_path, batch_size=8, num_goals=20, num_traj=1, rounds=1, device=None, dataset_name=None):
+   
+	def evaluate(self, data, params, image_path, batch_size=8, num_goals=20, num_traj=1, rounds=1, device=None, dataset_name=None, no_hd_map=False):
 		"""
 		Val function
 		:param data: pd.df, val data
@@ -366,7 +385,7 @@ class YNet:
 			image_file_name = 'reference.png'
 		elif dataset_name == 'eth':
 			image_file_name = 'oracle.png'
-		elif dataset_name == 'spa':
+		elif dataset_name == 'sit':
 			image_file_name = 'polygon.json'
 		else:
 			raise ValueError(f'{dataset_name} dataset is not supported')
@@ -410,7 +429,7 @@ class YNet:
 										  temperature=params['temperature'], use_TTST=True,
 										  use_CWS=True if len(params['waypoints']) > 1 else False,
 										  rel_thresh=params['rel_threshold'], CWS_params=params['CWS_params'],
-										  dataset_name=dataset_name, homo_mat=self.homo_mat, mode='test')
+										  dataset_name=dataset_name, homo_mat=self.homo_mat, mode='test', no_hd_map=no_hd_map)
 			print(f'Round {e}: \nTest ADE: {test_ADE} \nTest FDE: {test_FDE}')
 
 			self.eval_ADE.append(test_ADE)
