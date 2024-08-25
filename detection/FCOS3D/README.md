@@ -21,9 +21,9 @@ sudo docker run -it --gpus all --ipc=host -v /mnt:/mnt --name sit_fcos3d geunjub
 
 ## Preprocess
 ```
-python2 pcd2bin_all_frame_concat    # We upload only pcd file for convenience. Therefore, you should convert pcd to bin file with python2 not 3.
-python sit_undistortion_image       # You should also undistort the images.
-python visualize_3dbox_on_image     # We provide a code of 3d boxes visualization on images.
+python2 pcd2bin_all_frame_concat.py    # We upload only pcd file for convenience. Therefore, you should convert pcd to bin file with python2 not 3.
+python sit_undistortion_image.py       # You should also undistort the images.
+python visualize_3dbox_on_image.py     # We provide a code of 3d boxes visualization on images.
 ```
 
 
