@@ -47,9 +47,9 @@
 <!-- * [2023-06] SiT mini Dataset released on <a href="https://drive.google.com/drive/folders/1kYGPJPoWn3J8s0mRWXZv9X-MOR5Hcg8u"> Google Drive.</a> -->
 
 ## Upcomings
-* [2024-07] Trained weights and updated code for 3D object detection and Trajectory prediction release on public.
-* [2024-07] Updated mini dataset release.
-* [2024-09] SiT End-to-End pedestrain trajectory prediction challenge starts on <a href='https://eval.ai/web/challenges/list'>Eval AI</a>.
+* [2024-09] Trained weights and updated code for 3D object detection and Trajectory prediction release on public.
+<!-- * [2024-07] Updated mini dataset release. -->
+<!-- * [2024-09] SiT End-to-End pedestrain trajectory prediction challenge starts on <a href='https://eval.ai/web/challenges/list'>Eval AI</a>. -->
 <!-- * [2023-07] Pretrained models for 3D object detection. -->
 <!-- * [2023-09] SiT Full dataset upload. -->
 <!-- * [2023-07] ROS bagfile of SiT Full dataset upload. -->
