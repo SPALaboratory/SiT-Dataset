@@ -12,14 +12,12 @@ ln -s {SiT Dataset} SiT_dataset
 ```
 ```
 ynet
-├── SiT_dataset
-├── data
-│   ├── semantic_maps_json
-│   ├── semantic_map
-│   ├── trajectory_txt
-│   ├── tran.pkl
-│   ├── val.pkl
-│   ├── test.pkl
+├─ SiT_dataset
+├─ config
+├─ utils
+├─ data
+│   ├─ semantic_maps_json
+│   ├─ semantic_map
 ```
 
 
