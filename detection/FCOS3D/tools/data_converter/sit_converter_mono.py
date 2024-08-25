@@ -229,10 +229,8 @@ def create_sit_infos_mono(root_path,
         val_scenes = splits.mini_val
     elif version == "sit-trainval":
         imageset_folder = Path(root_path) / 'ImageSets'
-        # train_scenes = _read_imageset_file(str(imageset_folder / 'train.txt'))
-        # val_scenes = _read_imageset_file(str(imageset_folder / 'val.txt'))
-        train_scenes = _read_imageset_file(str(imageset_folder / 'train_temp.txt'))
-        val_scenes = _read_imageset_file(str(imageset_folder / 'val_temp.txt'))
+        train_scenes = _read_imageset_file(str(imageset_folder / 'train.txt'))
+        val_scenes = _read_imageset_file(str(imageset_folder / 'val.txt'))
         
         
         
