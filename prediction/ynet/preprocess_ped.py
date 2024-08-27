@@ -418,7 +418,8 @@ for place in os.listdir(dataset):
                 file.writelines(obj)
 
 n_pred = 91 # hist+cur+pred
-train_val_list = ['train', 'val', 'test']
+# train_val_list = ['train', 'val', 'test']
+train_val_list = ['train', 'val']
 trajectory_txt = 'trajectory.txt'
 
 columns = ['trackId', 'xmin', 'xmax', 'ymin', 'ymax','frame','lost','occluded','generated','label']
