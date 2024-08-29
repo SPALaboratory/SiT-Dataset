@@ -6,9 +6,9 @@ from tools.data_converter import indoor_converter as indoor
 from tools.data_converter import kitti_converter as kitti
 from tools.data_converter import lyft_converter as lyft_converter
 from tools.data_converter import nuscenes_converter as nuscenes_converter
-from tools.data_converter import spa_nus_converter as spa_nus_converter
-from tools.data_converter import spa_nus_top_converter as spa_nus_top_converter
-from tools.data_converter import spa_nus_bottom_converter as spa_nus_bottom_converter
+from tools.data_converter import sit_converter as sit_converter
+from tools.data_converter import sit_top_converter as sit_top_converter
+from tools.data_converter import sit_bottom_converter as sit_bottom_converter
 from tools.data_converter.create_gt_database import (
     GTDatabaseCreater, create_groundtruth_database)
 
@@ -53,7 +53,7 @@ def kitti_data_prep(root_path,
         mask_anno_path='instances_train.json',
         with_mask=(version == 'mask'))
 
-def spa_nus_data_prep(root_path,
+def sit_data_prep(root_path,
                        info_prefix,
                        version,
                        dataset_name,
@@ -73,28 +73,24 @@ def spa_nus_data_prep(root_path,
         max_sweeps (int, optional): Number of input consecutive frames.
             Default: 10
     """
-    spa_nus_converter.create_spa_nus_infos(
+    sit_converter.create_sit_infos(
         root_path, info_prefix, version=version, max_sweeps=max_sweeps)
 
-    if version == 'v1.0-test':
+    # if version == 'v1.0-test': # base
+    if version == 'v1.0-sit-test':
         info_test_path = osp.join(root_path, f'{info_prefix}_infos_test.pkl')
-        spa_nus_converter.export_2d_annotation(
+        sit_converter.export_2d_annotation(
             root_path, info_test_path, version=version)
         return
 
     info_train_path = osp.join(root_path, f'{info_prefix}_infos_train.pkl')
     info_val_path = osp.join(root_path, f'{info_prefix}_infos_val.pkl')
 
-    # # for mono 3d
-    # spa_nus_converter.export_2d_annotation(
-    #     root_path, info_train_path, version=version)
-    # spa_nus_converter.export_2d_annotation(
-    #     root_path, info_val_path, version=version)
 
     create_groundtruth_database(dataset_name, root_path, info_prefix,
                                 f'{out_dir}/{info_prefix}_infos_train.pkl')
 
-def spa_nus_top_data_prep(root_path,
+def sit_top_data_prep(root_path,
                        info_prefix,
                        version,
                        dataset_name,
@@ -114,28 +110,22 @@ def spa_nus_top_data_prep(root_path,
         max_sweeps (int, optional): Number of input consecutive frames.
             Default: 10
     """
-    spa_nus_top_converter.create_spa_nus_top_infos(
+    sit_top_converter.create_sit_top_infos(
         root_path, info_prefix, version=version, max_sweeps=max_sweeps)
 
     if version == 'v1.0-test':
         info_test_path = osp.join(root_path, f'{info_prefix}_infos_test.pkl')
-        spa_nus_top_converter.export_2d_annotation(
+        sit_top_converter.export_2d_annotation(
             root_path, info_test_path, version=version)
         return
 
     info_train_path = osp.join(root_path, f'{info_prefix}_infos_train.pkl')
     info_val_path = osp.join(root_path, f'{info_prefix}_infos_val.pkl')
-
-    # for mono 3d
-    # spa_nus_top_converter.export_2d_annotation(
-    #     root_path, info_train_path, version=version)
-    # spa_nus_top_converter.export_2d_annotation(
-    #     root_path, info_val_path, version=version)
 
     create_groundtruth_database(dataset_name, root_path, info_prefix,
                                 f'{out_dir}/{info_prefix}_infos_train.pkl')
 
-def spa_nus_bottom_data_prep(root_path,
+def sit_bottom_data_prep(root_path,
                        info_prefix,
                        version,
                        dataset_name,
@@ -155,23 +145,17 @@ def spa_nus_bottom_data_prep(root_path,
         max_sweeps (int, optional): Number of input consecutive frames.
             Default: 10
     """
-    spa_nus_bottom_converter.create_spa_nus_bottom_infos(
+    sit_bottom_converter.create_sit_bottom_infos(
         root_path, info_prefix, version=version, max_sweeps=max_sweeps)
 
     if version == 'v1.0-test':
         info_test_path = osp.join(root_path, f'{info_prefix}_infos_test.pkl')
-        spa_nus_bottom_converter.export_2d_annotation(
+        sit_bottom_converter.export_2d_annotation(
             root_path, info_test_path, version=version)
         return
 
     info_train_path = osp.join(root_path, f'{info_prefix}_infos_train.pkl')
     info_val_path = osp.join(root_path, f'{info_prefix}_infos_val.pkl')
-
-    # for mono 3d
-    spa_nus_bottom_converter.export_2d_annotation(
-        root_path, info_train_path, version=version)
-    spa_nus_bottom_converter.export_2d_annotation(
-        root_path, info_val_path, version=version)
 
     create_groundtruth_database(dataset_name, root_path, info_prefix,
                                 f'{out_dir}/{info_prefix}_infos_train.pkl')
@@ -371,39 +355,41 @@ if __name__ == '__main__':
             version=args.version,
             out_dir=args.out_dir,
             with_plane=args.with_plane)
-    elif args.dataset == 'spa_nus' and args.version == 'v1.0-spa-trainval':
+    elif args.dataset == 'sit' and args.version == 'v1.0-sit-trainval':
         train_version = f'{args.version}'
-        spa_nus_data_prep(
+        sit_data_prep(
             root_path=args.root_path,
             info_prefix=args.extra_tag,
             version=train_version,
-            dataset_name='SPA_Nus_Dataset',
+            dataset_name='SiT_Dataset',
             out_dir=args.out_dir,
             max_sweeps=args.max_sweeps)
-        # test_version = 'v1.0-spa-test'
-        # spa_nus_data_prep(
-        #     root_path=args.root_path,
-        #     info_prefix=args.extra_tag,
-        #     version=test_version,
-        #     dataset_name='SPA_Nus_Dataset',
-        #     out_dir=args.out_dir,
-        #     max_sweeps=args.max_sweeps)
-    elif args.dataset == 'spa_nus_top' and args.version == 'v1.0-spa-trainval':
-        train_version = f'{args.version}'
-        spa_nus_top_data_prep(
+    elif args.dataset == 'sit' and args.version == 'v1.0-sit-test':
+        test_version = f'{args.version}'
+        sit_data_prep(
             root_path=args.root_path,
             info_prefix=args.extra_tag,
-            version=train_version,
-            dataset_name='SPA_Nus_Dataset_Top',
+            version=test_version,
+            dataset_name='SiT_Dataset',
             out_dir=args.out_dir,
             max_sweeps=args.max_sweeps)
-    elif args.dataset == 'spa_nus_bottom' and args.version == 'v1.0-spa-trainval':
+        
+    elif args.dataset == 'sit_top' and args.version == 'v1.0-sit-trainval':
         train_version = f'{args.version}'
-        spa_nus_bottom_data_prep(
+        sit_top_data_prep(
             root_path=args.root_path,
             info_prefix=args.extra_tag,
             version=train_version,
-            dataset_name='SPA_Nus_Dataset_Bottom',
+            dataset_name='SiT_Dataset_Top',
+            out_dir=args.out_dir,
+            max_sweeps=args.max_sweeps)
+    elif args.dataset == 'sit_bottom' and args.version == 'v1.0-sit-trainval':
+        train_version = f'{args.version}'
+        sit_bottom_data_prep(
+            root_path=args.root_path,
+            info_prefix=args.extra_tag,
+            version=train_version,
+            dataset_name='SiT_Dataset_Bottom',
             out_dir=args.out_dir,
             max_sweeps=args.max_sweeps)
     elif args.dataset == 'nuscenes' and args.version == 'v1.0-trainval':

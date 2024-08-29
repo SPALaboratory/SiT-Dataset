@@ -155,7 +155,7 @@ class PillarFeatureNet(nn.Module):
 
         for pfn in self.pfn_layers:
             features = pfn(features, num_points)
-
+        # breakpoint()
         return features.squeeze(1)
 
 

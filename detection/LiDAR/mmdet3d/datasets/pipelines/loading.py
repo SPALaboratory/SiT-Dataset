@@ -570,6 +570,7 @@ class LoadAnnotations3D(LoadAnnotations):
         Returns:
             dict: The dict containing loaded 3D bounding box annotations.
         """
+        # breakpoint()
         results['gt_bboxes_3d'] = results['ann_info']['gt_bboxes_3d']
         results['bbox3d_fields'].append('gt_bboxes_3d')
         return results
@@ -674,6 +675,7 @@ class LoadAnnotations3D(LoadAnnotations):
                 semantic segmentation annotations.
         """
         results = super().__call__(results)
+        # breakpoint()
         if self.with_bbox_3d:
             results = self._load_bboxes_3d(results)
             if results is None:

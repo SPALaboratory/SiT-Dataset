@@ -117,6 +117,28 @@ class CenterPoint(MVXTwoStageDetector):
             bbox3d2result(bboxes, scores, labels)
             for bboxes, scores, labels in bbox_list
         ]
+
+        vis_flag = False
+        # import pdb; pdb.set_trace()
+        if vis_flag:
+            # save_path = "/home/changwon/detection_task/mmdetection3d/viz_in_model/pred/"
+            save_path = '/home/cwkang/data/ROS/for_rebuttle_viz/pred_1101/'
+            import os
+            os.makedirs(save_path, exist_ok=True)
+            for batch in range(len(bbox_list)):
+                idx = img_metas[batch]['sample_idx']
+
+                pred_boxes = bbox_list[batch][0].tensor.detach().clone().cpu().numpy()
+                score = bbox_list[batch][1].detach().clone().cpu().numpy()
+                cls = bbox_list[batch][2].detach().clone().cpu().numpy()
+
+                txt_list = np.hstack([pred_boxes, score.reshape(pred_boxes.shape[0],1)])
+
+                with open(save_path + "{}.txt".format(idx), "w") as file:
+                    for c in txt_list:
+                        file.write("{} {} {} {} {} {} {} {}".format(c[0], c[1], c[2], c[3], c[4], c[5], c[6], c[7]) + "\n")
+
+
         return bbox_results
 
     def aug_test_pts(self, feats, img_metas, rescale=False):

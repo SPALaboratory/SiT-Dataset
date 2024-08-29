@@ -123,8 +123,9 @@ class Preprocess(object):
                 points = res["lidar"]["points"]
         elif res["type"] in ["NuScenesDataset"]:
             points = res["lidar"]["combined"]
-        elif res["type"] in ["SPA_Nus_Dataset"]:
-            points = res["lidar"]["points"]
+        elif res["type"] in ["SiT_Dataset"]:
+            # points = res["lidar"]["points"]
+            points = res["lidar"]["combined"]
         else:
             raise NotImplementedError
         
@@ -405,10 +406,11 @@ class AssignLabel(object):
             forecast_map = {"car_1" : 1, "car_2" : 2, "car_3" : 3, "car_4" : 4, "car_5" : 5, "car_6" : 6, "car_7" : 7}
         else:
             trajectory_map = {"static_pedestrian": 1, "linear_pedestrian" : 2, "nonlinear_pedestrian" : 3}
-            # forecast_map = {"pedestrian_1" : 1, "pedestrian_2" : 2, "pedestrian_3" : 3, "pedestrian_4" : 4, "pedestrian_5" : 5, "pedestrian_6" : 6, "pedestrian_7" : 7}
-            forecast_map = {}
-            for i in range(length):
-                forecast_map["pedestrian_{}".format(i+1)] = i+1
+            forecast_map = {"pedestrian_1" : 1, "pedestrian_2" : 2, "pedestrian_3" : 3, "pedestrian_4" : 4, "pedestrian_5" : 5, "pedestrian_6" : 6, "pedestrian_7" : 7}
+        
+        if res['metadata']['token'] == 'Corridor*Corridor_3*80':
+            print(1)
+            pass
         
         if res["mode"] == "train":
             gt_dict = res["lidar"]["annotations"]
@@ -435,13 +437,11 @@ class AssignLabel(object):
                 class_names = gt_dict["gt_names"][i]
                 boxes = gt_dict["gt_boxes"][i]
 
-                try:
-                    for name, box in zip(class_names, boxes):
-                        name_forecast.append("{}_{}".format(name, i + 1))
-                        classes_forecast.append(forecast_map["{}_{}".format(name, i + 1)])
-                        boxes_forecast.append(box)
-                except:
-                    print(1)
+                for name, box in zip(class_names, boxes):
+                    name_forecast.append("{}_{}".format(name, i + 1))
+                    classes_forecast.append(forecast_map["{}_{}".format(name, i + 1)])
+                    boxes_forecast.append(box)
+
             gt_dict["gt_names_forecast"] = length * [np.array(name_forecast)]
             gt_dict["gt_classes_forecast"] = length * [np.array(classes_forecast)]
             gt_dict["gt_boxes_forecast"] = length * [np.array(boxes_forecast)]
@@ -508,7 +508,7 @@ class AssignLabel(object):
                         anno_box = np.zeros((max_objs, 14), dtype=np.float32)
                     elif res['type'] == 'WaymoDataset':
                         anno_box = np.zeros((max_objs, 10), dtype=np.float32) 
-                    elif res['type'] == 'SPA_Nus_Dataset':
+                    elif res['type'] == 'SiT_Dataset':
                         anno_box = np.zeros((max_objs, 14), dtype=np.float32)
                     else:
                         raise NotImplementedError("Only Support nuScene for Now!")
@@ -577,7 +577,7 @@ class AssignLabel(object):
                                 anno_box[new_idx] = np.concatenate(
                                 (ct - (x, y), z, np.log(gt_dict['gt_boxes'][idx][k][3:6]),
                                 np.array(vx), np.array(vy), np.sin(rot), np.cos(rot)), axis=None)
-                            elif res['type'] == 'SPA_Nus_Dataset': 
+                            elif res['type'] == 'SiT_Dataset': 
                                 vx, vy = gt_dict['gt_boxes'][i][idx][k][6:8]
                                 rvx, rvy = gt_dict['gt_boxes'][i][idx][k][8:10]
                                 rot = gt_dict['gt_boxes'][i][idx][k][10]
@@ -604,7 +604,7 @@ class AssignLabel(object):
                     gt_boxes_and_cls = np.zeros((max_objs, 13), dtype=np.float32)
                 elif res['type'] == "WaymoDataset":
                     gt_boxes_and_cls = np.zeros((max_objs, 10), dtype=np.float32)
-                elif res["type"] == "SPA_Nus_Dataset":
+                elif res["type"] == "SiT_Dataset":
                     gt_boxes_and_cls = np.zeros((max_objs, 13), dtype=np.float32)
                 else:
                     raise NotImplementedError()
@@ -691,7 +691,7 @@ class AssignLabel(object):
                             anno_box = np.zeros((max_objs, 14), dtype=np.float32)
                         elif res['type'] == 'WaymoDataset':
                             anno_box = np.zeros((max_objs, 10), dtype=np.float32) 
-                        elif res['type'] == 'SPA_Nus_Dataset':
+                        elif res['type'] == 'SiT_Dataset':
                             # [reg, hei, dim, vx, vy, rots, rotc]
                             anno_box = np.zeros((max_objs, 14), dtype=np.float32)
                         else:
@@ -759,7 +759,7 @@ class AssignLabel(object):
                                     anno_box[new_idx] = np.concatenate(
                                     (ct - (x, y), z, np.log(gt_dict['gt_boxes_trajectory'][idx][k][3:6]),
                                     np.array(vx), np.array(vy), np.sin(rot), np.cos(rot)), axis=None)
-                                elif res['type'] == 'SPA_Nus_Dataset': 
+                                elif res['type'] == 'SiT_Dataset': 
                                     vx, vy = gt_dict['gt_boxes_trajectory'][i][idx][k][6:8]
                                     rvx, rvy = gt_dict['gt_boxes_trajectory'][i][idx][k][8:10]
                                     rot = gt_dict['gt_boxes_trajectory'][i][idx][k][10]
@@ -786,7 +786,7 @@ class AssignLabel(object):
                         gt_boxes_and_cls = np.zeros((max_objs, 13), dtype=np.float32)
                     elif res['type'] == "WaymoDataset":
                         gt_boxes_and_cls = np.zeros((max_objs, 10), dtype=np.float32)
-                    elif res["type"] == "SPA_Nus_Dataset":
+                    elif res["type"] == "SiT_Dataset":
                         gt_boxes_and_cls = np.zeros((max_objs, 13), dtype=np.float32)
                     else:
                         raise NotImplementedError()
@@ -811,13 +811,9 @@ class AssignLabel(object):
                     if classname == "car":               
                         class_forecast_names_by_task = [["car_1", "car_2", "car_3", "car_4", "car_5", "car_6", "car_7"]]
                     else:
-                        # class_forecast_names_by_task = [["pedestrian_1", "pedestrian_2", "pedestrian_3", "pedestrian_4", "pedestrian_5", "pedestrian_6", "pedestrian_7"]]
-                        class_forecast_names_by_task = [[]]
-                        for i_ in range(length):
-                            class_forecast_names_by_task[0].append("pedestrian_{}".format(i_+1))
+                        class_forecast_names_by_task = [["pedestrian_1", "pedestrian_2", "pedestrian_3", "pedestrian_4", "pedestrian_5", "pedestrian_6", "pedestrian_7"]]
 
-                    # num_classes_forecast_by_task = [7]
-                    num_classes_forecast_by_task = [length]
+                    num_classes_forecast_by_task = [7]
                     task_masks = []
                     flag = 0
                     for class_name in class_forecast_names_by_task:
@@ -877,7 +873,7 @@ class AssignLabel(object):
                             anno_box = np.zeros((max_objs, 14), dtype=np.float32)
                         elif res['type'] == 'WaymoDataset':
                             anno_box = np.zeros((max_objs, 10), dtype=np.float32) 
-                        elif res['type'] == 'SPA_Nus_Dataset':
+                        elif res['type'] == 'SiT_Dataset':
                             # [reg, hei, dim, vx, vy, rots, rotc]
                             anno_box = np.zeros((max_objs, 14), dtype=np.float32)
                         else:
@@ -945,7 +941,7 @@ class AssignLabel(object):
                                     anno_box[new_idx] = np.concatenate(
                                     (ct - (x, y), z, np.log(gt_dict['gt_boxes_forecast'][idx][k][3:6]),
                                     np.array(vx), np.array(vy), np.sin(rot), np.cos(rot)), axis=None)
-                                elif res['type'] == 'SPA_Nus_Dataset': 
+                                elif res['type'] == 'SiT_Dataset': 
                                     vx, vy = gt_dict['gt_boxes_forecast'][i][idx][k][6:8]
                                     rvx, rvy = gt_dict['gt_boxes_forecast'][i][idx][k][8:10]
                                     rot = gt_dict['gt_boxes_forecast'][i][idx][k][10]
@@ -972,7 +968,7 @@ class AssignLabel(object):
                         gt_boxes_and_cls = np.zeros((max_objs, 13), dtype=np.float32)
                     elif res['type'] == "WaymoDataset":
                         gt_boxes_and_cls = np.zeros((max_objs, 10), dtype=np.float32)
-                    elif res["type"] == "SPA_Nus_Dataset":
+                    elif res["type"] == "SiT_Dataset":
                         gt_boxes_and_cls = np.zeros((max_objs, 13), dtype=np.float32)
                     else:
                         raise NotImplementedError()
@@ -993,10 +989,13 @@ class AssignLabel(object):
         else:
             example_forecast = length * [{}]
 
-        ex = {k : [] for k in example_forecast[0].keys()}
-        for ef in example_forecast:
-            for k in ef.keys():
-                ex[k].append(ef[k])
+        try:
+            ex = {k : [] for k in example_forecast[0].keys()}
+            for ef in example_forecast:
+                for k in ef.keys():
+                    ex[k].append(ef[k])
+        except:
+            pdb.set_trace()
 
         res["lidar"]["targets"] = ex
         return res, info

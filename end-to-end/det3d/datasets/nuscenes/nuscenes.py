@@ -1,7 +1,7 @@
 import sys
 
-sys.path.append('/home/changwon/detection_task/Det3D')
-sys.path.append('/home/changwon/detection_task/Det3D/nuscenes-forecast/python-sdk')
+sys.path.append('./Det3D')
+sys.path.append('./Det3D/nuscenes-forecast/python-sdk')
 
 import pickle
 import json

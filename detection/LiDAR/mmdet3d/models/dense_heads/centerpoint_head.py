@@ -457,6 +457,8 @@ class CenterHead(BaseModule):
         max_objs = self.train_cfg['max_objs'] * self.train_cfg['dense_reg']
         grid_size = torch.tensor(self.train_cfg['grid_size'])
         pc_range = torch.tensor(self.train_cfg['point_cloud_range'])
+        # pc_test_range = torch.tensor(self.test_cfg['point_cloud_range'])
+        # breakpoint()
         voxel_size = torch.tensor(self.train_cfg['voxel_size'])
 
         feature_map_size = grid_size[:2] // self.train_cfg['out_size_factor']
@@ -531,11 +533,11 @@ class CenterHead(BaseModule):
                     coor_y = (
                         y - pc_range[1]
                     ) / voxel_size[1] / self.train_cfg['out_size_factor']
-
                     center = torch.tensor([coor_x, coor_y],
                                           dtype=torch.float32,
                                           device=device)
                     center_int = center.to(torch.int32)
+                    # breakpoint()
 
                     # throw out not in range objects to avoid out of array
                     # area when creating the heatmap
@@ -595,8 +597,10 @@ class CenterHead(BaseModule):
         Returns:
             dict[str:torch.Tensor]: Loss of heatmap and bbox of each task.
         """
+        
         heatmaps, anno_boxes, inds, masks = self.get_targets(
             gt_bboxes_3d, gt_labels_3d)
+        
         loss_dict = dict()
         for task_id, preds_dict in enumerate(preds_dicts):
             # heatmap focal loss
@@ -651,6 +655,7 @@ class CenterHead(BaseModule):
         rets = []
         for task_id, preds_dict in enumerate(preds_dicts):
             num_class_with_bg = self.num_classes[task_id]
+            # breakpoint()
             batch_size = preds_dict[0]['heatmap'].shape[0]
             batch_heatmap = preds_dict[0]['heatmap'].sigmoid()
 
@@ -712,6 +717,9 @@ class CenterHead(BaseModule):
 
         # Merge branches results
         num_samples = len(rets[0])
+        
+        while isinstance(img_metas, list):
+            img_metas = img_metas[0]
 
         ret_list = []
         for i in range(num_samples):
@@ -719,8 +727,11 @@ class CenterHead(BaseModule):
                 if k == 'bboxes':
                     bboxes = torch.cat([ret[i][k] for ret in rets])
                     bboxes[:, 2] = bboxes[:, 2] - bboxes[:, 5] * 0.5
-                    bboxes = img_metas[i]['box_type_3d'](
+                    # bboxes = img_metas[i]['box_type_3d'](
+                    #     bboxes, self.bbox_coder.code_size) # base
+                    bboxes = img_metas['box_type_3d'](
                         bboxes, self.bbox_coder.code_size)
+
                 elif k == 'scores':
                     scores = torch.cat([ret[i][k] for ret in rets])
                 elif k == 'labels':
@@ -756,6 +767,10 @@ class CenterHead(BaseModule):
                 -labels (torch.Tensor): Prediction labels after nms with the
                     shape of [N].
         """
+        # breakpoint()
+        while isinstance(img_metas, list):
+            img_metas = img_metas[0]
+
         predictions_dicts = []
         post_center_range = self.test_cfg['post_center_limit_range']
         if len(post_center_range) > 0:
@@ -793,11 +808,13 @@ class CenterHead(BaseModule):
                 if self.test_cfg['score_threshold'] > 0.0:
                     box_preds = box_preds[top_scores_keep]
                     top_labels = top_labels[top_scores_keep]
-
-                boxes_for_nms = xywhr2xyxyr(img_metas[i]['box_type_3d'](
+                # breakpoint()
+                # boxes_for_nms = xywhr2xyxyr(img_metas[i]['box_type_3d'](
+                #     box_preds[:, :], self.bbox_coder.code_size).bev) #base
+                boxes_for_nms = xywhr2xyxyr(img_metas['box_type_3d'](
                     box_preds[:, :], self.bbox_coder.code_size).bev)
-                # the nms in 3d detection just remove overlap boxes.
 
+                # the nms in 3d detection just remove overlap boxes.
                 selected = nms_bev(
                     boxes_for_nms,
                     top_scores,

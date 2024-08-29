@@ -232,6 +232,7 @@ class DefaultFormatBundle3D(DefaultFormatBundle):
                     results['gt_bboxes'] = results['gt_bboxes'][gt_bboxes_mask]
                 results['gt_names'] = results['gt_names'][gt_bboxes_mask]
             if self.with_label:
+                # import pdb; pdb.set_trace()
                 if 'gt_names' in results and len(results['gt_names']) == 0:
                     results['gt_labels'] = np.array([], dtype=np.int64)
                     results['attr_labels'] = np.array([], dtype=np.int64)

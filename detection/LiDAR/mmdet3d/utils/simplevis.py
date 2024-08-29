@@ -1,7 +1,7 @@
 import cv2
 import numba
 import numpy as np
-
+from PIL import Image
 
 @numba.jit(nopython=True)
 def _points_to_bevmap_reverse_kernel(
@@ -82,6 +82,7 @@ def points_to_bev(points,
             if with_reflectivity is True, bev_map[-2] is intensity map. 
     """
     if not isinstance(voxel_size, np.ndarray):
+        # breakpoint()
         voxel_size = np.array(voxel_size, dtype=points.dtype)
     if not isinstance(coors_range, np.ndarray):
         coors_range = np.array(coors_range, dtype=points.dtype)
@@ -121,6 +122,7 @@ def point_to_vis_bev(points,
                             voxel_size,
                             coors_range,
                             max_voxels=max_voxels)
+    # breakpoint()
     height_map = (bev_map[0] * 255).astype(np.uint8)
     return cv2.cvtColor(height_map, cv2.COLOR_GRAY2RGB)
 
@@ -216,6 +218,141 @@ def draw_box_in_bev(img,
         img = cv2_draw_text(img, text_center, labels, label_color, thickness)
     return img
 
+def draw_box_in_integrated_bev(img,
+                    coors_range,
+                    boxes1,
+                    boxes2,
+                    color1,
+                    color2,
+                    thickness1=1,
+                    thickness2=1,
+                    labels1=None,
+                    labels2=None,
+                    label_color1=None,
+                    label_color2=None):
+    """
+    Args:
+        boxes1: center format.
+        boxes1: center format.
+    """
+    # about img1
+
+    coors_range = np.array(coors_range)
+    bev_corners1= center_to_corner_box2d(boxes1[:, [0, 1]], boxes1[:, [3, 4]],
+                                         boxes1[:, 6])
+    bev_corners1 -= coors_range[:2]
+    bev_corners1 *= np.array(
+        img.shape[:2])[::-1] / (coors_range[3:5] - coors_range[:2])
+    standup = corner_to_standup_nd(bev_corners1)
+    text_center1 = standup[:, 2:]
+    text_center1[:, 1] -= (standup[:, 3] - standup[:, 1]) / 2
+
+    # bev_lines = np.concatenate(
+    #     [bev_corners[:, [0, 2, 3]], bev_corners[:, [1, 3, 0]]], axis=2)
+    bev_lines1 = np.concatenate(
+        [bev_corners1[:, [0, 2, 3, 1]], bev_corners1[:, [1, 3, 0, 2]]], axis=2)
+    bev_lines1 = bev_lines1.reshape(-1, 4)
+    colors1 = np.tile(np.array(color1).reshape(1, 3), [bev_lines1.shape[0], 1])
+    colors1 = colors1.astype(np.int32)
+    img = cv2_draw_lines(img, bev_lines1, colors1, thickness1)
+
+    # bev_lines = np.concatenate(
+    #     [bev_corners[:, [0, 2, 3]], bev_corners[:, [1, 3, 0]]], axis=2)
+    # bev_lines = bev_lines.reshape(-1, 4)
+    # colors = np.tile(np.array(color).reshape(1, 3), [bev_lines.shape[0], 1])
+    # colors = colors.astype(np.int32)
+    # img = cv2_draw_lines(img, bev_lines, colors, thickness)
+
+    if boxes1.shape[1] == 9:
+        # draw velocity arrows
+        for box in boxes1:
+            velo = box[-2:]
+            # velo = np.array([-np.sin(box[6]), -np.cos(box[6])])
+            velo_unified = velo
+            if np.isnan(velo_unified[0]):
+                continue
+            velo_unified = velo_unified * np.array(
+                img.shape[:2])[::-1] / (coors_range[3:5] - coors_range[:2])
+            center = box[:2] - coors_range[:2]
+            center = center * np.array(
+                img.shape[:2])[::-1] / (coors_range[3:5] - coors_range[:2])
+            center = tuple(map(lambda x: int(x), center))
+            center2 = tuple(map(lambda x: int(x), center + velo_unified))
+            cv2.arrowedLine(img,
+                            center,
+                            center2,
+                            color1,
+                            thickness1,
+                            tipLength=0.3)
+    if labels1 is not None:
+        if label_color1 is None:
+            label_color1 = colors1
+        else:
+            label_color1 = np.tile(
+                np.array(label_color1).reshape(1, 3), [bev_lines1.shape[0], 1])
+            label_color1 = label_color1.astype(np.int32)
+
+        img = cv2_draw_text(img, text_center1, labels1, label_color1, thickness1)
+
+    # about img2
+
+    coors_range = np.array(coors_range)
+    bev_corners2= center_to_corner_box2d(boxes2[:, [0, 1]], boxes2[:, [3, 4]],
+                                         boxes2[:, 6])
+    bev_corners2 -= coors_range[:2]
+    bev_corners2 *= np.array(
+        img.shape[:2])[::-1] / (coors_range[3:5] - coors_range[:2])
+    standup = corner_to_standup_nd(bev_corners2)
+    text_center2 = standup[:, 2:]
+    text_center2[:, 1] -= (standup[:, 3] - standup[:, 1]) / 2
+
+    # bev_lines = np.concatenate(
+    #     [bev_corners[:, [0, 2, 3]], bev_corners[:, [1, 3, 0]]], axis=2)
+    bev_lines2 = np.concatenate(
+        [bev_corners2[:, [0, 2, 3, 1]], bev_corners2[:, [1, 3, 0, 2]]], axis=2)
+    bev_lines2 = bev_lines2.reshape(-1, 4)
+    colors2 = np.tile(np.array(color2).reshape(1, 3), [bev_lines2.shape[0], 1])
+    colors2 = colors2.astype(np.int32)
+    img = cv2_draw_lines(img, bev_lines2, colors2, thickness2)
+
+    # bev_lines = np.concatenate(
+    #     [bev_corners[:, [0, 2, 3]], bev_corners[:, [1, 3, 0]]], axis=2)
+    # bev_lines = bev_lines.reshape(-1, 4)
+    # colors = np.tile(np.array(color).reshape(1, 3), [bev_lines.shape[0], 1])
+    # colors = colors.astype(np.int32)
+    # img = cv2_draw_lines(img, bev_lines, colors, thickness)
+
+    if boxes1.shape[1] == 9:
+        # draw velocity arrows
+        for box in boxes1:
+            velo = box[-2:]
+            # velo = np.array([-np.sin(box[6]), -np.cos(box[6])])
+            velo_unified = velo
+            if np.isnan(velo_unified[0]):
+                continue
+            velo_unified = velo_unified * np.array(
+                img.shape[:2])[::-1] / (coors_range[3:5] - coors_range[:2])
+            center = box[:2] - coors_range[:2]
+            center = center * np.array(
+                img.shape[:2])[::-1] / (coors_range[3:5] - coors_range[:2])
+            center = tuple(map(lambda x: int(x), center))
+            center2 = tuple(map(lambda x: int(x), center + velo_unified))
+            cv2.arrowedLine(img,
+                            center,
+                            center2,
+                            color1,
+                            thickness1,
+                            tipLength=0.3)
+    if labels1 is not None:
+        if label_color1 is None:
+            label_color1 = colors1
+        else:
+            label_color1 = np.tile(
+                np.array(label_color1).reshape(1, 3), [bev_lines1.shape[0], 1])
+            label_color1 = label_color1.astype(np.int32)
+
+        img = cv2_draw_text(img, text_center1, labels1, label_color1, thickness1)
+    return img
 
 def kitti_vis(points, boxes=None, labels=None):
     vis_voxel_size = [0.1, 0.1, 0.1]
@@ -227,7 +364,6 @@ def kitti_vis(points, boxes=None, labels=None):
 
     return bev_map
 
-
 def nuscene_vis(points, boxes=None, labels=None):
     vis_voxel_size = [0.1, 0.1, 0.2]
     vis_point_range = [-51.2, -51.2, -5, 51.2, 51.2, 3]
@@ -237,6 +373,42 @@ def nuscene_vis(points, boxes=None, labels=None):
                                   2, labels)
 
     return bev_map
+
+def nuscene_vis_gt(points, boxes=None, labels=None):
+    vis_voxel_size = [0.1, 0.1, 0.2]
+    vis_point_range = [-51.2, -51.2, -5, 51.2, 51.2, 3]
+    bev_map = point_to_vis_bev(points, vis_voxel_size, vis_point_range)
+    if boxes is not None:
+        bev_map = draw_box_in_bev(bev_map, vis_point_range, boxes, [0, 255, 0],
+                                  2, labels)
+
+    return bev_map
+
+def nuscene_vis_pred(points, boxes=None, labels=None):
+    vis_voxel_size = [0.1, 0.1, 0.2]
+    vis_point_range = [-51.2, -51.2, -5, 51.2, 51.2, 3]
+    bev_map = point_to_vis_bev(points, vis_voxel_size, vis_point_range)
+    if boxes is not None:
+        bev_map = draw_box_in_bev(bev_map, vis_point_range, boxes, [255, 0, 0],
+                                  2, labels)
+
+    return bev_map
+
+def integrate_nuscene_vis(points, boxes=None, labels=None):
+    vis_voxel_size = [0.1, 0.1, 0.2]
+    vis_point_range = [-51.2, -51.2, -5, 51.2, 51.2, 3]
+    bev_map = point_to_vis_bev(points, vis_voxel_size, vis_point_range)
+    if boxes is not None:
+        bev_map = draw_box_in_integrated_bev(bev_map, vis_point_range, boxes, [0, 0, 255],
+                                  2, labels)
+
+    return bev_map
+
+# def integrate_nuscene_vis(img1, img2):
+#     # integrated_bev_map = Image.alpha_composite(img1.convert("RGBA"), img2.convert("RGBA"))
+#     integrated_bev_map = Image.alpha_composite(img1, img2)
+
+#     return integrated_bev_map
 
 
 def center_to_corner_box2d(centers, dims, angles=None, origin=0.5):

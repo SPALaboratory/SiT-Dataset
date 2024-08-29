@@ -12,7 +12,7 @@ log_config = dict(
 # yapf:enable
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-work_dir = None
+work_dir = './work_dirs/spa_nusc_centerpoint_ped/ver4_dynamic_voxel/'
 load_from = None
 resume_from = None
 workflow = [('train', 1)]

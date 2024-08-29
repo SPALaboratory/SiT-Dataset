@@ -3,3 +3,7 @@
 0	8522	1677397666390129208	/home/changwon/detection_task/Det3D/det3d/ops/iou3d_nms/build/temp.linux-x86_64-3.8/src/iou3d_cpu.o	363f37cf18ba5da
 0	9072	1677397666938174683	/home/changwon/detection_task/Det3D/det3d/ops/iou3d_nms/build/temp.linux-x86_64-3.8/src/iou3d_nms.o	e896891514528e77
 0	12774	1677397670638480760	/home/changwon/detection_task/Det3D/det3d/ops/iou3d_nms/build/temp.linux-x86_64-3.8/src/iou3d_nms_api.o	7e597366930025d5
+0	2397	1696305011490000665	/home/cwkang/data_2/cwkang/SPA_Detection/futuredet/det3d/ops/iou3d_nms/build/temp.linux-x86_64-3.8/src/iou3d_nms_kernel.o	dd9a34ddbc69eb18
+0	6432	1696305015526123567	/home/cwkang/data_2/cwkang/SPA_Detection/futuredet/det3d/ops/iou3d_nms/build/temp.linux-x86_64-3.8/src/iou3d_cpu.o	5e4e8f83b255b43a
+0	6925	1696305016018138599	/home/cwkang/data_2/cwkang/SPA_Detection/futuredet/det3d/ops/iou3d_nms/build/temp.linux-x86_64-3.8/src/iou3d_nms.o	a33a11ee4a72cd1a
+0	9827	1696305018918227478	/home/cwkang/data_2/cwkang/SPA_Detection/futuredet/det3d/ops/iou3d_nms/build/temp.linux-x86_64-3.8/src/iou3d_nms_api.o	8ba1173905eed32b

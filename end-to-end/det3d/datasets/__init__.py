@@ -3,7 +3,7 @@ from .builder import build_dataset
 # from .cityscapes import CityscapesDataset
 from .nuscenes import NuScenesDataset
 from .waymo import WaymoDataset
-from .spa_nusc import SPA_Nus_Dataset
+from .sit import SiT_Dataset
 
 # from .custom import CustomDataset
 from .dataset_wrappers import ConcatDataset, RepeatDataset

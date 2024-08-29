@@ -30,12 +30,36 @@ def read_file(path, tries=2, num_point_feature=4, painted=False):
         points = points[:, [0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]] # remove ring_index from features 
     else:
         try:
-            points = np.fromfile(path, dtype=np.float32).reshape(-1, 5)[:, :num_point_feature]
+            points = np.fromfile(path, dtype=np.float32, count=-1).reshape(-1, 5)[:, :num_point_feature]
         except:
-            points = np.fromfile(path, dtype=np.float32).reshape(-1, 4)[:, :num_point_feature]
+            points = np.fromfile(path, dtype=np.float32, count=-1).reshape(-1, 4)[:, :num_point_feature]
 
     return points
 
+def filter_points_in_range_np(points, range_):
+    """
+    Filters and returns points within a specified range using NumPy.
+    
+    Parameters:
+        points (np.array): A NumPy array of points in [x, y, z, intensity] format.
+        range_ (list or np.array): A list or np.array specifying the range in [xmin, ymin, zmin, xmax, ymax, zmax] format.
+        
+    Returns:
+        np.array: A NumPy array containing only the points within the specified range.
+    """
+    # Ensure the input range_ is a numpy array for efficient calculations.
+    range_np = np.asarray(range_)
+    xmin, ymin, zmin, xmax, ymax, zmax = range_np
+    
+    # Create masks for each condition.
+    mask_x = np.logical_and(points[:, 0] >= xmin, points[:, 0] <= xmax)
+    mask_y = np.logical_and(points[:, 1] >= ymin, points[:, 1] <= ymax)
+    mask_z = np.logical_and(points[:, 2] >= zmin, points[:, 2] <= zmax)
+    
+    # Combine the masks with logical AND, and use it to index the input points array.
+    mask = np.logical_and.reduce((mask_x, mask_y, mask_z))
+    
+    return points[mask]
 
 def remove_close(points, radius: float) -> None:
     """
@@ -62,6 +86,25 @@ def read_sweep(sweep, painted=False):
     curr_times = sweep["time_lag"] * np.ones((1, points_sweep.shape[1]))
 
     return points_sweep.T, curr_times.T
+
+def read_sweep_sit(sweep, painted=False):
+    min_distance = 1.0
+    points_sweep = read_file(sweep["lidar_path"], painted=painted).T
+    points_sweep = remove_close(points_sweep, min_distance)
+    N = points_sweep.shape[1]
+
+    nbr_points = points_sweep.shape[1]
+    # if sweep["transform_matrix"] is not None:
+    #     points_sweep[:3, :] = sweep["transform_matrix"].dot(
+    #         np.vstack((points_sweep[:3, :], np.ones(nbr_points)))
+    #     )[:3, :]
+    curr_times = sweep["time_lag"].split("_")[0]
+    if curr_times == '0':
+        time_ = np.zeros((N, 1)) 
+    else:
+        time_ = np.ones((N, 1)) 
+
+    return points_sweep.T, np.ones((N, 1))
 
 def read_single_waymo(obj):
     points_xyz = obj["lidars"]["points_xyz"]
@@ -116,7 +159,7 @@ class LoadPointCloudFromFile(object):
     def __call__(self, res, info):
 
         res["type"] = self.type
-
+        # pdb.set_trace()
         if self.type == "NuScenesDataset":
 
             nsweeps = res["lidar"]["nsweeps"]
@@ -176,31 +219,60 @@ class LoadPointCloudFromFile(object):
                 res["lidar"]["points"] = points
                 res["lidar"]["times"] = times
                 res["lidar"]["combined"] = np.hstack([points, times])
-        elif self.type == "SPA_Nus_Dataset":
-
+        elif self.type == "SiT_Dataset":
+            pc_range = [-51.2, -51.2, -5.0, 51.2, 51.2, 3.0]
             nsweeps = res["lidar"]["nsweeps"]
 
             lidar_path = Path(info["lidar_path"])
-            points = read_file(str(lidar_path), painted=res["painted"])
 
-            sweep_points_list = [points]
-            sweep_times_list = [np.zeros((points.shape[0], 1))]
+            sweep_points_list = []
+            sweep_times_list = []
+
+            present_loc = info["sweeps"][0]['transform_matrix'][:3, -1]
+            for i in range(10):
+                sweep = deepcopy(info["sweeps"][i])
+                points_sweep, times_sweep = read_sweep_sit(sweep, painted=res["painted"])
+                points_sweep = np.fromfile(sweep['lidar_path'], dtype=np.float32, count=-1).reshape(-1, 4)
+                points_sweep = filter_points_in_range_np(points_sweep, pc_range)
+                
+                times_sweep = np.ones((points_sweep.shape[0], 1))
+                points_sweep_ = np.concatenate([deepcopy(points_sweep[:, :3]), np.ones(points_sweep.shape[0]).reshape(1, -1).T], axis=1).T
+                    
+                ego_motion = deepcopy(info["sweeps"][i]['transform_matrix'])
+                prev_loc = info["sweeps"][i]['transform_matrix'][:3, -1]
+                ego_rot = np.eye(4)
+                ego_rot[:3, :3] = ego_motion[:3, :3]
+                
+                # ego_rot = ego_motion
+                ego_rot[:3, -1] = -1 * (present_loc - prev_loc)
+                points_sweep_ = deepcopy(np.matmul(ego_rot, points_sweep_).T)
+                points_sweep[:, :3] = points_sweep_[:, :3]
+                # points_sweep[:, :3] = points_sweep_[:, :3] + first_loc.T
+
+                sweep_points_list.append(points_sweep)
+                sweep_times_list.append(times_sweep)
+            # ============================================================
             
             points = np.concatenate(sweep_points_list, axis=0)
+            # points[:, :3] -= first_loc.T
             times = np.concatenate(sweep_times_list, axis=0).astype(points.dtype)
 
+                
             place = info['token'].split("*")[0]
             scene = info['token'].split("*")[1]
             frame = info['token'].split("*")[2]
-            root_path = Path("./data/spa/")
+            root_path = Path("./data/sit/")
+            
             odom_path = root_path / place / scene / "ego_trajectory/{}.txt".format(frame)
             ego_motion = get_ego_matrix(odom_path)
             ego_rot = np.eye(4)
-            ego_rot[:3, :3] = ego_motion[:3, :3]
+            ego_rot[:3, :3] = np.linalg.inv(ego_motion[:3, :3])
+            # ego_rot[:3, :3] = ego_motion[:3, :3]
 
             points_ = np.concatenate([points[:, :3], np.ones(points.shape[0]).reshape(1, -1).T], axis=1).T
             points_ = np.matmul(ego_rot, points_).T
             points[:, :3] = points_[:, :3]
+            # points[:, :3] = points_.T[:, :3]
             
             res["lidar"]["points"] = points
             res["lidar"]["times"] = times
@@ -262,50 +334,19 @@ class LoadPointCloudAnnotations(object):
                 "names": info["gt_names"],
             }
         
-        elif res["type"] in ["SPA_Nus_Dataset"] and "gt_boxes" in info:
-            gt_boxes = info["gt_boxes"].astype(np.float32)
-            root_path = Path("./data/spa/")
+        elif res["type"] in ["SiT_Dataset"] and "gt_boxes" in info:
+            try:
+                gt_boxes = info["gt_boxes"].astype(np.float32)
+            except:
+                import pdb; pdb.set_trace()
+            root_path = Path("./data/sit/")
             gt_boxes[np.isnan(gt_boxes)] = 0
 
             boxes, names, tokens, rtokens, velocity, rvelocity, trajectory, track_id = [], [], [], [], [], [], [], []
 
+
+            # import pdb; pdb.set_trace()
             for i in range(res["metadata"]["timesteps"]):
-                vis_flag = False
-                if vis_flag:
-                    token_ = info["gt_boxes_token"][:,i][0]
-                    place = token_.split("*")[0]
-                    scene = token_.split("*")[1]
-                    frame = token_.split("*")[2]
-                    save_path = "/home/changwon/detection_task/Det3D/viz_in_model/preprocessing/"
-                    os.makedirs(save_path, exist_ok=True)
-
-                    # bbox_list = gt_boxes[:,i,[0,1,2,3,4,5,-2]] #x,y,z,l,w,h,rot
-                    bbox_list = gt_boxes[:,i,[0,1,2,3,4,5,-2]] #x,y,z,w,l,h,rot
-                    velo_path = "./data/spa/{}/{}/velo/concat/bin_data/{}.bin".format(place, scene, frame)
-                    points_ = np.fromfile(velo_path, dtype=np.float32, count=-1).reshape([-1, 4])
-                    # points = res['lidar']['points']
-                    odom_path = root_path / place / scene / "ego_trajectory/{}.txt".format(frame)
-                    ego_motion = get_ego_matrix(odom_path)
-                    ego_rot = np.eye(4)
-                    ego_rot[:3, :3] = ego_motion[:3, :3]
-
-                    points = np.concatenate([points_[:, :3], np.ones(points_.shape[0]).reshape(1, -1).T], axis=1).T
-                    points = np.matmul(ego_rot, points).T
-                    points_[:, :3] = points[:, :3]
-
-                    pred_boxes = bbox_list
-                    point = points
-                    #pred_boxes[:, 6] *= -1
-                    bev = nuscene_vis(point, pred_boxes)
-                    cv2.imwrite(save_path+"pred_{}*{}*{}-{}.png".format(place, scene, frame, i), bev)
-                
-                # token_ = info['gt_boxes_token'][0][i]
-                # place = token_.split("*")[0]
-                # scene = token_.split("*")[1]
-                # frame = token_.split("*")[2]
-                # odom_path = root_path / place / scene / "ego_trajectory/{}.txt".format(frame)
-                # ego_motion = get_ego_matrix(odom_path)
-                # gt_boxes[:, i, :3] = gt_boxes[:, i, :3] - ego_motion[:3, 3]
 
                 try:
                     boxes.append(gt_boxes[:,i,:])

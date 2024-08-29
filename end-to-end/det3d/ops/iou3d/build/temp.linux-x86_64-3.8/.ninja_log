@@ -1,0 +1,4 @@
+# ninja log v5
+0	2207	1696303555001057939	/home/cwkang/data_2/cwkang/SPA_Detection/futuredet/det3d/ops/iou3d/build/temp.linux-x86_64-3.8/src/iou3d_kernel.o	a2b508f8f24d45cc
+0	9188	1696303561977508653	/home/cwkang/data_2/cwkang/SPA_Detection/futuredet/det3d/ops/iou3d/build/temp.linux-x86_64-3.8/src/iou3d.o	5ce7a26fc77efcfc
+1	2056	1696304955396379725	/home/cwkang/data_2/cwkang/SPA_Detection/futuredet/det3d/ops/iou3d/build/temp.linux-x86_64-3.8/src/iou3d_kernel.o	6cf0a0d4dfed9e0c

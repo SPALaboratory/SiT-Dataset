@@ -21,9 +21,8 @@ class Compose(object):
                 raise TypeError("transform must be callable or a dict")
 
     def __call__(self, res, info):
-        if info['token'] == '230412_international*indoor_1_2023-04-12-17-32-46_sync_odom_sync_offset-2_-2_-3_-2_-3_cut6_20sec_5hz*1681288482083865166':
-            print(1)
         for t in self.transforms:
+            # import pdb; pdb.set_trace()
             res, info = t(res, info)
             if res is None:
                 return None

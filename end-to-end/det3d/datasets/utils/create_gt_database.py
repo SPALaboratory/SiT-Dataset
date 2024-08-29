@@ -11,7 +11,7 @@ import pdb
 dataset_name_map = {
     "NUSC": "NuScenesDataset",
     "WAYMO": "WaymoDataset",
-    "SPA_Nus" : "SPA_Nus_Dataset"
+    "SiT" : "SiT_Dataset"
 
 }
 
@@ -52,7 +52,7 @@ def create_groundtruth_database(
 
     root_path = Path(data_path)
 
-    if dataset_class_name in ["WAYMO", "NUSC", "SPA_Nus"]: 
+    if dataset_class_name in ["WAYMO", "NUSC", "SiT"]: 
         if db_path is None:
             db_path = root_path / f"gt_database_{nsweeps}sweeps_withvelo"
         if dbinfo_path is None:
@@ -64,7 +64,7 @@ def create_groundtruth_database(
         point_features = 5
     elif dataset_class_name == "WAYMO":
         point_features = 5 if nsweeps == 1 else 6 
-    elif dataset_class_name == "SPA_Nus":
+    elif dataset_class_name == "SiT":
         point_features = 4 if nsweeps == 1 else 6 
     else:
         raise NotImplementedError()

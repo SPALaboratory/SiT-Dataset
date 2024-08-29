@@ -8,10 +8,10 @@ from .kitti_mono_dataset import KittiMonoDataset
 from .lyft_dataset import LyftDataset
 from .nuscenes_dataset import NuScenesDataset
 from .nuscenes_mono_dataset import NuScenesMonoDataset
-from .spa_nus_dataset import SPA_Nus_Dataset
-from .spa_nus_dataset_top import SPA_Nus_Dataset_Top
-from .spa_nus_dataset_bottom import SPA_Nus_Dataset_Bottom
-from .spa_nus_mono_dataset import SPA_Nus_MonoDataset
+from .sit_dataset import SiT_Dataset
+from .sit_dataset_top import SiT_Dataset_Top
+from .sit_dataset_bottom import SiT_Dataset_Bottom
+from .sit_mono_dataset import SiT_MonoDataset
 # yapf: disable
 from .pipelines import (AffineResize, BackgroundPointsFilter, GlobalAlignment,
                         GlobalRotScaleTrans, IndoorPatchPointSample,
@@ -48,6 +48,6 @@ __all__ = [
     'RandomJitterPoints', 'ObjectNameFilter', 'AffineResize',
     'RandomShiftScale', 'LoadPointsFromDict', 'PIPELINES',
     'RangeLimitedRandomCrop', 'RandomRotate', 'MultiViewWrapper',
-    'SPADataset', 'SPA_MVX_Dataset', "SPA_Nus_Dataset", "SPA_Nus_MonoDataset",
-    'SPA_Nus_Dataset_Top', 'SPA_Nus_Dataset_Bottom'
+    "SiT_Dataset", "SiT_MonoDataset",
+    'SiT_Dataset_Top', 'SiT_Dataset_Bottom'
 ]

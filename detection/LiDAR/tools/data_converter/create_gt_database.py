@@ -12,7 +12,7 @@ from pycocotools.coco import COCO
 from mmdet3d.core.bbox import box_np_ops as box_np_ops
 from mmdet3d.datasets import build_dataset
 from mmdet.core.evaluation.bbox_overlaps import bbox_overlaps
-from tools.data_converter import spa_nus_converter as spa_nus_converter
+from tools.data_converter import sit_converter as sit_converter
 
 
 def _poly2mask(mask_ann, img_h, img_w):
@@ -217,7 +217,7 @@ def create_groundtruth_database(dataset_class_name,
                     file_client_args=file_client_args)
             ])
     
-    elif dataset_class_name == 'SPA_Nus_Dataset':
+    elif dataset_class_name == 'SiT_Dataset':
         dataset_cfg.update(
             use_valid_flag=True,
             pipeline=[
@@ -232,7 +232,7 @@ def create_groundtruth_database(dataset_class_name,
                     with_label_3d=True)
             ])
     
-    elif dataset_class_name == 'SPA_Nus_Dataset_Top':
+    elif dataset_class_name == 'SiT_Dataset_Top':
         dataset_cfg.update(
             use_valid_flag=True,
             pipeline=[
@@ -247,7 +247,7 @@ def create_groundtruth_database(dataset_class_name,
                     with_label_3d=True)
             ])
     
-    elif dataset_class_name == 'SPA_Nus_Dataset_Bottom':
+    elif dataset_class_name == 'SiT_Dataset_Bottom':
         dataset_cfg.update(
             use_valid_flag=True,
             pipeline=[
@@ -300,8 +300,8 @@ def create_groundtruth_database(dataset_class_name,
 
         num_obj = gt_boxes_3d.shape[0]
 
-        gt_boxes_corners = spa_nus_converter.box_center_to_corner_3d(gt_boxes_3d[:, :3], gt_boxes_3d[:, 3:6], gt_boxes_3d[:, 6])
-        num_pts_list = spa_nus_converter.get_pts_index_in_3dbox_(points, gt_boxes_corners)
+        gt_boxes_corners = sit_converter.box_center_to_corner_3d(gt_boxes_3d[:, :3], gt_boxes_3d[:, 3:6], gt_boxes_3d[:, 6])
+        num_pts_list = sit_converter.get_pts_index_in_3dbox_(points, gt_boxes_corners)
         # point_indices = box_np_ops.points_in_rbbox(points, gt_boxes_3d)
         if np.array(num_pts_list).shape[0] != 0:
             point_indices = np.array(num_pts_list).transpose(1, 0)

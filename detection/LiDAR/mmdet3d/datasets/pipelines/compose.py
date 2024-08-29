@@ -46,6 +46,7 @@ class Compose:
         """
 
         for t in self.transforms:
+            # import pdb; pdb.set_trace()
             data = t(data)
             if data is None:
                 return None

@@ -14,11 +14,13 @@ from itertools import tee
 from copy import deepcopy
 
 try:
+    # import pdb; pdb.set_trace()
     from nuscenes import NuScenes
     from nuscenes.utils import splits
     from nuscenes.utils.data_classes import Box, LidarPointCloud
     from nuscenes.eval.detection.config import config_factory
-    from nuscenes.eval.detection.evaluate import NuScenesEval
+    # from nuscenes.eval.detection.evaluate import NuScenesEval
+    from .evaluate import NuScenesEval
     from nuscenes.eval.detection.render import visualize_sample
 except:
     print("nuScenes devkit not Found!")

@@ -916,7 +916,7 @@ class ObjectRangeFilter(object):
             bev_range = self.pcd_range[[0, 1, 3, 4]]
         elif isinstance(input_dict['gt_bboxes_3d'], CameraInstance3DBoxes):
             bev_range = self.pcd_range[[0, 2, 3, 5]]
-
+        # breakpoint()
         gt_bboxes_3d = input_dict['gt_bboxes_3d']
         gt_labels_3d = input_dict['gt_labels_3d']
         mask = gt_bboxes_3d.in_range_bev(bev_range)
@@ -937,6 +937,7 @@ class ObjectRangeFilter(object):
     def __repr__(self):
         """str: Return a string that describes the module."""
         repr_str = self.__class__.__name__
+        # breakpoint()
         repr_str += f'(point_cloud_range={self.pcd_range.tolist()})'
         return repr_str
 
