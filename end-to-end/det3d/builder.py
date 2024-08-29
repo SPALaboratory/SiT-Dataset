@@ -210,6 +210,7 @@ def build_dbsampler(cfg, logger=None):
     groups = cfg.sample_groups
     # groups = [dict(g.name_to_max_num) for g in groups]
     info_path = cfg.db_info_path
+    # import pdb; pdb.set_trace()
     with open(info_path, "rb") as f:
         db_infos = pickle.load(f)
     grot_range = list(grot_range)

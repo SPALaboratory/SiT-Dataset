@@ -647,7 +647,7 @@ class CenterHead(nn.Module):
 
             xs = xs * test_cfg.out_size_factor * test_cfg.voxel_size[0] + test_cfg.pc_range[0]
             ys = ys * test_cfg.out_size_factor * test_cfg.voxel_size[1] + test_cfg.pc_range[1]
-
+            # import pdb; pdb.set_trace()
             if 'rvel' in preds_dict:
                 batch_vel = preds_dict['vel']
                 batch_vel = batch_vel.reshape(batch, H*W, 2)

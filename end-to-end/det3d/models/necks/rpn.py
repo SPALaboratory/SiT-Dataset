@@ -154,6 +154,7 @@ class RPN(nn.Module):
             if i - self._upsample_start_idx >= 0:
                 ups.append(self.deblocks[i - self._upsample_start_idx](x))
         if len(ups) > 0:
+            # import pdb; pdb.set_trace()
             x = torch.cat(ups, dim=1)
 
         return x

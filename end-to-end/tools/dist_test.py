@@ -8,10 +8,8 @@ import sys
 
 # sys.path.append('/home/nperi/Workspace/FutureDet')
 # sys.path.append('/home/nperi/Workspace/Core/nuscenes-forecast/python-sdk')
-sys.path.append('/home/changwon/detection_task/Det3D')
-sys.path.append('/home/changwon/detection_task/Det3D/nuscenes-forecast/python-sdk')
-sys.path.append('./')
-sys.path.append('./nuscenes-forecast/python-sdk')
+sys.path.append('/home/cwkang/data_2/SiT_Dataset_1113/SPA_retraining/SPA_FutureDet/')
+sys.path.append('/home/cwkang/data_2/SiT_Dataset_1113/SPA_retraining/SPA_FutureDet/nuscenes-forecast/python-sdk')
 
 
 try:
@@ -290,6 +288,7 @@ def main():
         return
     
     predictions = load_pred(args.work_dir, args.split, args.modelCheckPoint)
+    #import pdb; pdb.set_trace()
     result_dict, _ = dataset.evaluation(copy.deepcopy(predictions), output_dir=args.work_dir, testset=args.testset, forecast=args.forecast, forecast_mode=args.forecast_mode, classname=args.classname,
                                         rerank=args.rerank, tp_pct=args.tp_pct, root=args.root, static_only=args.static_only, cohort_analysis=args.cohort_analysis,
                                         K=args.K, C=args.C, split=args.split, version=args.version, eval_only=args.eval_only, jitter=args.jitter, 

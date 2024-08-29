@@ -9,7 +9,7 @@ sys.path.append('~/Workspace/FutureDet')
 sys.path.append('~/Workspace/Core/nuscenes-forecast/python-sdk')
 
 from det3d.datasets.nuscenes import nusc_common as nu_ds
-from det3d.datasets.spa_nusc import spa_nusc_common as spa_nusc_ds
+from det3d.datasets.sit import sit_common as sit_ds
 from det3d.datasets.utils.create_gt_database import create_groundtruth_database
 from det3d.datasets.waymo import waymo_common as waymo_ds
 
@@ -28,19 +28,19 @@ def nuscenes_data_prep(root_path, version, experiment="trainval_forecast", nswee
         timesteps=timesteps
     )
 
-# def spa_nusc_data_prep(root_path, version, experiment="trainval_forecast", nsweeps=20, filter_zero=True, timesteps=7):
-def spa_nusc_data_prep(root_path, version, experiment="trainval_forecast", nsweeps=1, filter_zero=True, timesteps=7):
+def sit_data_prep(root_path, version, experiment="trainval_forecast", nsweeps=10, filter_zero=True, timesteps=7):
     past = True if "past" in experiment else False
 
     if not os.path.isdir(root_path + "/" + experiment):
         os.makedirs(root_path + "/" + experiment)
 
-    spa_nusc_ds.create_spa_nusc_infos(root_path, version=version, experiment=experiment, nsweeps=nsweeps, filter_zero=filter_zero, timesteps=timesteps, past=past)
+    sit_ds.create_sit_infos(root_path, version=version, experiment=experiment, nsweeps=nsweeps, filter_zero=filter_zero, timesteps=timesteps, past=past)
     create_groundtruth_database(
-        "SPA_Nus",
+        "SiT",
         root_path + "/{}".format(experiment),
         Path(root_path) / "{}/infos_train_{:02d}sweeps_withvelo_filter_{}.pkl".format(experiment, nsweeps, filter_zero),
-        nsweeps=nsweeps,
+        # nsweeps=nsweeps,
+        nsweeps=10,
         timesteps=timesteps
     )
 
