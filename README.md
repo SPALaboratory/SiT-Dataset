@@ -136,11 +136,11 @@ We provide benchmarks and weights of trained models for 3D pedestrian detection,
 <!-- |**Vanilla LSTM**| X|1.156 | 2.205 | 1.601 | 3.157 | <a href="">TBD</a>| -->
 |**Name**|**Map**|**ADE<sub>5<sub>** **&darr;**|**FDE<sub>5<sub>** **&darr;**| **ADE<sub>20<sub>** **&darr;** | **FDE<sub>20<sub>** **&darr;** | **Trained** |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|**<a href="https://openaccess.thecvf.com/content_cvpr_2016/html/Alahi_Social_LSTM_Human_CVPR_2016_paper.html">Social-LSTM</a>**| X | - | - | - | - | <a href="">TBD</a>|
+|**<a href="https://openaccess.thecvf.com/content_cvpr_2016/html/Alahi_Social_LSTM_Human_CVPR_2016_paper.html">Social-LSTM</a>**| X | 1.781 | 2.816 | 1.683 | 2.722 | <a href="">TBD</a>|
 |**<a href="https://openaccess.thecvf.com/content/ICCV2021/html/Mangalam_From_Goals_Waypoints__Paths_to_Long_Term_Human_Trajectory_ICCV_2021_paper.html">Y-NET</a>**| X | - | - | - | - | <a href="">TBD</a>|
 |**<a href="https://openaccess.thecvf.com/content/ICCV2021/html/Mangalam_From_Goals_Waypoints__Paths_to_Long_Term_Human_Trajectory_ICCV_2021_paper.html">Y-NET</a>**| O | - | - | - | - | <a href="">TBD</a>|
-  |**<a href="https://link.springer.com/chapter/10.1007/978-3-031-19830-4_22">NSP-SFM</a>**| X | - | - | - | -  | <a href="">TBD</a>|
-|**<a href="https://link.springer.com/chapter/10.1007/978-3-031-19830-4_22">NSP-SFM</a>**| O | - | - | - | - | <a href="">TBD</a>|
+  |**<a href="https://link.springer.com/chapter/10.1007/978-3-031-19830-4_22">NSP-SFM</a>**| X | 1.451 | 2.329 | 0.812 | 1.331  | <a href="">TBD</a>|
+|**<a href="https://link.springer.com/chapter/10.1007/978-3-031-19830-4_22">NSP-SFM</a>**| O | 0.883 | 1.809 | 0.624 | 1.237 | <a href="">TBD</a>|
 
 ### End-to-End Pedestrian Motion Forecasting
 |**Method**| **mAP** **&uarr;** |  **mAP<sub>f<sub>** **&uarr;** | **ADE<sub>5<sub>** **&darr;** | **FDE<sub>5<sub>** **&darr;** | **Trained** |
