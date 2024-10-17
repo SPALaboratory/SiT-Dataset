@@ -36,7 +36,7 @@
 
 
 ## Updates
-* [2024-10] The Google form link for download has been changed. <a href="https://docs.google.com/forms/u/3/d/e/1FAIpQLSfsMQq5Ob2NI1aV96C7NhnMtXvBshJvbuegVeQ5B3KETNv0FQ/viewform?usp=send_form">Google Form</a>
+* [2024-10] The Google Form link for download has been changed. <a href="https://docs.google.com/forms/u/3/d/e/1FAIpQLSfsMQq5Ob2NI1aV96C7NhnMtXvBshJvbuegVeQ5B3KETNv0FQ/viewform?usp=send_form">Google Form</a>
 * [2024-06] The final dataset is released! Download it via the link at the end of the Google Form. <a href="https://forms.gle/6iBSnRakR9wwpbkL8">Google Form</a>
 * [2023-09] Our paper is accepted to NeurIPS 2023 Dataset and Benchmark Track! <a href="https://openreview.net/forum?id=gMYsxTin4x">Paper Link</a>
 * [2023-06] Semantic map data of SiT Dataset released on <a href="https://github.com/SPALaboratory/SiT-Dataset/tree/main/semantic-maps">Github.</a>
